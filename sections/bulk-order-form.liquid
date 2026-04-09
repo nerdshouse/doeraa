@@ -1,0 +1,266 @@
+<script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
+<div {% render 'section-properties' %}>
+  <div class="form-main">
+    <h5 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">{{ section.settings.title }}</h5>
+    <div class="contact-form form-default">
+      <form
+        action="https://send.pageclip.co/gvW6sw8JSAl62WoEt2RC1U1Do2lYZrOV/Wholesale"
+        class="pageclip-form"
+        method="post"
+      >
+        <div class="row">
+          <div class="col-md-12">
+            <div class="input_section form-group">
+              <input
+                autocomplete="rutjfkde"
+                type="text"
+                id="name"
+                name="first_name"
+                placeholder="First Name*"
+                required
+              >
+            </div>
+            <div class="input_section form-group">
+              <input
+                autocomplete="rutjfkde"
+                type="text"
+                id="name"
+                name="last_name"
+                placeholder="Last Name*"
+                required
+              >
+            </div>
+            <div class="input_section form-group">
+              <input
+                autocomplete="rutjfkde"
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Email*"
+                required
+              >
+            </div>
+            <div class="input_section form-group">
+              <input
+                maxlength="10"
+                pattern="[0-9]{10}"
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Mobile*"
+                required
+              >
+            </div>
+            <div class="input_section form-group">
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Message*"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="pageclip-form__submit btn_project_default cmn_btn btn ttbtnmainstyle"
+              value="sent"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/vivus/0.1.2/vivus.min.js"></script>
+<script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>
+{% schema %}
+{
+  "name": "Bulk order form",
+  "class": "cstm-bulk-order",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "title",
+      "default": "Fill in this form and we shall get back to you."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bulk order form",
+      "category": "custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<script>
+document.querySelector('.pageclip-form').addEventListener('submit', function(e) {
+  let valid = true;
+
+  this.querySelectorAll('[required]').forEach(function(field){
+    if (!field.value.trim()) {
+      valid = false;
+      field.style.border = "1px solid red";
+    } else {
+      field.style.border = "";
+    }
+  });
+
+  if (!valid) {
+    e.preventDefault();
+    alert("Please fill all required fields.");
+  }
+});
+</script>
+
+<script>
+  var form = document.querySelector('.pageclip-form');
+
+  Pageclip.form(form, {
+    onSubmit: function (event) {},
+
+    onResponse: function (error, response) {
+      if (!error) {
+        if (typeof fbq !== "undefined") {
+          fbq('track', 'Lead');
+        }
+      }
+    },
+
+    successTemplate: '<span style="color:#228B22; font-weight: bold;">Thank you for showing interest in Doeraa!</span>',
+  });
+</script>
+
+
+
+{% comment %} <script>
+  var form = document.querySelector('.pageclip-form');
+  Pageclip.form(form, {
+    onSubmit: function (event) {},
+    onResponse: function (error, response) {},
+    successTemplate: '<span style="color:#228B22; font-weight: bold;">Thank you for showing interest in Doeraa!</span>',
+  });
+  // $(document).ready(function(){
+  //   // Add smooth scrolling to all links
+  //   $("a").on('click', function(event) {
+
+  //     // Prevent default anchor click behavior
+  //     event.preventDefault();
+
+  //     // Store hash
+  //     var hash = this.hash;
+
+  //     // Using jQuery's animate() method to add smooth page scroll
+  //     // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+  //     $('html, body').animate({
+  //       scrollTop: $(hash).offset().top
+  //     }, 400, function(){
+
+  //       // Add hash (#) to URL when done scrolling (default click behavior)
+  //       window.location.hash = hash;
+  //     });
+  //   });
+  // });
+</script> {% endcomment %}
+
+<style>
+      .notes-data{
+      margin: 20px 0;
+  }
+  .notes-data .para_text{
+      font-size: 16px;
+      line-height: 24px;
+      font-family: SpartanRegular;
+      text-align: left;
+      color: #1d3b4a;
+  }
+
+  #contact-us{
+      background-color: #fff;
+  }
+  .pageclip-form__success{
+      font-family: SpartanRegular;
+      position: unset;
+      text-align: left;
+      background: unset;
+      padding-top: 10px;
+  }
+    @media (max-width: 767px){
+    #index_page .how_customise .customise h5{
+    line-height: 45px;
+
+    }
+  }
+</style>

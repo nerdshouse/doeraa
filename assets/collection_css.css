@@ -1,0 +1,93 @@
+
+/* css 10 jan 2023 */
+
+/* nav tabs  */
+#myTab {
+width: fit-content;
+margin: 0 auto;
+text-align: center;
+background: rgba(29, 59, 74, 0.05);
+border-radius: 25px;
+border: 0;
+}
+.cstmhome-tabs .nav-tabs .nav-link {
+border: 0!important;
+border-radius: 25px;
+margin: 3px;
+font-size: 16px;
+font-weight: 400;
+letter-spacing: 0em;
+text-align: center;
+font-family: Inter,sans-serif;
+padding: 10px 25px;
+}
+.cstmhome-tabs .nav-tabs .nav-link.active, .cstmhome-tabs .nav-tabs .nav-link:hover {
+background: #C87641;
+color: #fff;
+transition: all .3s;
+}
+
+/* nav tabs */
+/* main */
+.cstmhome-tabs p.colorname {
+font-size: 17px;
+}
+.product-card__figure{
+overflow: hidden;
+}
+.cstmhome-tabs .section-header h2.h2 {
+text-align: center;
+}
+
+.cstmhome-tabs .section-header {
+justify-items: initial !important;
+justify-content: center;
+}
+.header__main-nav, .header__secondary-nav {
+width: auto;
+}
+/* main */
+
+
+/* footer */
+.cstn- .container {
+max-width: -webkit-fill-available;
+--container-outer-width: calc(((100vw - var(--scrollbar-width, 0px)) - var(--container-inner-width)) / 2);
+margin-inline-start: max(var(--container-gutter),50% - var(--container-max-width) / 2);
+margin-inline-end: max(var(--container-gutter),50% - var(--container-max-width) / 2);
+}
+/* footer */
+
+@media (max-width: 767px) {
+ul#myTab {
+background: transparent;
+justify-content: space-between;
+padding: 0 20px;
+row-gap: 8px;
+flex-direction: row;
+flex-wrap: nowrap;
+overflow-x: auto;
+width: 100%;
+}
+ul#myTab li.nav-item {
+white-space: nowrap;
+margin: 0;
+}
+.cstmhome-tabs .nav-tabs .nav-link {
+background: rgba(29,59,74,.05);
+padding: 10px 20px;
+font-size: 14px;
+  margin: 0 10px 0 0;
+}  
+.cstmTabs.bs-example {
+padding-top: 12px;
+}
+}
+
+
+
+
+
+
+
+

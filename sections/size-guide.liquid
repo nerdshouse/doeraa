@@ -1,0 +1,205 @@
+<div {% render 'section-properties' %}>
+  <div class="section-stack">
+    {%- render 'section-header',
+      subheading: section.settings.subheading,
+      heading: section.settings.title,
+      heading_color: section.settings.heading_color,
+      heading_gradient: section.settings.heading_gradient,
+      content: section.settings.content,
+      link_text: section.settings.link_text,
+      link_url: section.settings.link_url
+    -%}
+
+    <div class="sizetable">
+      <div class="size-table-main">
+        <table>
+          <tr>
+            <th></th>
+            <th>Fabric Width 44 Inches</th>
+            <th>Fabric Width 56 - 60 Inches</th>
+          </tr>
+          <tr>
+            <td>Blouse (Cap/Elbow sleeves)</td>
+            <td>1 Meter</td>
+            <td>1 Meter</td>
+          </tr>
+          <tr>
+            <td>Shirt / Short Kurti</td>
+            <td>2 Meters</td>
+            <td>2 Meters</td>
+          </tr>
+          <tr>
+            <td>Kurti / Peplum Top / Cape</td>
+            <td>3 Meters</td>
+            <td>2 Meters</td>
+          </tr>
+          <tr>
+            <td>A-line kurti / Sharara</td>
+            <td>4 Meters</td>
+            <td>2 Meters</td>
+          </tr>
+          <tr>
+            <td>Lehenga / Anarkali</td>
+            <td>5 Meters</td>
+            <td>3 Meters</td>
+          </tr>
+          <tr>
+            <td>Saree / Gown</td>
+            <td>6 Meters</td>
+            <td>6 Meters</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <a data-fancybox="" data-src="#sizeguidepop" href="javascript:;" class="button button--xl cstmpopup">
+      View Chart
+    </a>
+
+    <div class="sizetable" id="sizeguidepop" style="display:none;">
+      <div class="size-table-main">
+        <table>
+          <tr>
+            <th></th>
+            <th>Fabric Width 44 Inches</th>
+            <th>Fabric Width 56 - 60 Inches</th>
+          </tr>
+          <tr>
+            <td>Blouse (Cap/Elbow sleeves)</td>
+            <td>1 Meter</td>
+            <td>1 Meter</td>
+          </tr>
+          <tr>
+            <td>Shirt / Short Kurti</td>
+            <td>2 Meters</td>
+            <td>2 Meters</td>
+          </tr>
+          <tr>
+            <td>Kurti / Peplum Top / Cape</td>
+            <td>3 Meters</td>
+            <td>2 Meters</td>
+          </tr>
+          <tr>
+            <td>A-line kurti / Sharara</td>
+            <td>4 Meters</td>
+            <td>2 Meters</td>
+          </tr>
+          <tr>
+            <td>Lehenga / Anarkali</td>
+            <td>5 Meters</td>
+            <td>3 Meters</td>
+          </tr>
+          <tr>
+            <td>Saree / Gown</td>
+            <td>6 Meters</td>
+            <td>6 Meters</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Custom Size Guide",
+  "class":"cstmsize-guide",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading gradient"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"title",
+      "name":"fabric",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"fabric name"
+        },
+        {
+          "type":"text",
+          "id":"inche44",
+          "label":"Fabric Width 44 Inches"
+        },
+        {
+          "type":"text",
+          "id":"inche50",
+          "label":"Fabric Width 56 - 60 Inches"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"Custom Size Guide",
+      "category":"custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,137 @@
+<div {% render 'section-properties' %}>
+<div class="section-stack">
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+
+<div class="main-cBlock">
+<div class="cgrid">
+  {% if section.settings.image1 != blank %}
+  <div class="cImage-inner">
+  <img src="{{ section.settings.image1 | img_url : 'master' }}">
+</div>
+  {% endif %}
+</div>
+  <div class="cgrid">
+    {% if section.settings.image2 != blank %}
+    <div class="cImage-inner">
+  <img src="{{ section.settings.image2 | img_url : 'master' }}">
+</div>
+    {% endif %}
+    {% if section.settings.image3 != blank %}
+    <div class="cImage-inner">
+  <img src="{{ section.settings.image3 | img_url : 'master' }}">
+</div>
+      {% endif %}
+</div>
+  <div class="cgrid">
+    {% if section.settings.image4 != blank %}
+    <div class="cImage-inner">
+  <img src="{{ section.settings.image4 | img_url : 'master' }}">
+</div>
+    {% endif %}
+</div>
+  
+</div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Careers image block",
+    "class":"cstm-careers-block",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      },
+      {
+        "type":"image_picker",
+        "id":"image1",
+        "label":"Image"
+      },
+       {
+        "type":"image_picker",
+        "id":"image2",
+        "label":"Image"
+      },
+       {
+        "type":"image_picker",
+        "id":"image3",
+        "label":"Image"
+      },
+       {
+        "type":"image_picker",
+        "id":"image4",
+        "label":"Image"
+      }
+    ],
+    "presets":[
+      {
+        "name":"Careers image block",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

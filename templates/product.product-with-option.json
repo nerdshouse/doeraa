@@ -1,0 +1,672 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "b7ae3bf0-98a3-4322-8b55-403a71978a9e": {
+          "type": "sku",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {
+            "show_empty": true
+          }
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "variant",
+            "size_chart_page": ""
+          }
+        },
+        "ef658d8b-b399-4418-bf60-22073a50bd29": {
+          "type": "custom-product-swatch",
+          "settings": {
+            "products": ""
+          }
+        },
+        "3d57e1fc-9fbe-420c-9b79-0f6c25bb898f": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>I want it for</strong></p>"
+          }
+        },
+        "575b19cf-9d04-4db3-8579-f405284f6336": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Customize",
+            "pick": "",
+            "type": "checkbox",
+            "required": false,
+            "allow_long_text": false
+          }
+        },
+        "db25aa97-4c97-4296-9844-877dad454ee1": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Saree (5 Mtr.)",
+            "pick": "5",
+            "type": "checkbox",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 0
+          }
+        },
+        "7a19031d-1e91-426d-bf2f-3d05c7b303d2": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Salwar Kameez (4 Mtr.)",
+            "pick": "4",
+            "type": "checkbox",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 0
+          }
+        },
+        "2bf13f18-acab-483d-bca2-4a675c01fa4f": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Payjama (2 Mtr.)",
+            "pick": "2",
+            "type": "checkbox",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 0
+          }
+        },
+        "2a37d07e-c1e1-4c4c-831d-e0a01065da26": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Lehanga (8 Mtr.)",
+            "pick": "8",
+            "type": "checkbox",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 0
+          }
+        },
+        "86c90d97-0c80-4ec5-901b-afe58f54294a": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Anarkali (5 Mtr.)",
+            "pick": "5",
+            "type": "checkbox",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 0
+          }
+        },
+        "a73477fb-e98e-4cf0-8fc3-f595af71391a": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "offtertext",
+            "title": "Offers for you",
+            "content": "<p>Use code<strong> FIRST5</strong> to get<strong> 5% off </strong>upto ₹100,on orders above ₹1000.</p><p><br/>Use code <strong>WED20</strong> to get<strong> 20% off</strong> upto ₹200 on orders above ₹5000.</p><p></p><p>Use code <strong>FIRST10</strong> to get <strong>10% off </strong>upto ₹500 on orders above ₹2500.</p><p></p><p>Use code <strong>RDAY</strong> to get <strong>23% off</strong></p><p>on orders above ₹2500.</p>",
+            "open": true
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "31ef72d4-e5df-4d4e-a25c-85a2a6b59057": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ product.description }}</p>"
+          }
+        },
+        "2b8f479d-01fb-4554-bc49-29280897f9a6": {
+          "type": "offer",
+          "settings": {
+            "text_alignment": "start",
+            "icon_position": "aligned",
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Frame_1.png",
+            "icon_width": 24,
+            "title": "Shipping",
+            "content": "<p>Place your order before <strong>12:00pm</strong> and receive it tomorrow</p>",
+            "background": "#ffffff",
+            "text_color": "#1d3b4a"
+          }
+        },
+        "babcbd7c-0828-40b8-96e4-15e35ec71d50": {
+          "type": "offer",
+          "settings": {
+            "text_alignment": "start",
+            "icon_position": "aligned",
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Frame_2.png",
+            "icon_width": 24,
+            "title": "Discount",
+            "content": "<p>Use the code <strong>DOERAA20 </strong>to receive a 20% discount on your order</p>",
+            "background": "#ffffff",
+            "text_color": "#1d3b4a"
+          }
+        },
+        "7556c898-a7d8-46aa-a747-317c841f2b02": {
+          "type": "custom-accordions",
+          "settings": {
+            "title1": "Details"
+          }
+        },
+        "7fe5c327-4f6d-4100-9ad5-1e4c697a7d8b": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Description",
+            "content": "<p>{{ product.description }}</p>",
+            "open": false
+          }
+        },
+        "0fd6a89e-2768-4780-a83c-55446415e708": {
+          "type": "lon-description",
+          "settings": {
+            "title": "Product details"
+          }
+        },
+        "749796aa-5809-4f28-97a3-05edfebf8d88": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Shipping and return policy",
+            "content": "<p><strong>Return Policy:</strong></p><p>Our fabrics are put through a rigorous 30-step quality check throughout the entire production process. From the lining of the threads to the beading of the embroidery - everything is looked into with a keen eye and cleared for packaging and shipping. Due to these strict measures, our production quality is unparalleled. Owing to the nature of the trade, once a fabric has been cut out and delivered it cannot be returned to us as it's been cut per your individual requirement and order quantity, which varies from order to order.</p><p><strong>Shipping Policy:</strong></p><ul><li>We ship across India. For international deliveries, please contact us.</li><li>Orders are shipped within 24-48 hours of being confirmed. All orders are shipped by FedEx, Delhivery or Bluedart.</li><li>Shipment tracking details will be mailed to you on the registered email ID.</li><li>It takes approximately 3 - 5 business days to deliver your product. Sometimes delivery may take longer due to bad weather, flight/transportation delays, political disruptions and/or other unforeseen circumstances.</li></ul><p><strong>Free Shipping:</strong></p><p>Orders worth more than Rs. 999 qualify for free shipping in India. Otherwise, Rs. 99 will be levied by way of shipping charges</p>",
+            "open": false
+          }
+        },
+        "085347f4-aa6d-44d9-8376-35f6695827df": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "washing instructions",
+            "content": "<p>Please refer to the product label for wash care instructions.</p>",
+            "open": false
+          }
+        },
+        "a5d9f7af-ee12-48f5-8535-b7b12f446998": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Disclaimer",
+            "content": "<p>Product specifications are a close approximate in value.<br/>Expect a slight variation in colour. There will always be a minor variation in the colour you see on your computer screen/phone display and the one that is received on the fabric since the technologies involved for display and printing are different. A customer must place an order keeping this slight colour variation in mind. Please note - no returns shall be accepted on the basis of colour and description discrepancy.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "b7ae3bf0-98a3-4322-8b55-403a71978a9e",
+        "title",
+        "badges",
+        "price",
+        "rating",
+        "separator",
+        "variant_picker",
+        "ef658d8b-b399-4418-bf60-22073a50bd29",
+        "3d57e1fc-9fbe-420c-9b79-0f6c25bb898f",
+        "575b19cf-9d04-4db3-8579-f405284f6336",
+        "db25aa97-4c97-4296-9844-877dad454ee1",
+        "7a19031d-1e91-426d-bf2f-3d05c7b303d2",
+        "2bf13f18-acab-483d-bca2-4a675c01fa4f",
+        "2a37d07e-c1e1-4c4c-831d-e0a01065da26",
+        "86c90d97-0c80-4ec5-901b-afe58f54294a",
+        "a73477fb-e98e-4cf0-8fc3-f595af71391a",
+        "quantity_selector",
+        "buy_buttons",
+        "31ef72d4-e5df-4d4e-a25c-85a2a6b59057",
+        "2b8f479d-01fb-4554-bc49-29280897f9a6",
+        "babcbd7c-0828-40b8-96e4-15e35ec71d50",
+        "7556c898-a7d8-46aa-a747-317c841f2b02",
+        "7fe5c327-4f6d-4100-9ad5-1e4c697a7d8b",
+        "0fd6a89e-2768-4780-a83c-55446415e708",
+        "749796aa-5809-4f28-97a3-05edfebf8d88",
+        "085347f4-aa6d-44d9-8376-35f6695827df",
+        "a5d9f7af-ee12-48f5-8535-b7b12f446998"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 50,
+        "desktop_media_layout": "grid_highlight",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "28884d65-cdae-499a-8ea2-60776ccc7607": {
+      "type": "custom-featured-collection",
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "More from this collection",
+        "content": "",
+        "link_url": "shopify://collections/1-meter-cut-piece",
+        "link_text": "view all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "collection": "1-meter-cut-piece",
+        "products": [],
+        "products_count": 6
+      }
+    },
+    "b972b298-79bd-4d5e-8fd3-42282a88abc4": {
+      "type": "product-similar-products",
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": true,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "More from this collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "87cadf24-2b02-4a6b-80f5-056b246204e3": {
+      "type": "scrolling-text",
+      "settings": {
+        "full_width": true,
+        "text": "For Woman who move the world.",
+        "text_size": "large",
+        "text_style": "fill",
+        "scrolling_mode": "auto",
+        "scrolling_speed": 10,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#1d3b4a",
+        "text_gradient": ""
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "recommendations_count": 6,
+        "products": [],
+        "full_width": false,
+        "stack_products": false,
+        "show_progress_bar": true,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "You may also like",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "54c95d77-ac49-43cd-b6bd-c0b1baae95dd": {
+      "type": "collection-list",
+      "blocks": {
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/MIT_1882.webp",
+            "subheading": "",
+            "title": "Georgette embroidery",
+            "url": "shopify://collections/embroidered-georgette-fabrics",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/embroidery-fabrics-beautiful-sequins-with-mauve-thread-wavy-embroidery-work-on-mauve-soft-net-fabric-37808918921470.webp",
+            "subheading": "",
+            "title": "Net embroidery",
+            "url": "shopify://collections/embroidered-net-fabric",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/embroidery-fabrics-multi-coloured-floral-thread-embroidery-on-grey-organza-fabric-22768270147736.jpg",
+            "subheading": "",
+            "title": "Organza embroidery",
+            "url": "shopify://collections/organza-fabrics",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "a48a29fb-d0b4-4817-a3b6-7fca5db52ef6": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/lehenga-set-lavender-and-white-unstitched-lehenga-set-fabric-3-piece-38369452589310.jpg",
+            "subheading": "",
+            "title": "Lehenga set",
+            "url": "shopify://collections/lehenga-sets",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "4f858fb5-b056-40a0-83c3-e14bd5299295": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/mulberrysuitset.jpg",
+            "subheading": "",
+            "title": "Suit set",
+            "url": "shopify://collections/unstitched-suits-fabrics",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "fda23004-ce7d-48af-b22a-3649d7505027": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/MIT_3349.webp",
+            "subheading": "",
+            "title": "Saree set",
+            "url": "shopify://collections/saree-sets",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-0",
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-1",
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-2",
+        "a48a29fb-d0b4-4817-a3b6-7fca5db52ef6",
+        "4f858fb5-b056-40a0-83c3-e14bd5299295",
+        "fda23004-ce7d-48af-b22a-3649d7505027"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_collections": false,
+        "collections_per_row": 4,
+        "show_progress_bar": true,
+        "subheading": "",
+        "title": "Collection list",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "5cab71bb-c8ce-4b27-abb3-7796b9836445": {
+      "type": "timeline",
+      "blocks": {
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-0": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_1.jpg",
+            "navigation_label": "Phase 1",
+            "subheading": "",
+            "title": "Inception",
+            "content": "<p> Doeraa was founded by a group of fashion-conscious individuals who wanted to create a brand that would empower consumers to make a positive impact on the world through their fashion choices.</p>"
+          }
+        },
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_2.jpg",
+            "navigation_label": "Phase 2",
+            "subheading": "",
+            "title": "Early days",
+            "content": "<p>In the early days, Doeraa focused on sourcing sustainable materials and working with skilled artisans to create a range of stylish and functional fashion products that were made with the consumer in mind.</p>"
+          }
+        },
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_3.jpg",
+            "navigation_label": "Phase 3",
+            "subheading": "",
+            "title": "Growth and expansion",
+            "content": "<p>As Doeraa gained popularity among fashion-conscious consumers, the brand expanded its offerings to include a wider range of products and began collaborating with more artisans from around the world.</p>"
+          }
+        },
+        "fe48bbf6-450a-4691-b358-499bb5f60ece": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_4.jpg",
+            "navigation_label": "Phase 4",
+            "subheading": "",
+            "title": "Commitment to sustainability",
+            "content": "<p>Doeraa became known for its commitment to sustainability, and the brand implemented various initiatives to reduce its environmental impact and support ethical and sustainable practices in the production of its fashion products.</p>"
+          }
+        },
+        "b51187be-4e0f-4ec7-991a-521bc39a7026": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_5.jpg",
+            "navigation_label": "Phase 5",
+            "subheading": "",
+            "title": "Giving back",
+            "content": "<p>In addition to its focus on sustainability, Doeraa also made a commitment to giving back to the community, and began donating a portion of its profits to charitable causes around the world. Today, Doeraa is a well-respected fashion brand that is known for its commitment to sustainability, social responsibility, and creating products that are not only stylish, but also have a positive impact on the world.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-0",
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-1",
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-2",
+        "fe48bbf6-450a-4691-b358-499bb5f60ece",
+        "b51187be-4e0f-4ec7-991a-521bc39a7026"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_impact_text_in_slide": true,
+        "impact_text_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "impact_text_color": "",
+        "impact_text_gradient": ""
+      }
+    },
+    "3fd59fef-1bf4-457d-81f6-883d6cf0d0df": {
+      "type": "testimonials",
+      "blocks": {
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/ART2367_1_2.png",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "David Pipaliya",
+            "title": "Loved It",
+            "content": "<p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>"
+          }
+        },
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-1": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/ART2367_1_2.png",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "David Pipaliya",
+            "title": "Loved It",
+            "content": "<p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>"
+          }
+        },
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-2": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/ART2367_1_2.png",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "David Pipaliya",
+            "title": "Loved It",
+            "content": "<p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>"
+          }
+        },
+        "4dfb635c-93dd-4730-a13c-cc4a25e549c2": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/ART2367_1_2.png",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "David Pipaliya",
+            "title": "Loved It",
+            "content": "<p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>"
+          }
+        },
+        "fc66a5c6-e625-43ff-8a4b-f8ea81b218c0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/ART2367_1_2.png",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "David Pipaliya",
+            "title": "Loved It",
+            "content": "<p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>"
+          }
+        },
+        "7bdc3802-706a-403f-b535-64f605e3d9e9": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/ART2367_1_2.png",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "David Pipaliya",
+            "title": "Loved It",
+            "content": "<p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-0",
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-1",
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-2",
+        "4dfb635c-93dd-4730-a13c-cc4a25e549c2",
+        "fc66a5c6-e625-43ff-8a4b-f8ea81b218c0",
+        "7bdc3802-706a-403f-b535-64f605e3d9e9"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_testimonials": false,
+        "subheading": "",
+        "title": "Customer Testimonials",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "testimonial_card_background": "",
+        "testimonial_card_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "28884d65-cdae-499a-8ea2-60776ccc7607",
+    "b972b298-79bd-4d5e-8fd3-42282a88abc4",
+    "87cadf24-2b02-4a6b-80f5-056b246204e3",
+    "product-recommendations",
+    "54c95d77-ac49-43cd-b6bd-c0b1baae95dd",
+    "5cab71bb-c8ce-4b27-abb3-7796b9836445",
+    "3fd59fef-1bf4-457d-81f6-883d6cf0d0df"
+  ]
+}

@@ -1,0 +1,855 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  COLLECTION TOP BAR
+  ----------------------------------------------------------------------------------------------------------------------
+
+  Show the top bar faceting visible on collection and search pages. It either shows facets or active filters based on
+  the selected settings.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * results: either collection or search drop to extract the filters from
+  * show_filters: if set to true, it shows the filters in their horizontal layout
+  * show_active_filters: if set to true, show the active filters
+  * show_sort_by: if set to true, show the sort by
+{%- endcomment -%}
+
+{%- assign selected_sort_by_value = results.sort_by | default: results.default_sort_by -%}
+{%- assign selected_sort_by = results.sort_options | where: 'value', selected_sort_by_value | first -%}
+
+<div class="collection__top-bar">
+  {%- if show_active_filters -%}
+    {%- if section.settings.filter_layout == 'drawer' -%}
+      <button
+        class="text-with-icon group justify-self-start"
+        aria-controls="facets-drawer"
+        aria-expanded="false"
+        data-action="open-drawer"
+      >
+        {% render 'icon' with 'filter', class: 'icon-subdued' %}
+        <span class="reversed-link">{{ 'collection.faceting.filters' | t }}</span>
+      </button>
+
+    {%- elsif section.settings.filter_layout == 'sidebar' -%}
+      <div class="text-with-icon">
+        {%- render 'icon' with 'filter', class: 'icon-subdued' -%}
+        {{- 'collection.faceting.filters' | t -}}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if show_active_filters or show_sort_by -%}
+    <div class="facets-summary">
+      {%- if show_active_filters -%}
+        {%- if section.settings.filter_layout != 'horizontal' -%}
+          {%- render 'active-facets', results: results -%}
+        {%- else -%}
+          {%- comment -%}The horizontal filtering show in a completely different way and have many exception, so the code end up pretty complex{%- endcomment -%}
+
+          {%- capture id_prefix -%}facets-{{ 'now' | date: '%N' }}{%- endcapture -%}
+          {%- assign availability_filter = results.filters | where: 'param_name', 'filter.v.availability' | first -%}
+
+          
+            {%- if request.page_type == 'search' -%}
+              <input type="hidden" name="q" value="{{ results.terms | escape }}">
+              <input type="hidden" name="type" value="product">
+              <input type="hidden" name="options[prefix]" value="last">
+              <input type="hidden" name="options[unavailable_products]" value="last">
+            {%- endif -%}
+
+            {%- if availability_filter -%}
+              <div class="availability-facet">
+                <label for="{{ id_prefix }}-{{ availability_filter.param_name }}" class="bold">
+                  {{- 'collection.faceting.availability_label' | t -}}
+                </label>
+                <input
+                  id="{{ id_prefix }}-{{ availability_filter.param_name }}"
+                  type="checkbox"
+                  class="switch"
+                  name="{{ availability_filter.param_name }}"
+                  value="1"
+                  {% if availability_filter.active_values.size > 0 %}
+                    checked
+                  {% endif %}
+                >
+              </div>
+            {%- endif -%}
+
+            <div class="facets-horizontal">
+              {%- assign color_label_list = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ',' -%}
+
+              {%- for filter in results.filters -%}
+                {%- assign safe_filter_id = filter.param_name | replace: '.', '-' -%}
+
+                {%- if filter.param_name == 'filter.v.availability' -%}
+                  {%- continue -%}
+                {%- endif -%}
+
+                {%- assign downcase_label = filter.label | downcase -%}
+
+                {%- if section.settings.show_empty_filter_values == false -%}
+                  {%- assign empty_filter_values = filter.values | where: 'count', 0 | where: 'active', false -%}
+
+                  {%- if empty_filter_values.size == filter.values.size -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                {%- endif -%}
+
+                <button
+                  type="button"
+                  class="text-with-icon group"
+                  aria-controls="filter-dialog-{{ safe_filter_id }}"
+                  aria-expanded="false"
+                >
+                  <span class="bold">{{ filter.label }}</span>
+                  <span class="circle-chevron group-expanded:rotate">
+                    {%- render 'icon' with 'chevron-bottom-small', direction_aware: true -%}
+                  </span>
+                </button>
+
+                <facet-dialog id="filter-dialog-{{ safe_filter_id }}" class="facet-dialog shadow">
+                  {%- case filter.type -%}
+                    {%- when 'list', 'boolean' -%}
+                      {%- if section.settings.show_color_swatch and color_label_list contains downcase_label -%}
+                        <div class="color-list h-stack wrap justify-center gap-4">
+                          {%- for filter_value in filter.values -%}
+                            {%- assign disabled = false -%}
+
+                            {%- if filter_value.count == 0 and filter_value.active == false -%}
+                              {% if section.settings.show_empty_filter_values == false %}
+                                {%- continue -%}
+                              {%- else -%}
+                                {%- assign disabled = true -%}
+                              {%- endif -%}
+                            {%- endif -%}
+
+                            {% render 'swatch' with 'color',
+                              allow_multiple: true,
+                              selected: filter_value.active,
+                              value: filter_value.label,
+                              name: filter_value.param_name,
+                              disabled: disabled,
+                              show_tooltip: true
+                            %}
+                          {%- endfor -%}
+                        </div>
+                      {%- else -%}
+                        <div class="h-stack gap-2 justify-center wrap">
+                          {%- for filter_value in filter.values -%}
+                            {%- assign disabled = false -%}
+
+                            {%- if filter_value.count == 0 and filter_value.active == false -%}
+                              {% if section.settings.show_empty_filter_values == false %}
+                                {%- continue -%}
+                              {%- else -%}
+                                {%- assign disabled = true -%}
+                              {%- endif -%}
+                            {%- endif -%}
+
+                            {%- capture checkbox_id -%}checkbox-{{ 'now' | date: '%N' }}{%- endcapture -%}
+                            <input
+                              id="{{ checkbox_id }}"
+                              class="sr-only"
+                              type="checkbox"
+                              name="{{ filter_value.param_name }}"
+                              value="{{ filter_value.value }}"
+                              {% if filter_value.active %}
+                                checked
+                              {% endif %}
+                              {% if disabled %}
+                                disabled
+                              {% endif %}
+                            >
+                            <label for="{{ checkbox_id }}" class="facet-dialog-option">
+                              {{- filter_value.label }}
+                              {% if section.settings.show_filter_values_count %}({{ filter_value.count }}){% endif -%}
+                            </label>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
+
+                    {%- when 'price_range' -%}
+                      {%- render 'price-range', filter: filter, layout: 'inline' -%}
+                  {%- endcase -%}
+                </facet-dialog>
+              {%- endfor -%}
+            </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if show_sort_by -%}
+        {%- capture base_id -%}template--{{ section.id }}__main{%- endcapture -%}
+
+        <facet-sort-by class="sort-by-facet">
+          <span
+            id="{{ base_id }}-sort-by-label"
+            class="bold"
+          >
+            {{ 'collection.faceting.sort_by' | t }}:
+          </span>
+
+          <button
+            type="button"
+            class="text-with-icon group"
+            aria-labelledby="{{ base_id }}-sort-by-label popover-sort-by-{{ base_id }}-value"
+            aria-controls="popover-sort-by-{{ base_id }}"
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            data-action="toggle-popover"
+          >
+            <span
+              id="popover-sort-by-{{ base_id }}-value"
+              class="reversed-link"
+            >
+              {{ selected_sort_by.name }}
+            </span>
+
+            <span class="circle-chevron group-hover:colors group-expanded:rotate">
+              {%- render 'icon' with 'chevron-bottom-small', direction_aware: true -%}
+            </span>
+          </button>
+
+          <x-popover
+            id="popover-sort-by-{{ base_id }}"
+            class="popover"
+            role="dialog"
+            inert
+          >
+            <x-listbox
+              class="popover-listbox"
+              aria-owns="popover-sort-by-{{ base_id }}-value"
+              role="listbox"
+            >
+              {%- for sort_option in results.sort_options -%}
+                <button
+                  type="button"
+                  class="popover-listbox__option group"
+                  role="option"
+                  value="{{ sort_option.value }}"
+                  {% if sort_option.value == selected_sort_by_value %}
+                    aria-selected="true"
+                  {% endif %}
+                >
+                  <span class="reversed-link">{{ sort_option.name }}</span>
+                </button>
+              {%- endfor -%}
+            </x-listbox>
+          </x-popover>
+        </facet-sort-by>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if show_active_filters and section.settings.filter_layout == 'horizontal' -%}
+    {%- render 'active-facets', results: results -%}
+  {%- endif -%}
+</div>
+
+<div id="facets-overlay" class="facets-overlay"></div>
+
+<aside
+  id="facets-drawer"
+  class="facets-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+>
+  <div class="facets-drawer__header">
+    <span class="bold">{{ 'collection.faceting.filters' | t }}</span>
+    <button
+      class="facets-drawer__close"
+      aria-label="Close filters"
+      data-action="close-drawer"
+    >
+      ✕
+    </button>
+  </div>
+
+  <div class="facets-drawer__content">
+  {%- render 'facets-vertical', 
+      results: collection, 
+      show_filters: true, 
+      show_sort_by: false, 
+      update_on_change: false, 
+      show_apply_button: true -%}
+</div>
+
+
+</aside>
+
+<style>
+    .facets-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+    z-index: 998;
+  }
+
+  .facets-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    max-width: 90%;
+    height: 100%;
+    background: #fff;
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+    z-index: 999;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .facets-drawer__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .facets-drawer__content {
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+  /* OPEN STATE */
+  body.facets-open .facets-drawer {
+    transform: translateX(0);
+  }
+
+  body.facets-open .facets-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+
+  /* Host popover styling */
+  x-popover {
+    position: absolute;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    min-width: 180px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 999;
+    transition: opacity 0.2s ease;
+  }
+
+  x-popover[open] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    inset-block-start: calc(100% + var(--popover-anchor-block-spacing));
+  }
+
+  /* Dropdown button options */
+  .popover-listbox__option {
+    padding: 10px 16px;
+    text-align: left;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .popover-listbox__option:hover,
+  .popover-listbox__option[aria-selected="true"] {
+    background-color: #f5f5f5;
+  }
+
+  .facets-drawer__content form button[type="submit"] {
+  margin-top: auto; /* stick to bottom */
+  padding: 14px;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  width: 100%;
+  border: none;
+}
+
+ 
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const drawer = document.getElementById('facets-drawer');
+    const overlay = document.getElementById('facets-overlay');
+    const openButtons = document.querySelectorAll('[data-action="open-drawer"]');
+    const closeButtons = document.querySelectorAll('[data-action="close-drawer"]');
+
+    function openDrawer() {
+      body.classList.add('facets-open');
+      drawer.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeDrawer() {
+      body.classList.remove('facets-open');
+      drawer.setAttribute('aria-hidden', 'true');
+    }
+
+    openButtons.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openDrawer();
+      });
+    });
+
+    closeButtons.forEach((btn) => {
+      btn.addEventListener('click', closeDrawer);
+    });
+
+    overlay.addEventListener('click', closeDrawer);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const button = e.target.closest('[data-facet-toggle]');
+    if (!button) return;
+
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Toggle popover open/close
+    document.querySelectorAll('[data-action="toggle-popover"]').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const popoverId = button.getAttribute('aria-controls');
+        const popover = document.getElementById(popoverId);
+        if (!popover) return;
+
+        const isOpen = popover.hasAttribute('open');
+
+        // Close all other popovers
+        document.querySelectorAll('x-popover[open]').forEach((p) => {
+          p.removeAttribute('open');
+          p.setAttribute('inert', '');
+          const btn = document.querySelector(`[aria-controls="${p.id}"]`);
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          popover.setAttribute('open', '');
+          popover.removeAttribute('inert');
+          button.setAttribute('aria-expanded', 'true');
+        } else {
+          popover.removeAttribute('open');
+          popover.setAttribute('inert', '');
+          button.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Handle sort option click
+    document.querySelectorAll('.popover-listbox__option').forEach((option) => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const value = option.value;
+        const text = option.innerText;
+
+        // Update button display
+        const listbox = option.closest('x-listbox');
+        const popover = listbox.closest('x-popover');
+        const button = document.querySelector(`[aria-controls="${popover.id}"]`);
+        const displaySpan = button.querySelector('span.reversed-link');
+        displaySpan.textContent = text;
+
+        // Update aria-selected
+        listbox.querySelectorAll('[role="option"]').forEach((opt) => opt.setAttribute('aria-selected', 'false'));
+        option.setAttribute('aria-selected', 'true');
+
+        // Close popover
+        popover.removeAttribute('open');
+        popover.setAttribute('inert', '');
+        button.setAttribute('aria-expanded', 'false');
+
+        // Submit sort change (reload page with sort param)
+        const url = new URL(window.location.href);
+        url.searchParams.set('sort_by', value);
+        window.location.href = url.toString();
+      });
+    });
+
+    // Close popover if click outside
+    document.addEventListener('click', (e) => {
+      document.querySelectorAll('x-popover[open]').forEach((p) => {
+        if (!p.contains(e.target)) {
+          p.removeAttribute('open');
+          p.setAttribute('inert', '');
+          const btn = document.querySelector(`[aria-controls="${p.id}"]`);
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  });
+</script>
+
+
+{% comment %} {%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+COLLECTION TOP BAR
+----------------------------------------------------------------------------------------------------------------------
+
+Show the top bar faceting visible on collection and search pages. It either shows facets or active filters based on
+the selected settings.
+
+********************************************
+Supported variables
+********************************************
+
+* results: either collection or search drop to extract the filters from
+* show_filters: if set to true, it shows the filters in their horizontal layout
+* show_active_filters: if set to true, show the active filters
+* show_sort_by: if set to true, show the sort by
+{%- endcomment -%}
+
+{%- assign selected_sort_by_value = results.sort_by | default: results.default_sort_by -%}
+{%- assign selected_sort_by = results.sort_options | where: 'value', selected_sort_by_value | first -%}
+
+<div class="collection__top-bar">
+  {%- if show_active_filters -%}
+    {%- if section.settings.filter_layout == 'drawer' -%}
+      <button
+  class="text-with-icon group justify-self-start"
+  aria-controls="facets-drawer"
+  aria-expanded="false"
+  data-action="open-drawer"
+>
+  {% render 'icon' with 'filter', class: 'icon-subdued' %}
+  <span class="reversed-link">{{ 'collection.faceting.filters' | t }}</span>
+</button>
+
+    {%- elsif section.settings.filter_layout == 'sidebar' -%}
+      <div class="text-with-icon">
+        {%- render 'icon' with 'filter', class: 'icon-subdued' -%} {{- 'collection.faceting.filters' | t -}}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <facet-drawer
+  id="facets-drawer"
+  class="facets-drawer drawer"
+  open-from="left"
+>
+  {% render 'facets-vertical', results: results %}
+</facet-drawer>
+
+
+
+  {%- if show_active_filters or show_sort_by -%}
+    <div class="facets-summary">
+      {%- if show_active_filters -%}
+        {%- if section.settings.filter_layout != 'horizontal' -%}
+          {%- render 'active-facets', results: results -%}
+        {%- else -%}
+          {%- comment -%}The horizontal filtering show in a completely different way and have many exception, so the code end up pretty complex{%- endcomment -%}
+
+          {%- capture id_prefix -%}facets-{{ 'now' | date: '%N' }}{%- endcapture -%}
+          {%- assign availability_filter = results.filters | where: 'param_name', 'filter.v.availability' | first -%}
+
+          <form is="facet-form" update-on-change section-id="{{ section.id }}" method="GET" action="{{ request.path }}" class="contents">
+            {%- if request.page_type == 'search' -%}
+              <input type="hidden" name="q" value="{{ results.terms | escape }}">
+              <input type="hidden" name="type" value="product">
+              <input type="hidden" name="options[prefix]" value="last">
+              <input type="hidden" name="options[unavailable_products]" value="last">
+            {%- endif -%}
+
+            {%- if availability_filter -%}
+              <div class="availability-facet">
+                <label for="{{ id_prefix }}-{{ availability_filter.param_name }}" class="bold">{{- 'collection.faceting.availability_label' | t -}}</label>
+                <input id="{{ id_prefix }}-{{ availability_filter.param_name }}" type="checkbox" class="switch" name="{{ availability_filter.param_name }}" value="1" {% if availability_filter.active_values.size > 0 %}checked{% endif %}>
+              </div>
+            {%- endif -%}
+
+            <div class="facets-horizontal">
+              {%- assign color_label_list = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ',' -%}
+
+              {%- for filter in results.filters -%}
+                {%- assign safe_filter_id = filter.param_name | replace: '.', '-' -%}
+
+                {%- if filter.param_name == 'filter.v.availability' -%}
+                  {%- continue -%}
+                {%- endif -%}
+
+                {%- assign downcase_label = filter.label | downcase -%}
+
+                {%- if section.settings.show_empty_filter_values == false -%}
+                  {%- assign empty_filter_values = filter.values | where: 'count', 0 | where: 'active', false -%}
+
+                  {%- if empty_filter_values.size == filter.values.size -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                {%- endif -%}
+
+                <button
+  type="button"
+  class="text-with-icon group"
+  aria-controls="filter-dialog-{{ safe_filter_id }}"
+  aria-expanded="false">
+
+                  <span class="bold">{{ filter.label }}</span>
+                  <span class="circle-chevron group-expanded:rotate">{%- render 'icon' with 'chevron-bottom-small', direction_aware: true -%}</span>
+                </button>
+
+                <facet-dialog id="filter-dialog-{{ safe_filter_id }}" class="facet-dialog shadow">
+                  {%- case filter.type -%}
+                    {%- when 'list' or 'boolean' -%}
+                      {%- if section.settings.show_color_swatch and color_label_list contains downcase_label -%}
+                        <div class="color-list h-stack wrap justify-center gap-4">
+                          {%- for filter_value in filter.values -%}
+                            {%- assign disabled = false -%}
+
+                            {%- if filter_value.count == 0 and filter_value.active == false -%}
+                              {% if section.settings.show_empty_filter_values == false %}
+                                {%- continue -%}
+                              {%- else -%}
+                                {%- assign disabled = true -%}
+                              {%- endif -%}
+                            {%- endif -%}
+
+                            {% render 'swatch' with 'color', allow_multiple: true, selected: filter_value.active, value: filter_value.label, name: filter_value.param_name, disabled: disabled, show_tooltip: true %}
+                          {%- endfor -%}
+                        </div>
+                      {%- else -%}
+                        <div class="h-stack gap-2 justify-center wrap">
+                          {%- for filter_value in filter.values -%}
+                            {%- assign disabled = false -%}
+
+                            {%- if filter_value.count == 0 and filter_value.active == false -%}
+                              {% if section.settings.show_empty_filter_values == false %}
+                                {%- continue -%}
+                              {%- else -%}
+                                {%- assign disabled = true -%}
+                              {%- endif -%}
+                            {%- endif -%}
+
+                            {%- capture checkbox_id -%}checkbox-{{ 'now' | date: '%N' }}{%- endcapture -%}
+                            <input id="{{ checkbox_id }}" class="sr-only" type="checkbox" name="{{ filter_value.param_name }}" value="{{ filter_value.value }}" {% if filter_value.active %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                            <label for="{{ checkbox_id }}" class="facet-dialog-option">{{ filter_value.label }} {% if section.settings.show_filter_values_count %}({{ filter_value.count }}){% endif %}</label>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
+
+                    {%- when 'price_range' -%}
+                      {%- render 'price-range', filter: filter, layout: 'inline' -%}
+                  {%- endcase -%}
+                </facet-dialog>
+              {%- endfor -%}
+            </div>
+          </form>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if show_sort_by -%}
+  {%- capture base_id -%}template--{{ section.id }}__main{%- endcapture -%}
+
+  <facet-sort-by class="sort-by-facet">
+    <span
+      id="{{ base_id }}-sort-by-label"
+      class="bold"
+    >
+      {{ 'collection.faceting.sort_by' | t }}:
+    </span>
+
+    <button
+      type="button"
+      class="text-with-icon group"
+      aria-labelledby="{{ base_id }}-sort-by-label popover-sort-by-{{ base_id }}-value"
+      aria-controls="popover-sort-by-{{ base_id }}"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      data-action="toggle-popover"
+    >
+      <span
+        id="popover-sort-by-{{ base_id }}-value"
+        class="reversed-link"
+      >
+        {{ selected_sort_by.name }}
+      </span>
+
+      <span class="circle-chevron group-hover:colors group-expanded:rotate">
+        {%- render 'icon' with 'chevron-bottom-small', direction_aware: true -%}
+      </span>
+    </button>
+
+    <x-popover
+      id="popover-sort-by-{{ base_id }}"
+      class="popover"
+      role="dialog"
+      inert
+    >
+      <x-listbox
+        class="popover-listbox"
+        aria-owns="popover-sort-by-{{ base_id }}-value"
+        role="listbox"
+      >
+        {%- for sort_option in results.sort_options -%}
+          <button
+            type="button"
+            class="popover-listbox__option group"
+            role="option"
+            value="{{ sort_option.value }}"
+            {% if sort_option.value == selected_sort_by_value %}
+              aria-selected="true"
+            {% endif %}
+          >
+            <span class="reversed-link">{{ sort_option.name }}</span>
+          </button>
+        {%- endfor -%}
+      </x-listbox>
+    </x-popover>
+  </facet-sort-by>
+{%- endif -%}
+
+
+
+    </div>
+  {%- endif -%}
+
+  {%- if show_active_filters and section.settings.filter_layout == 'horizontal' -%}
+    {%- render 'active-facets', results: results -%}
+  {%- endif -%}
+</div>
+
+<style>
+ 
+/* Host popover styling */
+x-popover {
+  position: absolute;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 999;
+  transition: opacity 0.2s ease;
+}
+
+x-popover[open] {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  inset-block-start: calc(100% + var(--popover-anchor-block-spacing));
+}
+
+/* Dropdown button options */
+.popover-listbox__option {
+  padding: 10px 16px;
+  text-align: left;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.popover-listbox__option:hover,
+.popover-listbox__option[aria-selected="true"] {
+  background-color: #f5f5f5;
+}
+
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Toggle popover open/close
+  document.querySelectorAll('[data-action="toggle-popover"]').forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const popoverId = button.getAttribute('aria-controls');
+      const popover = document.getElementById(popoverId);
+      if (!popover) return;
+
+      const isOpen = popover.hasAttribute('open');
+
+      // Close all other popovers
+      document.querySelectorAll('x-popover[open]').forEach(p => {
+        p.removeAttribute('open');
+        p.setAttribute('inert', '');
+        const btn = document.querySelector(`[aria-controls="${p.id}"]`);
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        popover.setAttribute('open', '');
+        popover.removeAttribute('inert');
+        button.setAttribute('aria-expanded', 'true');
+      } else {
+        popover.removeAttribute('open');
+        popover.setAttribute('inert', '');
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Handle sort option click
+  document.querySelectorAll('.popover-listbox__option').forEach(option => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const value = option.value;
+      const text = option.innerText;
+      
+      // Update button display
+      const listbox = option.closest('x-listbox');
+      const popover = listbox.closest('x-popover');
+      const button = document.querySelector(`[aria-controls="${popover.id}"]`);
+      const displaySpan = button.querySelector('span.reversed-link');
+      displaySpan.textContent = text;
+
+      // Update aria-selected
+      listbox.querySelectorAll('[role="option"]').forEach(opt => opt.setAttribute('aria-selected', 'false'));
+      option.setAttribute('aria-selected', 'true');
+
+      // Close popover
+      popover.removeAttribute('open');
+      popover.setAttribute('inert', '');
+      button.setAttribute('aria-expanded', 'false');
+
+      // Submit sort change (reload page with sort param)
+      const url = new URL(window.location.href);
+      url.searchParams.set('sort_by', value);
+      window.location.href = url.toString();
+    });
+  });
+
+  // Close popover if click outside
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('x-popover[open]').forEach(p => {
+      if (!p.contains(e.target)) {
+        p.removeAttribute('open');
+        p.setAttribute('inert', '');
+        const btn = document.querySelector(`[aria-controls="${p.id}"]`);
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+});
+
+
+</script> {% endcomment %}

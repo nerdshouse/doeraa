@@ -1,0 +1,35 @@
+{% comment %} {% if product.metafields.global.fabric != blank %}
+<details  class="product-info__accordion accordion  group" aria-expanded="{% if open %}true{% else %}false{% endif %}" is="accordion-disclosure" {% if open %}open{% endif %}>
+  <summary>
+    <div class="accordion__toggle bold">
+        <span>{{ title1 }}</span>
+      <span class="circle-chevron group-hover:colors group-expanded:colors group-expanded:rotate">{%- render 'icon' with 'chevron-bottom-small' -%}</span>
+    </div>
+  </summary>
+
+  <div class="accordion__content">
+    
+
+    <div><b>fabric:</b> {{ product.metafields.global.fabric }}</div>
+     <div><b>width:</b> {{ product.metafields.global.width }}</div>
+    <div><b>usage:</b> {{ product.metafields.global.usage }}</div>
+    <div><b>Work:</b> {{ product.metafields.global.Work }}</div>    
+   
+  </div>
+</details>
+{% endif %} {% endcomment %}
+<div class="rte details">
+  {% if product.metafields.global.fabric != blank %}
+ <div><b>fabric:</b> {{ product.metafields.global.fabric }}</div>
+    {% endif %}
+    {% if product.metafields.global.width != blank %}
+     <div><b>width:</b> {{ product.metafields.global.width }}</div>
+      {% endif %}
+      {% if product.metafields.global.usage != blank %}
+    <div><b>usage:</b> {{ product.metafields.global.usage }}</div>
+        {% endif %}
+        {% if product.metafields.global.Work != blank %}
+    <div><b>Work:</b> {{ product.metafields.global.Work }}</div> 
+  {% endif %}
+
+</div>

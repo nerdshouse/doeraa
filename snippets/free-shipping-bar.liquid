@@ -1,0 +1,101 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+FREE SHIPPING BAR
+----------------------------------------------------------------------------------------------------------------------
+
+Renders the free shipping bar component. It is used on cart page and cart drawer to render the remaining amount before
+being eligible for free shipping.
+
+********************************************
+Supported variables
+********************************************
+
+* size: accept the value "sm"
+{%- endcomment -%}
+
+{%- liquid
+  assign calculated_total_price = 0
+
+  for line_item in cart.items
+    if line_item.requires_shipping
+      assign calculated_total_price = calculated_total_price | plus: line_item.final_line_price
+    endif
+  endfor
+-%}
+
+<div class="Cart__ShippingNotice shipping-notes-wrapper">  
+ {% assign total_price = cart.total_price %}
+ {% assign first_threshhold = section.settings.first_threshhold | times: 100 %}
+ {% assign second_threshhold = section.settings.second_threshhold | times: 100 %}
+ {% assign third_threshhold = section.settings.third_threshhold | times: 100 %}
+ {% assign f_checkpoint = first_threshhold | times: 100 | divided_by: second_threshhold %} 
+ {% assign s_checkpoint = second_threshhold | times: 100 | divided_by: third_threshhold %}  
+ {% if total_price >= third_threshhold %}
+   {% if section.settings.third_threshhold_message != blank %}                          
+    <p class="shipping-notes-wrapper-text">{{ section.settings.third_threshhold_message }}</p>
+   {% endif %}                         
+ {% elsif total_price >= second_threshhold %}     
+   {% assign checkpoint = total_price | times: s_checkpoint | divided_by: second_threshhold %}                      
+   {% assign first_ach = third_threshhold | minus: total_price | money %}                      
+   {% if section.settings.second_threshhold_message != blank %}                          
+    <p class="shipping-notes-wrapper-text ff">{{ section.settings.second_threshhold_message | replace: '[price]' , first_ach }}</p>
+   {% endif %}
+    <div class="shipiing-progress-track">
+      <div class="shipping-progress-thumb" style="width: {{checkpoint}}%">0</div>
+        <span class="check-point" style="left:{{f_checkpoint}}%;">
+         <span class="checkpoint-price"> {{ section.settings.first_threshhold_short_message }}</span>
+       </span>
+        <span class="check-point" style="left:{{s_checkpoint}}%;">
+         <span class="checkpoint-price"> {{ section.settings.second_threshhold_short_message }}</span>
+       </span>
+       <span class="check-point" style="left:98%;">
+         <span class="checkpoint-price"> {{ section.settings.third_threshhold_short_message }}</span>
+       </span> 
+    </div>
+ {% elsif total_price >= first_threshhold %}  
+   {% assign checkpoint = total_price | times: s_checkpoint | divided_by: second_threshhold %}                      
+   {% assign first_ach = second_threshhold | minus: total_price | money %}                      
+   {% if section.settings.first_threshhold_message != blank %}                          
+    <p class="shipping-notes-wrapper-text">{{ section.settings.first_threshhold_message | replace: '[price]' , first_ach }}</p>
+   {% endif %}
+    <div class="shipiing-progress-track">
+      <div class="shipping-progress-thumb" style="width: {{checkpoint}}%">0</div>
+        <span class="check-point" style="left:{{f_checkpoint}}%;">
+         <span class="checkpoint-price"> {{ section.settings.first_threshhold_short_message }}</span>
+       </span>
+       <span class="check-point" style="left:{{s_checkpoint}}%;">
+         <span class="checkpoint-price"> {{ section.settings.second_threshhold_short_message }}</span>
+       </span> 
+      <span class="check-point" style="left:98%;">
+         <span class="checkpoint-price"> {{ section.settings.third_threshhold_short_message }}</span>
+       </span> 
+    </div>
+ {% else %}  
+   {% assign checkpoint = total_price | times: f_checkpoint | divided_by: first_threshhold %}                      
+   {% assign first_ach = first_threshhold | minus: total_price | money %}
+   {% if section.settings.default_message != blank %}                          
+      <p class="shipping-notes-wrapper-text">{{ section.settings.default_message | replace: '[price]', first_ach }}</p>
+   {% endif %}
+    <div class="shipiing-progress-track">
+      <div class="shipping-progress-thumb" style="width: {{checkpoint}}%">0</div>
+        <span class="check-point" style="left:{{f_checkpoint}}%;">
+         <span class="checkpoint-price"> {{ section.settings.first_threshhold_short_message }}</span>
+       </span>
+       <span class="check-point" style="left:{{ s_checkpoint }}%;">
+         <span class="checkpoint-price"> {{ section.settings.second_threshhold_short_message }}</span>
+       </span> 
+      <span class="check-point" style="left:98%;">
+         <span class="checkpoint-price"> {{ section.settings.third_threshhold_short_message }}</span>
+       </span> 
+    </div>
+ {% endif %}                      
+</div>
+
+{% comment %}
+<free-shipping-bar class="free-shipping-bar" threshold="{{ section.settings.cart_free_shipping_threshold | times: 100.0 }}" total-price="{{ calculated_total_price }}" reached-message="{{ section.settings.success_msg }}" unreached-message="{{ section.settings.remaining_msg }}">
+  {%- comment -%}The span below is the placeholder where the content will be inserted in JS{%- endcomment -%}
+  <span>&nbsp;</span>
+
+  <progress-bar class="progress-bar" role="progressbar" aria-valuemin="0" style="--progress: 0"></progress-bar>
+</free-shipping-bar>
+{% endcomment %}

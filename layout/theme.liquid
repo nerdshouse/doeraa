@@ -1,0 +1,780 @@
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing this theme as much as we did for
+    developing it. We have put a lot of work to make this theme as developer friendly as possible by offering you
+    hooks to integrate into critical parts of the theme. You will find the complete technical documentation (including
+    all events, dependencies...) in the "documentation.txt" file, located in the Assets folder.
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<!doctype html>
+
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
+  <head>
+    <link rel="preconnect dns-prefetch" href="https://api.config-security.com/" crossorigin>
+    <link rel="preconnect dns-prefetch" href="https://conf.config-security.com/" crossorigin>
+    <link rel="preconnect dns-prefetch" href="https://whale.camera/" crossorigin>
+    <script>
+      /* >> TriplePixel :: start*/
+      (window.TriplePixelData = {
+        TripleName: 'doeraa.myshopify.com',
+        ver: '2.12',
+        plat: 'SHOPIFY',
+        isHeadless: false,
+      }),
+        (function (W, H, A, L, E, _, B, N) {
+          function O(U, T, P, H, R) {
+            void 0 === R && (R = !1),
+              (H = new XMLHttpRequest()),
+              P ? (H.open('POST', U, !0), H.setRequestHeader('Content-Type', 'text/plain')) : H.open('GET', U, !0),
+              H.send(JSON.stringify(P || {})),
+              (H.onreadystatechange = function () {
+                4 === H.readyState && 200 === H.status
+                  ? ((R = H.responseText), U.includes('.txt') ? eval(R) : P || (N[B] = R))
+                  : (299 < H.status || H.status < 200) && T && !R && ((R = !0), O(U, T - 1, P));
+              });
+          }
+          if (((N = window), !N[H + 'sn'])) {
+            (N[H + 'sn'] = 1),
+              (L = function () {
+                return Date.now().toString(36) + '_' + Math.random().toString(36);
+              });
+            try {
+              A.setItem(H, 1 + (0 | A.getItem(H) || 0)),
+                (E = JSON.parse(A.getItem(H + 'U') || '[]')).push({
+                  u: location.href,
+                  r: document.referrer,
+                  t: Date.now(),
+                  id: L(),
+                }),
+                A.setItem(H + 'U', JSON.stringify(E));
+            } catch (e) {}
+            var i, m, p;
+            A.getItem('"!nC`') ||
+              ((_ = A),
+              (A = N),
+              A[H] ||
+                ((E = A[H] =
+                  function (t, e, a) {
+                    return (
+                      void 0 === a && (a = []),
+                      'State' == t ? E.s : ((W = L()), (E._q = E._q || []).push([W, t, e].concat(a)), W)
+                    );
+                  }),
+                (E.s = 'Installed'),
+                (E._q = []),
+                (E.ch = W),
+                (B = 'configSecurityConfModel'),
+                (N[B] = 1),
+                O('https://conf.config-security.com/model', 5),
+                (i = L()),
+                (m = A[atob('c2NyZWVu')]),
+                _.setItem('di_pmt_wt', i),
+                (p = {
+                  id: i,
+                  action: 'profile',
+                  avatar: _.getItem('auth-security_rand_salt_'),
+                  time: m[atob('d2lkdGg=')] + ':' + m[atob('aGVpZ2h0')],
+                  host: A.TriplePixelData.TripleName,
+                  plat: A.TriplePixelData.plat,
+                  url: window.location.href,
+                  ref: document.referrer,
+                  ver: A.TriplePixelData.ver,
+                }),
+                O('https://api.config-security.com/event', 5, p),
+                O('https://whale.camera/live/dot.txt', 5)));
+          }
+        })('', 'TriplePixel', localStorage);
+      /* << TriplePixel :: end*/
+    </script>
+    <link rel="preconnect dns-prefetch" href="https://triplewhale-pixel.web.app/" crossorigin>
+    {% include 'visually_io_sdk' %}
+
+    <script>
+      /* >> TriplePixel :: start*/
+      (window.TriplePixelData = { TripleName: 'doeraa.myshopify.com', ver: '1.9.0' }),
+        (function (W, H, A, L, E, _, B, N) {
+          function O(U, T, P, H, R) {
+            void 0 === R && (R = !1),
+              (H = new XMLHttpRequest()),
+              P
+                ? (H.open('POST', U, !0), H.setRequestHeader('Content-Type', 'application/json'))
+                : H.open('GET', U, !0),
+              H.send(JSON.stringify(P || {})),
+              (H.onreadystatechange = function () {
+                4 === H.readyState && 200 === H.status
+                  ? ((R = H.responseText), U.includes('.txt') ? eval(R) : P || (N[B] = R))
+                  : (299 < H.status || H.status < 200) && T && !R && ((R = !0), O(U, T - 1));
+              });
+          }
+          if (((N = window), !N[H + 'sn'])) {
+            N[H + 'sn'] = 1;
+            try {
+              A.setItem(H, 1 + (0 | A.getItem(H) || 0)),
+                (E = JSON.parse(A.getItem(H + 'U') || '[]')).push(location.href),
+                A.setItem(H + 'U', JSON.stringify(E));
+            } catch (e) {}
+            var i, m, p;
+            A.getItem('"!nC`') ||
+              ((_ = A),
+              (A = N),
+              A[H] ||
+                ((L = function () {
+                  return Date.now().toString(36) + '_' + Math.random().toString(36);
+                }),
+                (E = A[H] =
+                  function (t, e) {
+                    return 'State' == t ? E.s : ((W = L()), (E._q = E._q || []).push([W, t, e]), W);
+                  }),
+                (E.s = 'Installed'),
+                (E._q = []),
+                (E.ch = W),
+                (B = 'configSecurityConfModel'),
+                (N[B] = 1),
+                O('//conf.config-security.com/model', 5),
+                (i = L()),
+                (m = A[atob('c2NyZWVu')]),
+                _.setItem('di_pmt_wt', i),
+                (p = {
+                  id: i,
+                  action: 'profile',
+                  avatar: _.getItem('auth-security_rand_salt_'),
+                  time: m[atob('d2lkdGg=')] + ':' + m[atob('aGVpZ2h0')],
+                  host: A.TriplePixelData.TripleName,
+                  url: window.location.href,
+                  ref: document.referrer,
+                  ver: window.TriplePixelData.ver,
+                }),
+                O('//api.config-security.com/', 5, p),
+                O('//triplewhale-pixel.web.app/dot1.9.txt', 5)));
+          }
+        })('', 'TriplePixel', localStorage);
+      /* << TriplePixel :: end*/
+    </script>
+    {% render 'gokwik' %}
+
+    {% render 'pagefly-head' %}
+    <!--
+      <link rel="stylesheet" href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css">
+        <script>var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData; bcpo.money_with_currency_format = {{ shop.money_with_currency_format  | json }};bcpo.money_format = {{ shop.money_format  | json }};</script>
+        <script>if (window.bcpo) bcpo.disabled = true;</script><script>
+      /* >> TriplePixel :: start*/
+      ~function(W,H,A,L,E,_){function O(T,R){void 0===R&&(R=!1),H=new XMLHttpRequest,H.open("GET","//triplewhale-pixel.web.app/triplepx.txt?"+~(Date.now()/9e7),!0),H.send(null),H.onreadystatechange=function(){4===H.readyState&&200===H.status?setTimeout(function(){return eval(H.responseText)},50):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(T-1))}}if(L=window,!L[H+"sn"]){L[H+"sn"]=1;try{A.setItem(H,1+(0|A.getItem(H)||0)),W.includes("⇈")&&A.setItem(H+"Stg",1+(0|A.getItem(H+"Stg")||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push(location.href),A.setItem(H+"U",JSON.stringify(E))}catch(e){}A.getItem('"!nC`')||(A=L,A[H]||(L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)},E=A[H]=function(t,e){return W=L(),(E._q=E._q||[]).push([W,t,e]),E._headless=!0,W},E.ch=W,O(5)))}}("","TriplePixel",localStorage);
+      /* << TriplePixel :: end*/
+      </script>
+    -->
+    <script async src="https://cdn.intelligems.io/9666da9291b1.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-528826631"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'AW-528826631', { send_page_view: false });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z0MTGKW89"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-6Z0MTGKW89');
+    </script>
+
+    <meta charset="utf-8">
+    <!--
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=1.0">
+    -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
+    >
+    <meta name="HandheldFriendly" content="true">
+    <meta name="theme-color" content="{{ settings.header_background }}">
+
+    <title>
+      {% if page_title == blank -%}
+        {{- shop.name -}}
+      {%- else -%}
+        {{- page_title -}}
+        {%- if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif -%}
+      {%- endif %}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
+    {%- endif -%}
+
+    {%- comment -%}Few prefetch to increase performance on commonly used third-parties{%- endcomment -%}
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
+
+    {%- comment -%}Some preload{%- endcomment -%}
+    <link rel="modulepreload" href="{{ 'vendor.min.js' | asset_url }}" as="script">
+    <link rel="modulepreload" href="{{ 'theme.js' | asset_url }}" as="script">
+    <link rel="modulepreload" href="{{ 'sections.js' | asset_url }}" as="script">
+
+    {%- unless settings.heading_font.system? -%}
+      <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin>
+    {%- endunless -%}
+
+    {%- unless settings.text_font.system? -%}
+      <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
+    {%- endunless -%}
+
+    {%- render 'social-meta-tags' -%}
+    {%- render 'microdata-schema' -%}
+    {%- render 'css-variables' -%}
+    {%- render 'js-variables' -%}
+
+    <script asyc src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script type="module" src="{{ 'vendor.min.js' | asset_url }}"></script>
+    <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
+    <script type="module" src="{{ 'sections.js' | asset_url }}"></script>
+    <script type="text/javascript" src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+
+    <script type="module" src="{{ 'owl.carousel.min.js' | asset_url }}"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"
+      integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    {%- if tinyscript -%}{{ content_for_header }}{%- else -%}{% render 'tiny-script-control' %}{%- endif -%}
+    {{- 'theme.css' | asset_url | stylesheet_tag -}}
+    {{- 'custom.css' | asset_url | stylesheet_tag -}}
+    {{- 'owl.carousel.min.css' | asset_url | stylesheet_tag: preload: true -}}
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"
+      integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+
+    <!--
+      <script src= "https://websdk-assets.s3.ap-south-1.amazonaws.com/shopify-messaging-app/doeraa.js" defer="defer"></script>
+    -->
+
+    {% comment %}
+      Microsoft Clarity code added by Aureate Labs team
+    {% endcomment %}
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'h5yol6qnqh');
+    </script>
+    <!--
+      <script>
+        document.addEventListener('touchmove', function (event) {
+          if (event.scale !== 1) { event.preventDefault(); }
+        }, { passive: false });
+      </script>
+    -->
+
+    {% render 'gsf-conversion-pixels' %}
+    <img
+      alt="icon"
+      id="svgicon"
+      width="1400"
+      height="1400"
+      style="pointer-events: none; position: absolute; top: 0; left: 0; width: 99vw; height: 99vh; max-width: 99vw; max-height: 99vh;"
+      src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+"
+      loading="eager"
+    >
+    <!-- Google search console -->
+    <meta name="google-site-verification" content="2uDBpLruz28wS14GplVeDKUVdt_b-tFPOZEY9bC-xeQ">
+    <!-- Google search console -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'rjxlcfvpxq');
+    </script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'sj8eke9wzu');
+    </script>
+  </head>
+
+  <body class="{% if settings.show_page_transition %}page-transition{% endif %} {% if settings.zoom_image_on_hover %}zoom-image--enabled{% endif %} cstn-{{ template.suffix }} {% if template == 'collections' %}collectointem{% endif %} template-{{ template | handle }}">
+    {% if template contains '404' %}
+      <script>
+        function call() {
+          window.location.href = '/collections/bestseller';
+        }
+        window.onpaint = call();
+      </script>
+    {% endif %}
+
+    {%- render 'shadow-dom-templates' -%}
+
+    <a href="#main" class="skip-to-content sr-only">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    {%- if request.page_type != 'password' -%}
+      {%- section 'announcement-bar' -%}
+      {%- section 'header' -%}
+
+      {%- if settings.cart_type != 'page' and request.page_type != 'cart' -%}
+        {%- section 'cart-drawer' -%}
+      {%- endif -%}
+
+      {%- if settings.cart_type == 'popover' -%}
+        <cart-notification-drawer open-from="bottom" class="quick-buy-drawer drawer"></cart-notification-drawer>
+      {%- endif -%}
+
+      {%- if request.page_type != 'search' -%}
+        {%- section 'search-drawer' -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if request.page_type == 'customers/account'
+      or request.page_type == 'customers/order'
+      or request.page_type == 'customers/addresses'
+    -%}
+      {%- section 'account-banner' -%}
+    {%- endif -%}
+    {% render 'kwikpass-add-button' %}
+    <main role="main" id="main" class="anchor">
+      {{ content_for_layout }}
+
+      {%- if request.page_type != 'password' -%}
+        {%- section 'static-text-with-icons' -%}
+      {%- endif -%}
+    </main>
+
+    {%- if request.page_type != 'password' -%}
+      {%- section 'footer' -%}
+    {%- endif -%}
+
+    <!-- google dynamic remarketing tag for theme.liquid -->
+    {% if template contains 'product' %}
+      <script type="text/javascript">
+        var json_product = {{ product | json }};
+      </script>
+      <script>
+        var ecomm_prodid = [];
+        for (var i = 0; i < json_product.variants.length; i++)
+          ecomm_prodid.push('shopify_IN_{{product.id}}_' + json_product.variants[i].id);
+      </script>
+      <script type="text/javascript">
+        var google_tag_params = {
+          ecomm_prodid: ecomm_prodid,
+          ecomm_pagetype: 'product',
+          ecomm_totalvalue: parseFloat('{{ product.price | money_without_currency | remove: ","}}'),
+        };
+      </script>
+    {% elsif template contains 'collection' %}
+      <script type="text/javascript">
+        var google_tag_params = {
+          ecomm_pagetype: 'category',
+        };
+      </script>
+    {% elsif template contains 'cart' %}
+      <script type="text/javascript">
+        var id = new Array();
+        {% for item in cart.items %}
+        id.push('shopify_IN_{{item.product.id}}_{{item.variant.id}}');
+        {% endfor %} var google_tag_params = {
+        ecomm_prodid: id,
+        ecomm_pagetype: 'cart',
+        ecomm_totalvalue: parseFloat('{{ cart.total_price | money_without_currency | remove: ","}}')
+        };
+      </script>
+    {% elsif template contains 'search' %}
+      <script type="text/javascript">
+        var google_tag_params = {
+          ecomm_pagetype: 'searchresults',
+        };
+      </script>
+    {% elsif template contains 'index' %}
+      <script type="text/javascript">
+        var google_tag_params = {
+          ecomm_pagetype: 'home',
+        };
+      </script>
+    {% else %}
+      <script type="text/javascript">
+        var google_tag_params = {
+          ecomm_pagetype: 'other',
+        };
+      </script>
+    {% endif %}
+    <script>
+      gtag('event', 'page_view', {
+        send_to: 'AW-528826631',
+        ecomm_prodid: window.google_tag_params.ecomm_prodid,
+        ecomm_pagetype: window.google_tag_params.ecomm_pagetype,
+        ecomm_totalvalue: window.google_tag_params.ecomm_totalvalue,
+      });
+    </script>
+
+    <script src="https://bridge.shopflo.com/js/shopflo.bundle.js" async></script>
+    <div
+      id="overlaydiv"
+      part="overlaydiv"
+      style="
+        margin-bottom: 209px;
+        display: none;
+        background: rgba(0, 0, 0, 0.4);
+        position: fixed;
+        inset: 0px;
+        z-index: 99;
+      "
+    ></div>
+    <div
+      class="popup"
+      id="popup"
+      style="
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+             height: auto;
+        padding: 20px 20px 10px 20px;
+            background-color: white;
+                  z-index:99
+      "
+    >
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 9px;
+          font-weight: 500;
+          align-items: center;
+          font-size: 16px;
+        "
+      >
+        <img
+          onclick="hideQuantityy()"
+          width="18"
+          height="18"
+          style="height:18px"
+          loading="eager"
+          src="https://img.icons8.com/external-inkubators-basic-outline-inkubators/32/external-close-button-it-and-computer-inkubators-basic-outline-inkubators.png"
+          alt="external-close-button"
+        >
+        <label
+          style="
+                    left: 42%;
+                    position: fixed;
+            font-weight: 700;
+          "
+          >Quantity</label
+        >
+      </div>
+      <div style="border-bottom: 0.3px solid #858585;width: 105%;left: 0px;position: absolute;"></div>
+      <div
+        class="product-info__quantity-selector"
+        style="
+          padding-top:24px;
+
+          padding-bottom: 10px;
+        "
+      >
+        <div
+          class="form-control"
+          style="
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <quantity-selector class="quantity-selector">
+            <button
+              type="button"
+              onClick="updateInputValues(-1)"
+              class="quantity-selector__button"
+              aria-label="{{ 'product.quantity.decrease_quantity' | t }}"
+            >
+              <svg
+                role="presentation"
+                focusable="false"
+                width="10"
+                height="2"
+                class="icon icon-minus"
+                viewBox="0 0 10 2"
+              >
+                <path d="M0 0H10V2H0V0Z" fill="currentColor"></path>
+              </svg>
+            </button>
+            <input
+              type="text"
+              id="homeatcc"
+              name="quantity"
+              value="1"
+              class="mul quantity-selector__input"
+              readonly="readonly"
+            >
+            <button
+              type="button"
+              class="quantity-selector__button"
+              aria-label="{{ 'product.quantity.increase_quantity' | t }}"
+              onClick="updateInputValues(1)"
+            >
+              <svg
+                role="presentation"
+                focusable="false"
+                stroke-width="2"
+                width="10"
+                height="10"
+                class="icon icon-plus"
+                viewBox="0 0 12 12"
+              >
+                <path d="M6 0V12" fill="none" stroke="currentColor"></path>
+                <path d="M0 6L12 6" fill="none" stroke="currentColor"></path>
+              </svg>
+            </button>
+          </quantity-selector>
+          <span id="QuantityType"></span>
+        </div>
+
+        <div class="poopbutton" style="margin-right:12px">
+          <a
+            style="color: #c87641;text-decoration:none;font-weight:600;font-size:15px"
+            data-fancybox=""
+            data-src="#sizechatpop"
+            href="javascript:;"
+            class="cstmsizechat"
+          >
+            Size Estimator
+          </a>
+          <div id="sizechatpop" style="display:none;padding:28px;">
+            {% render 'size-guide-popup' %}
+          </div>
+        </div>
+      </div>
+      <div style="border-bottom: 0.3px solid #000;width: 105%;left: 0px;position: absolute;"></div>
+      <span id="originalPricee" style="display:none;"></span>
+
+      <div
+        id="buyPopUp"
+        style="
+                display:flex;flex-direction:row;color: #1d3b4a;
+                justify-content: space-between;
+                font-weight: 700;font-size: 17px;
+
+          margin-top: 10px;
+        "
+      >
+        <div
+          style="    align-self: center;"
+        >
+          {{ '₹' }}
+          <span id="formattedPriced"> </span>
+          <span id="formattedTypee"> </span>
+        </div>
+        <form
+          method="post"
+          action="/cart/add"
+          name="atcForm"
+          id="atcForm"
+          accept-charset="UTF-8"
+          class="shopify-product-form"
+          enctype="multipart/form-data"
+          is="product-form"
+        >
+          <input
+            type="hidden"
+            id="homeatc"
+            name="quantity"
+            value="1"
+          >
+          <input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓"
+          ><input type="hidden" name="id" value="" class="forminp">
+          <buy-buttons
+            style="width:160px;"
+            onClick="hideQuantitafterAtc()"
+            class="buy-buttons"
+            form=""
+            force-secondary-button
+          >
+            {%- render 'button',
+              name: 'customButtonn',
+              type: 'submit',
+              content: 'Add to cart',
+              background: buy_buttons_block.settings.atc_button_background,
+              text_color: buy_buttons_block.settings.atc_button_text_color,
+              secondary: true
+            -%}
+          </buy-buttons>
+        </form>
+      </div>
+    </div>
+    <script>
+      const customButtons = document.getElementsByName('customButtonn');
+      customButtons.forEach((button) => {
+        button.style.fontSize = '15px';
+      });
+      function hideQuantitafterAtc() {
+        setTimeout(function () {
+          const overlaydiv = document.getElementById('overlaydiv');
+          overlaydiv.style.display = 'none';
+
+          const additionalContent = document.getElementById('popup');
+          additionalContent.style.display = 'none';
+          const inputField = document.getElementById('homeatc');
+          inputField.setAttribute('value', 1);
+
+          const inputFields = document.getElementById('homeatcc');
+
+          inputFields.setAttribute('value', 1);
+          document.documentElement.style.overflow = 'unset';
+        }, 2000);
+      }
+      function hideQuantityy() {
+        const overlaydiv = document.getElementById('overlaydiv');
+        overlaydiv.style.display = 'none';
+        document.documentElement.style.overflow = 'unset';
+        const additionalContent = document.getElementById('popup');
+        additionalContent.style.display = 'none';
+        const inputField = document.getElementById('homeatc');
+        inputField.setAttribute('value', 1);
+
+        const inputFields = document.getElementById('homeatcc');
+
+        inputFields.setAttribute('value', 1);
+      }
+    </script>
+    <script>
+      var productType;
+      function updateInputValues(inp) {
+        const inputField = document.getElementById('homeatc');
+        let qty = inputField.value;
+        const inputFields = document.getElementById('homeatcc');
+        const formattedPriceElement = document.getElementById('formattedPriced');
+        const getPrice = formattedPriceElement.textContent;
+        const price = document.getElementById('originalPricee');
+        const ori = price.textContent;
+        const productTypeElement = document.getElementById('formattedTypee');
+        if (productTypeElement.textContent.length != 0) {
+          productType = productTypeElement.textContent;
+        }
+        if (inp == 1) {
+          qty++;
+          if (qty != 1) {
+            const formattedTypeElement = document.getElementById('formattedTypee');
+            formattedTypeElement.innerHTML = '';
+          }
+          inputField.setAttribute('value', qty);
+          inputFields.setAttribute('value', qty);
+          var updatedPrice = ori * qty;
+          var formattedUpdatedPrice = updatedPrice;
+          formattedPriceElement.innerHTML = `${formattedUpdatedPrice}`;
+        } else if (inp == -1 && qty == 1) {
+          const formattedTypeElement = document.getElementById('formattedTypee');
+          formattedTypeElement.innerHTML = productType;
+
+          return;
+        } else if (inp == -1) {
+          qty--;
+
+          if (qty != 1) {
+            const formattedTypeElement = document.getElementById('formattedTypee');
+            formattedTypeElement.innerHTML = '';
+          }
+          if (qty == 1) {
+            const formattedTypeElement = document.getElementById('formattedTypee');
+            formattedTypeElement.innerHTML = productType;
+          }
+          inputField.setAttribute('value', qty);
+          inputFields.setAttribute('value', qty);
+
+          var updatedPrice = ori * qty;
+          var formattedUpdatedPrice = updatedPrice;
+          formattedPriceElement.innerHTML = `${formattedUpdatedPrice}`;
+        }
+      }
+    </script>
+    {{ 'tiny-img-link-preloader.js' | asset_url | script_tag }}
+    {% render 'kwikpass' %}
+
+    <script>
+      (function () {
+        function hideLoaderIfDone() {
+          const loader = document.querySelector('.loader-ellips');
+          if (!loader) return;
+
+          // 🚫 Do NOT hide loader while infinite scroll is loading
+          if (window.__infScrollLoading === true) return;
+
+          const moreLink = document.querySelector('.more a');
+
+          // ✅ Hide loader ONLY when no next page exists
+          if (!moreLink) {
+            loader.remove();
+          }
+        }
+
+        hideLoaderIfDone();
+
+        const observer = new MutationObserver(hideLoaderIfDone);
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+
+        document.addEventListener('facet:updated', hideLoaderIfDone);
+        document.addEventListener('drawer:closed', hideLoaderIfDone);
+        window.addEventListener('resize', hideLoaderIfDone);
+      })();
+    </script>
+
+    {% if page.handle == 'bulk-orders' %}
+<style>
+  #wa-chat-btn-root {
+    display: none !important;
+  }
+
+</style>
+{% endif %}
+
+  </body>
+</html>

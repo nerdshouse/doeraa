@@ -1,0 +1,401 @@
+<div {% render 'section-properties' %}>
+<div class="section-stack">
+  {% if section.settings.headerimage != blank %}
+  <div class="headerimg">
+    <img src="{{ section.settings.headerimage | img_url : 'master' }}">
+  </div>
+  {% endif %}
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+
+<div class="cstmTabs">
+<div class="tab">
+  {% for block in section.blocks %}
+  {% if block.settings.button_text != blank %}  
+  <button class="tablinks" onclick="openCity(event, '{{ block.settings.button_text | handleize }}')" {% if forloop.first %} id="defaultOpen"{% endif %}>{{ block.settings.button_text }}</button>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<div class="content-div">
+  {% for block in section.blocks %}
+    {% if block.settings.button_text != blank %}  
+<div id="{{ block.settings.button_text | handleize }}" class="tabcontent">
+
+ <div class="owl-carousel category-{{ forloop.index }}">
+    {% if block.settings.image1 != blank %}
+    <div class="item bulktab">
+      <div class="inner-color-div">
+      {% if block.settings.link1 != blank %}
+        <a href="{{ block.settings.link1 }}">
+        {% endif %}
+    <img src="{{ block.settings.image1 | img_url : 'master' }}" class="content-over-media__media zoom-image">
+      <p class="headingbulk">{{ block.settings.heading1 }}</p>
+    <p class="colorname">{{ block.settings.title1 }}</p>
+          {% if block.settings.link1 != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+   {% if block.settings.image2 != blank %}
+    <div class="item bulktab">
+      <div class="inner-color-div">
+      {% if block.settings.link2 != blank %}
+        <a href="{{ block.settings.link1 }}">
+        {% endif %}
+    <img src="{{ block.settings.image2 | img_url : 'master' }}" class="content-over-media__media zoom-image">
+     <p class="headingbulk">{{ block.settings.heading2 }}</p>
+    <p class="colorname">{{ block.settings.title2 }}</p>
+          {% if block.settings.link2 != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+   {% if block.settings.image3 != blank %}
+    <div class="item bulktab">
+      <div class="inner-color-div">
+      {% if block.settings.link3 != blank %}
+        <a href="{{ block.settings.link3 }}">
+        {% endif %}
+    <img src="{{ block.settings.image3 | img_url : 'master' }}" class="content-over-media__media zoom-image">
+     <p class="headingbulk">{{ block.settings.heading3 }}</p>
+    <p class="colorname">{{ block.settings.title3 }}</p>
+          {% if block.settings.link3 != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+   {% if block.settings.image4 != blank %}
+    <div class="item bulktab">
+      <div class="inner-color-div">
+      {% if block.settings.link4 != blank %}
+        <a href="{{ block.settings.link4 }}">
+        {% endif %}
+    <img src="{{ block.settings.image4 | img_url : 'master' }}" class="content-over-media__media zoom-image">
+     <p class="headingbulk">{{ block.settings.heading4 }}</p>
+    <p class="colorname">{{ block.settings.title4 }}</p>
+          {% if block.settings.link4 != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+   {% if block.settings.image5 != blank %}
+    <div class="item bulktab">
+      <div class="inner-color-div">
+      {% if block.settings.link5 != blank %}
+        <a href="{{ block.settings.link5 }}">
+        {% endif %}
+    <img src="{{ block.settings.image5 | img_url : 'master' }}" class="content-over-media__media zoom-image">
+          <p class="headingbulk">{{ block.settings.heading5 }}</p>
+    <p class="colorname">{{ block.settings.title5 }}</p>
+          {% if block.settings.link5 != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+   {% if block.settings.image6 != blank %}
+    <div class="item bulktab">
+      <div class="inner-color-div">
+      {% if block.settings.link6 != blank %}
+        <a href="{{ block.settings.link6 }}">
+        {% endif %}
+    <img src="{{ block.settings.image6 | img_url : 'master' }}" class="content-over-media__media zoom-image">
+     <p class="headingbulk">{{ block.settings.heading6 }}</p>
+    <p class="colorname">{{ block.settings.title6 }}</p>
+          {% if block.settings.link6 != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+ </div>
+  
+
+</div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+  
+  
+</div>
+
+  
+</div>
+</div>
+<script>
+  function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+  document.getElementById("defaultOpen").click();
+</script>
+
+{% for block in section.blocks %}
+<script>
+  $(document).ready(function(){
+$('.owl-carousel.category-{{ forloop.index }}').owlCarousel({
+    loop:true,
+    margin:20,
+    nav:false,
+    dots:true,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1.4
+        },
+        600:{
+            items:2
+        },
+        1000:{
+            items:3
+        }
+    }
+})
+    });
+</script>
+  {% endfor %}
+
+
+{% schema %}
+  {
+    "name": "Bulk order tab",
+    "class":"cstmbulk-tab",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"headerimage",
+        "label":"Header image"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"title",
+        "name":"item",
+        "settings":[
+          {
+            "type":"text",
+            "id":"button_text",
+            "label":"Tab Button Text"
+          },
+          {
+            "type":"image_picker",
+            "id":"image1",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"heading1",
+            "label":"Heading"
+          },
+          {
+            "type":"text",
+            "id":"title1",
+            "label":"content"
+          },
+          {
+            "type":"url",
+            "id":"link1",
+            "label":"Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"image2",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"heading2",
+            "label":"Heading"
+          },
+          {
+            "type":"text",
+            "id":"title2",
+            "label":"content"
+          },
+          {
+            "type":"url",
+            "id":"link2",
+            "label":"Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"image3",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"heading3",
+            "label":"Heading"
+          },
+          {
+            "type":"text",
+            "id":"title3",
+            "label":"content"
+          },
+          {
+            "type":"url",
+            "id":"link3",
+            "label":"Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"image4",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"heading4",
+            "label":"Heading"
+          },
+          {
+            "type":"text",
+            "id":"title4",
+            "label":"content"
+          },
+          {
+            "type":"url",
+            "id":"link4",
+            "label":"Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"image5",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"heading5",
+            "label":"Heading"
+          },
+          {
+            "type":"text",
+            "id":"title5",
+            "label":"content"
+          },
+          {
+            "type":"url",
+            "id":"link5",
+            "label":"Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"image6",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"heading6",
+            "label":"Heading"
+          },
+          {
+            "type":"text",
+            "id":"title6",
+            "label":"content"
+          },
+          {
+            "type":"url",
+            "id":"link6",
+            "label":"Link"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Bulk order tab",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+

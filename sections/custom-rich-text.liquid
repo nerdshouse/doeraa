@@ -1,0 +1,39 @@
+{%- render 'css-variables' -%}       
+{{- 'theme.css' | asset_url | stylesheet_tag -}}
+    {{- 'custom.css' | asset_url | stylesheet_tag -}}
+<style>
+.rich-text-section {
+  padding: 10px;
+}
+  /* .rich-text {
+    font-size: 21px;
+  } */
+.rich-text-section .container  h1,h2,h3,h4,h5,h6{
+font-size:revert !important;
+}  
+</style>
+
+<div class="rich-text-section">
+  <div class="container rich-text">
+    <span>{{ section.settings.content }}</span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Rich Text",
+  "settings": [
+   {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+  ],
+  "presets": [
+    {
+      "name": "Custom Rich Text"
+    }
+  ]
+}
+{% endschema %}

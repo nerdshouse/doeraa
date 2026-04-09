@@ -1,0 +1,29 @@
+{%- if section.settings.show_review -%}
+  <div class="container">
+    <div class="review-tle main-review-block">
+      <h2 class="title-head">Let customers speak for us</h2>
+      {% render 'judgeme_all_reviews' %}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Review",
+  "class": "shopify-section--blog-posts",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_review",
+      "label": "Enable Review",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Review"
+    }
+  ]
+}
+{% endschema %}

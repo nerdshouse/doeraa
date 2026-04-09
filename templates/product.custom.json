@@ -1,0 +1,884 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "custom-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h5"
+          }
+        },
+        "b7ae3bf0-98a3-4322-8b55-403a71978a9e": {
+          "type": "sku",
+          "settings": {}
+        },
+        "0c74fdd5-b2c2-443a-9d5b-04413e20e013": {
+          "type": "inventory",
+          "disabled": true,
+          "settings": {
+            "low_inventory_threshold": 0
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "86286b67-432a-46a8-acbd-280d1a48f2be": {
+          "type": "custom-product-swatch",
+          "settings": {
+            "products": ""
+          }
+        },
+        "6156dfbb-a4cb-42a2-8bc4-111bcf22ec80": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "97bfbfed-82bc-4437-bdb0-31f96e56e96b": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "dc3013a8-486d-4a30-a163-a09e95c99c93": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div\n        class=\"product-info__quantity-selector\"\n        style=\"margin-top:-14px\"\n      >\n        <div\n          class=\"form-control\"\n\n          style=\"\n            display: flex;\n            flex-direction: column;\n    font-weight: 600;\n    font-size: 15px;\n    align-self: end;\n          \"\n        >\n          \n       Real Product Images\n        </div>\n\n        <div class=\"poopbutton\" style=\"margin-right:12px\">\n          <a\n            style=\"color: #c87641;text-decoration:none;font-weight:600;font-size:15px;\n    position: relative;\"\n            data-fancybox=\"\"\n            data-src=\"#sizechatpop\"\n            href=\"javascript:;\"\n            class=\"cstmsizechat\"\n          >\n            Size Estimator\n          </a>\n          <div id=\"sizechatpop\" style=\"display:none;\">\n            {% render 'size-guide-popup' %}\n          </div>\n        </div>\n      </div>"
+          }
+        },
+        "806962e8-cc79-4b5c-9bb5-6a76c9d49177": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div style=\"\n    position: relative;\n    width: 100%;\n    height: 195px;\n    overflow-x: scroll;\n    overflow-y: hidden;\n    text-align: left;\n    color: #000;\n    \nmargin-bottom:-48px;\n  \">\n  <div style=\"\n      left: 2px;\n      width: 380px;\n    \">\n    <div style=\"\n        overflow-x: scroll;\n        overflow-y: hidden;\n        left: 0px;\n        width: 380px;\n        display: flex;\n        flex-direction: row;\n        align-items: flex-start;\n        justify-content: flex-start;\n        gap: 8px;\n        color: #1a181e;\n      \">\n      <div style=\"\n          display: flex;\n          flex-direction: column;\n          align-items: center;\n          justify-content: flex-start;\n          gap: 4px;\n        \">\n        <img style=\"\n            position: relative;\n            border-radius: 10px;\n            width: 120px;\n            height: 120px;\n            object-fit: cover;\n            cursor: pointer;\n          \" alt=\"\" src=\"https://cdn.shopify.com/s/files/1/0495/6386/1144/files/bd795f8a-8b32-4881-b1d5-532739a201fe_74966e67-527a-45b3-b3bb-685845f8632b.jpg?v=1692363167\"\n          onclick=\"showModal(this.src, 'Lehenga')\">\n\n        <div style=\"position: relative\">Shirt & Cape</div>\n      </div>\n      <div style=\"\n          display: flex;\n          flex-direction: column;\n          align-items: center;\n          justify-content: flex-start;\n          gap: 4px;\n        \">\n        <img style=\"\n            position: relative;\n            border-radius: 10px;\n            width: 120px;\n            height: 120px;\n            object-fit: cover;\n            cursor: pointer;\n          \" alt=\"\" src=\"https://cdn.shopify.com/s/files/1/0495/6386/1144/files/3362d34c-0b9c-4ffa-b66d-02fcdcae3b40.jpg?v=1692283843\"\n          onclick=\"showModal(this.src, 'Lehenga')\">\n\n        <div style=\"position: relative\">Frock</div>\n      </div>\n      <div style=\"\n          display: flex;\n          flex-direction: column;\n          align-items: center;\n          justify-content: flex-start;\n          gap: 4px;\n        \">\n        <img style=\"\n            position: relative;\n            border-radius: 10px;\n            width: 120px;\n            height: 120px;\n            object-fit: fill;\n            cursor: pointer;\n          \" alt=\"\" src=\"https://cdn.shopify.com/s/files/1/0495/6386/1144/files/PHOTO-2023-07-19-12-43-26.jpg?v=1692362905\"\n          onclick=\"showModal(this.src, 'Lehenga')\">\n\n        <div style=\"position: relative\">Lehenga</div>\n      </div>\n\n       \n    </div>\n  </div>\n</div>\n\n  \n    <!-- Modal -->\n    <div id=\"imageModal\" class=\"modal\">\n      <span class=\"close\" onclick=\"closeModal()\">&times;</span>\n      <img id=\"modalImage\" style=\"\n    margin-top: 25%\" class=\"modal-content\">\n      <div id=\"caption\"></div>\n    </div>\n\n    <style>\n      /* Modal styles */\n      .modal {\n        display: none;\n        position: fixed;\n        z-index: 99999;\n        padding-top: 60px;\n        left: 0;\n        top: 0;\n        width: 100%;\n        height: 100%;\n        overflow: auto;\n        background-color: rgba(0, 0, 0, 0.9);\n      }\n\n      .modal-content {\n        margin: auto;\n        display: block;\n        max-width: 80%;\n        max-height: 80%;\n      }\n\n      .close {\n        position: absolute;\n        top: 10%;\n        right: 35px;\n        color: #f1f1f1;\n        font-size: 40px;\n        font-weight: bold;\n        transition: 0.3s;\n        cursor: pointer;\n      }\n\n      .close:hover {\n        color: #bbb;\n      }\n    </style>\n\n    <script>\n\n      function showModal(imageSrc, caption) {\ndocument.documentElement.style.overflowY = 'hidden';\n        var modal = document.getElementById('imageModal');\n        var modalImage = document.getElementById('modalImage');\n        var captionElement = document.getElementById('caption');\n        modal.style.display = 'block';\n        modalImage.src = imageSrc;\n        captionElement.textContent = caption;\n      }\n\n      function closeModal() {\n        var modal = document.getElementById('imageModal');\n        modal.style.display = 'none';\n      }\n    </script>"
+          }
+        },
+        "d0ed67b8-d3e9-4999-8987-af0f3adef7f4": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<style>\n  #offers {\n    width: max-content;\n  }\n\n  @media screen and (max-width: 488px) {\n    #offers {\n      width: 100%;\n    }\n  }\n  ::-webkit-scrollbar {\n    display: none;\n  }\n</style>\n<script>\nfunction copyToClipboard(element) {\n  var $temp = $(\"<input>\");\n  $(\"body\").append($temp);\n  \n  var trimmedText = $(element).text().trim(); // Trim leading and trailing white spaces\n  $temp.val(trimmedText).select();\n  \n  document.execCommand(\"copy\");\n  $temp.remove();\n}\n</script>\n<div\n  id=\"offers\"\n  style=\"\n    margin-top: 20px;\n    position: relative;\n    overflow-x: scroll;\n    height: 138px;\n    overflow-y: hidden;\n    background-color: #fff1ee;\n    margin-bottom: 20px;\n    text-align: left;\n    border-radius: 12px;\n    font-size: inherit;\n    color: #000;\n  \"\n>\n  <div\n    style=\"\n      position: sticky;\n      left: 10px;\n      font-weight: 600;\n      display: inline-block;\n      margin-top: 5px;\n      width: 41.52px;\n    \"\n  >\n    Offers\n  </div>\n  <div\n    style=\"\n      position: relative;\n      top: -20px;\n      border-radius: 10px;\n\n      width: 478px;\n    \"\n  >\n    <div\n      style=\"\n        position: absolute;\n        border-radius: 10px;\n        /* background-color: #FFF1EE; */\n        /* width: 100%; */\n        height: 124px;\n      \"\n    ></div>\n    <div\n      style=\"position: absolute; left: 6px; height: 82px; border-radius: 12px\"\n    >\n      <div\n        style=\"\n          position: absolute;\n          top: 25px;\n          left: 2px;\n          width: 350px;\n          height: 58px;\n          /* overflow-x: auto; */\n          font-size: 9px;\n          color: #1a181e;\n        \"\n      >\n        <div\n          style=\"\n            position: absolute;\n            top: 0px;\n            left: 0px;\n            width: 427px;\n            height: 58px;\n          \"\n        >\n          <div\n            style=\"\n              position: absolute;\n              top: 0px;\n              left: 0px;\n              width: 150px;\n              height: 70px;\n            \"\n          >\n            <div\n              style=\"\n                position: absolute;\n                top: 0px;\n                left: 0px;\n                border-radius: 10px;\n                background-color: #fff;\n                width: 150px;\n                height: 88px;\n              \"\n            ></div>\n            <div\n              style=\"\n                position: absolute;\n                top: 8px;\n                left: 8px;\n                width: 131px;\n                height: 42px;\n              \"\n            >\n              <div\n                style=\"\n                  position: absolute;\n                  top: 0px;\n                  left: 0px;\n                  width: 132px;\n                  height: 36px;\n                \"\n              >\n                <div\n                  style=\"\n                    position: absolute;\n                    top: 0px;\n                    left: 0px;\n                    width: 132px;\n                    height: 36px;\n                  \"\n                >\n                  <div\n                    style=\"\n                      position: absolute;\n                      top: 0px;\n                      left: -1px;\n                      border-radius: 6px;\n                      background-color: #fff;\n                      border: 1px dashed #b34428;\n                      box-sizing: border-box;\n                      width: 134px;\n                      height: 36px;\n                    \"\n                  >\n                    <div\n                      style=\"\n                        position: absolute;\n                        top: 10px;\n                        font-size: 11px;\n                        left: 8px;\n                        font-weight: 600;\n                      \"\n                      id=\"p1\"\n                    >\n                      DOERAA 5\n                    </div>\n                    <div\n                      style=\"\n                        position: absolute;\n                        top: -1px;\n                        left: 83.9px;\n                        border-radius: 6px;\n                        background-color: #d28774;\n                        display: flex;\n                        flex-direction: row;\n                        padding: 8.5px 8.29px;\n                        align-items: center;\n                        justify-content: center;\n                        color: #fff;\n                      \"\n                    >\n                      <div\n                        style=\"position: relative; font-size: 12px\"\n                        onclick=\"copyToClipboard('#p1')\"\n                      >\n                        COPY\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </div>\n              <div\n                style=\"\n                  position: absolute;\n                  top: 38px;\n                  left: 0px;\n                  width: 140px;\n                  font-size: 12px;\n                  color: #201a31;\n                \"\n              >\n                5% OFF on Cart Value over ₹ 999\n              </div>\n            </div>\n          </div>\n          <div\n            style=\"\n              position: absolute;\n              top: 0px;\n              left: 155px;\n              width: 150px;\n              height: 70px;\n            \"\n          >\n            <div\n              style=\"\n                position: absolute;\n                top: 0px;\n                left: 0px;\n                border-radius: 10px;\n                background-color: #fff;\n                width: 150px;\n                height: 88px;\n              \"\n            ></div>\n            <div\n              style=\"\n                position: absolute;\n                top: 8px;\n                left: 8px;\n                width: 131px;\n                height: 42px;\n              \"\n            >\n              <div\n                style=\"\n                  position: absolute;\n                  top: 0px;\n                  left: 0px;\n                  width: 132px;\n                  height: 36px;\n                \"\n              >\n                <div\n                  style=\"\n                    position: absolute;\n                    top: 0px;\n                    left: 0px;\n                    width: 132px;\n                    height: 36px;\n                  \"\n                >\n                  <div\n                    style=\"\n                      position: absolute;\n                      top: 0px;\n                      left: -1px;\n                      border-radius: 6px;\n                      background-color: #fff;\n                      border: 1px dashed #b34428;\n                      box-sizing: border-box;\n                      width: 134px;\n                      height: 36px;\n                    \"\n                  >\n                    <div\n                      style=\"\n                        position: absolute;\n                        top: 10px;\n                        font-size: 11px;\n                        left: 8px;\n                        font-weight: 600;\n                      \"\n                      id=\"p2\"\n                    >\n                      DOERAA 10\n                    </div>\n                    <div\n                      style=\"\n                        position: absolute;\n                        top: -1px;\n                        left: 83.9px;\n                        border-radius: 6px;\n                        background-color: #d28774;\n                        display: flex;\n                        flex-direction: row;\n                        padding: 8.5px 8.29px;\n                        align-items: center;\n                        justify-content: center;\n                        color: #fff;\n                      \"\n                    >\n                      <div\n                        style=\"position: relative; font-size: 12px\"\n                        onclick=\"copyToClipboard('#p2')\"\n                      >\n                        COPY\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </div>\n              <div\n                style=\"\n                  position: absolute;\n                  top: 38px;\n                  left: 0px;\n                  width: 145px;\n                  font-size: 12px;\n                  color: #201a31;\n                \"\n              >\n                10% OFF on Cart Value over ₹ 2500\n              </div>\n            </div>\n          </div>\n          <div\n            style=\"\n              position: absolute;\n              top: 0px;\n              left: 310px;\n              width: 150px;\n              height: 70px;\n            \"\n          >\n            <div\n              style=\"\n                position: absolute;\n                top: 0px;\n                left: 0px;\n                border-radius: 10px;\n                background-color: #fff;\n                width: 150px;\n                height: 88px;\n              \"\n            ></div>\n            <div\n              style=\"\n                position: absolute;\n                top: 8px;\n                left: 8px;\n                width: 131px;\n                height: 42px;\n              \"\n            >\n              <div\n                style=\"\n                  position: absolute;\n                  top: 0px;\n                  left: 0px;\n                  width: 132px;\n                  height: 36px;\n                \"\n              >\n                <div\n                  style=\"\n                    position: absolute;\n                    top: 0px;\n                    left: 0px;\n                    width: 132px;\n                    height: 36px;\n                  \"\n                >\n                  <div\n                    style=\"\n                      position: absolute;\n                      top: 0px;\n                      left: -1px;\n                      border-radius: 6px;\n                      background-color: #fff;\n                      border: 1px dashed #b34428;\n                      box-sizing: border-box;\n                      width: 134px;\n                      height: 36px;\n                    \"\n                  >\n                    <div\n                      style=\"\n                        position: absolute;\n                        top: 10px;\n                        font-size: 11px;\n                        left: 8px;\n                        font-weight: 600;\n                      \"\n                      id=\"p3\"\n                    >\n                      DOERAA 15\n                    </div>\n                    <div\n                      style=\"\n                        position: absolute;\n                        top: -1px;\n                        left: 83.9px;\n                        border-radius: 6px;\n                        background-color: #d28774;\n                        display: flex;\n                        flex-direction: row;\n                        padding: 8.5px 8.29px;\n                        align-items: center;\n                        justify-content: center;\n                        color: #fff;\n                      \"\n                    >\n                      <div\n                        style=\"position: relative; font-size: 12px\"\n                        onclick=\"copyToClipboard('#p3')\"\n                      >\n                        COPY\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </div>\n              <div\n                style=\"\n                  position: absolute;\n                  top: 38px;\n                  left: 0px;\n                  width: 145px;\n                  font-size: 12px;\n                  color: #201a31;\n                \"\n              >\n                15% OFF on Cart Value over ₹ 3500\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {
+            "show_empty": true
+          }
+        },
+        "separator": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "variant",
+            "size_chart_page": ""
+          }
+        },
+        "8eab73ae-a471-4f47-8baf-8ffc2e9f1c80": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/badges_1.webp",
+            "alignment": "start",
+            "max_width": 500
+          }
+        },
+        "88388b9d-401b-4c8e-98bb-10e6a9dffee0": {
+          "type": "lon-description",
+          "settings": {
+            "title": "Title"
+          }
+        },
+        "38fca3d9-3d13-4577-b4ff-0155d1ae04be": {
+          "type": "usp_icons",
+          "disabled": true,
+          "settings": {
+            "icon_1": "shopify://shop_images/cod.png",
+            "icon_text_1": "COD Available",
+            "icon_subtitle_1": "<p>Upto Rs.2500</p>",
+            "icon_2": "shopify://shop_images/fast.png",
+            "icon_text_2": "Express Shipping",
+            "icon_subtitle_2": "<p>Ships within 24 hrs</p>",
+            "icon_3": "shopify://shop_images/quality.png",
+            "icon_text_3": "Finest Quality Fabrics",
+            "icon_subtitle_3": "",
+            "icon_4": "shopify://shop_images/ratings.png",
+            "icon_text_4": "Loved by 50k+ customers",
+            "icon_subtitle_4": "",
+            "icon_5": "shopify://shop_images/earth.png",
+            "icon_text_5": "Shipping Globally",
+            "icon_subtitle_5": ""
+          }
+        },
+        "713bebdc-7db0-4b3e-8b45-b07254d53663": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ product.description }}</p>"
+          }
+        },
+        "2b8f479d-01fb-4554-bc49-29280897f9a6": {
+          "type": "offer",
+          "disabled": true,
+          "settings": {
+            "text_alignment": "start",
+            "icon_position": "aligned",
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Frame_1.png",
+            "icon_width": 24,
+            "title": "Shipping",
+            "content": "<p><strong>Free Express Shipping</strong>. Delivery within 2-4 working days. </p><p><strong>Delivery within 2 days in Mumbai and Delhi.</strong></p>",
+            "background": "#ffffff",
+            "text_color": "#1d3b4a"
+          }
+        },
+        "babcbd7c-0828-40b8-96e4-15e35ec71d50": {
+          "type": "offer",
+          "disabled": true,
+          "settings": {
+            "text_alignment": "start",
+            "icon_position": "aligned",
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Frame_2.png",
+            "icon_width": 24,
+            "title": "Discount",
+            "content": "<p>Use code <strong>\"FIRST5\"</strong> for 5% Discount on orders above Rs.1000. More discounts at checkout.</p>",
+            "background": "#ffffff",
+            "text_color": "#1d3b4a"
+          }
+        },
+        "11e496ef-5f8d-4c82-88fb-9b3bab881a05": {
+          "type": "custom-accordions",
+          "settings": {
+            "title1": "Details"
+          }
+        },
+        "546b9003-594d-4e07-9692-3eaa867a413c": {
+          "type": "lon-description",
+          "settings": {
+            "title": "Product details"
+          }
+        },
+        "e42b6016-2772-4064-b52a-eda648114d3e": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Product Description",
+            "content": "<p>{{ product.description }}</p>",
+            "open": false
+          }
+        },
+        "8e451939-f11f-4f9f-9192-1ebec93ed54f": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Size Estimator",
+            "content": "<p>Confused about how many meters of fabrics you need to make your desired attire? Click on the size estimator above to get better clarity.</p>",
+            "open": false
+          }
+        },
+        "749796aa-5809-4f28-97a3-05edfebf8d88": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Shipping and return policy",
+            "content": "<p><strong>Return Policy:</strong></p><p>Our fabrics are put through a rigorous 30-step quality check throughout the entire production process. From the lining of the threads to the beading of the embroidery - everything is looked into with a keen eye and cleared for packaging and shipping. Due to these strict measures, our production quality is unparalleled. Owing to the nature of the trade, once a fabric has been cut out and delivered it cannot be returned to us as it's been cut per your individual requirement and order quantity, which varies from order to order.</p><p><strong>Shipping Policy:</strong></p><ul><li>We ship across India. For international deliveries, please contact us.</li><li>Orders are shipped within 24-48 hours of being confirmed. All orders are shipped by FedEx, Delhivery or Bluedart.</li><li>Shipment tracking details will be mailed to you on the registered email ID.</li><li>It takes approximately 3 - 5 business days to deliver your product. Sometimes delivery may take longer due to bad weather, flight/transportation delays, political disruptions and/or other unforeseen circumstances.</li></ul><p><strong>Free Shipping:</strong></p><p>Orders worth more than Rs. 999 qualify for free shipping in India. Otherwise, Rs. 99 will be levied by way of shipping charges</p>",
+            "open": false
+          }
+        },
+        "085347f4-aa6d-44d9-8376-35f6695827df": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Washing instructions",
+            "content": "<p>Please refer to the product label for wash care instructions.</p>",
+            "open": false
+          }
+        },
+        "a5d9f7af-ee12-48f5-8535-b7b12f446998": {
+          "type": "collapsible_text",
+          "settings": {
+            "cstmclass": "",
+            "title": "Disclaimer",
+            "content": "<p>Product specifications are a close approximate in value.<br/>Expect a slight variation in colour. There will always be a minor variation in the colour you see on your computer screen/phone display and the one that is received on the fabric since the technologies involved for display and printing are different. A customer must place an order keeping this slight colour variation in mind. Please note - no returns shall be accepted on the basis of colour and description discrepancy.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "b7ae3bf0-98a3-4322-8b55-403a71978a9e",
+        "0c74fdd5-b2c2-443a-9d5b-04413e20e013",
+        "badges",
+        "price",
+        "86286b67-432a-46a8-acbd-280d1a48f2be",
+        "6156dfbb-a4cb-42a2-8bc4-111bcf22ec80",
+        "97bfbfed-82bc-4437-bdb0-31f96e56e96b",
+        "dc3013a8-486d-4a30-a163-a09e95c99c93",
+        "806962e8-cc79-4b5c-9bb5-6a76c9d49177",
+        "d0ed67b8-d3e9-4999-8987-af0f3adef7f4",
+        "rating",
+        "separator",
+        "variant_picker",
+        "8eab73ae-a471-4f47-8baf-8ffc2e9f1c80",
+        "88388b9d-401b-4c8e-98bb-10e6a9dffee0",
+        "38fca3d9-3d13-4577-b4ff-0155d1ae04be",
+        "713bebdc-7db0-4b3e-8b45-b07254d53663",
+        "2b8f479d-01fb-4554-bc49-29280897f9a6",
+        "babcbd7c-0828-40b8-96e4-15e35ec71d50",
+        "11e496ef-5f8d-4c82-88fb-9b3bab881a05",
+        "546b9003-594d-4e07-9692-3eaa867a413c",
+        "e42b6016-2772-4064-b52a-eda648114d3e",
+        "8e451939-f11f-4f9f-9192-1ebec93ed54f",
+        "749796aa-5809-4f28-97a3-05edfebf8d88",
+        "085347f4-aa6d-44d9-8376-35f6695827df",
+        "a5d9f7af-ee12-48f5-8535-b7b12f446998"
+      ],
+      "custom_css": [],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 50,
+        "desktop_media_layout": "grid_highlight",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 2.5,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "recommendations_count": 6,
+        "products": [],
+        "full_width": false,
+        "stack_products": true,
+        "show_progress_bar": true,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "You may also like",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "28884d65-cdae-499a-8ea2-60776ccc7607": {
+      "type": "custom-featured-collection",
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "More from this collection",
+        "content": "",
+        "link_url": "shopify://collections/laces",
+        "link_text": "More Laces",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "collection": "laces",
+        "products": [],
+        "products_count": 6
+      }
+    },
+    "eddae018-0626-400a-aac6-6336f78634cf": {
+      "type": "product-similar-products",
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": false,
+        "stack_products": false,
+        "show_progress_bar": true,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "More from this collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "f5273ba1-9734-49b1-a15a-4436745d2ede": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "laces",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 8,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "Featured collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "87cadf24-2b02-4a6b-80f5-056b246204e3": {
+      "type": "scrolling-text",
+      "settings": {
+        "full_width": true,
+        "text": "For Woman who move the world.",
+        "text_size": "large",
+        "text_style": "fill",
+        "scrolling_mode": "auto",
+        "scrolling_speed": 10,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#1d3b4a",
+        "text_gradient": ""
+      }
+    },
+    "54c95d77-ac49-43cd-b6bd-c0b1baae95dd": {
+      "type": "collection-list",
+      "blocks": {
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "embroidered-georgette-fabrics",
+            "image": "shopify://shop_images/MIT_1882.webp",
+            "subheading": "",
+            "title": "Georgette embroidery",
+            "url": "shopify://collections/embroidered-georgette-fabrics",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "embroidered-net-fabric",
+            "image": "shopify://shop_images/embroidery-fabrics-beautiful-sequins-with-mauve-thread-wavy-embroidery-work-on-mauve-soft-net-fabric-37808918921470.webp",
+            "subheading": "",
+            "title": "Net embroidery",
+            "url": "shopify://collections/embroidered-net-fabric",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "a48a29fb-d0b4-4817-a3b6-7fca5db52ef6": {
+          "type": "collection",
+          "settings": {
+            "collection": "organza-fabrics",
+            "image": "shopify://shop_images/embroidery-fabrics-multi-coloured-floral-thread-embroidery-on-grey-organza-fabric-22768270147736.jpg",
+            "subheading": "",
+            "title": "Organza embroidery",
+            "url": "shopify://collections/organza-fabrics",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "lehenga-sets",
+            "image": "shopify://shop_images/lehenga-set-lavender-and-white-unstitched-lehenga-set-fabric-3-piece-38369452589310.jpg",
+            "subheading": "",
+            "title": "Lehenga set",
+            "url": "shopify://collections/lehenga-sets",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "4f858fb5-b056-40a0-83c3-e14bd5299295": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/mulberrysuitset.jpg",
+            "subheading": "",
+            "title": "Suit set",
+            "url": "shopify://collections/unstitched-suits-fabrics",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "fda23004-ce7d-48af-b22a-3649d7505027": {
+          "type": "collection",
+          "settings": {
+            "collection": "saree-sets",
+            "image": "shopify://shop_images/MIT_3349.webp",
+            "subheading": "",
+            "title": "Saree Sets",
+            "url": "shopify://collections/saree-sets",
+            "heading_tag": "h3",
+            "text_position": "place-self-center text-center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        }
+      },
+      "block_order": [
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-0",
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-1",
+        "a48a29fb-d0b4-4817-a3b6-7fca5db52ef6",
+        "template--16605951197438__54c95d77-ac49-43cd-b6bd-c0b1baae95dd-1669972448993e4c52-2",
+        "4f858fb5-b056-40a0-83c3-e14bd5299295",
+        "fda23004-ce7d-48af-b22a-3649d7505027"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "stack_collections": false,
+        "collections_per_row": 4,
+        "show_progress_bar": true,
+        "subheading": "",
+        "title": "Explore  More Collections",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "613cdb49-850b-496b-8154-0798cf775333": {
+      "type": "product-review",
+      "disabled": true,
+      "settings": {
+        "show_review": true
+      }
+    },
+    "3fd59fef-1bf4-457d-81f6-883d6cf0d0df": {
+      "type": "testimonials",
+      "blocks": {
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Kumud_sharma.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Kumud Sharma",
+            "title": "",
+            "content": "<p> First i was unsure about ordering any stuff. I thought to give it a try. But i am happy with their service. I ordered a blouse piece which was as given in image. The material is also worth every penny.Delivery was also prompt.Would definitely like to purchase more.Thank You so much</p>"
+          }
+        },
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-1": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Suchanda_biswas_chakrobarti_e8baf424-6f1f-4f3b-a9a4-c5b55f98eca1.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Suchanda Biswas Chakraborty",
+            "title": "",
+            "content": "<p>I fell in love with the material that i bought. The exact material was delivered which i saw and ordered. The delivery was very smooth and fast. I am gonna purchase more and recommend everyone else. The collection is also awesome.</p>"
+          }
+        },
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-2": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Snigdha_k.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "Snigdha K1",
+            "title": "",
+            "content": "<p>I am impressed with the fabric and with how fast they delivered it!! Can't wait to order more!!:)</p>"
+          }
+        },
+        "4dfb635c-93dd-4730-a13c-cc4a25e549c2": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rahul_chandra.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Rahul Chandra",
+            "title": "",
+            "content": "<p>Received the order in record time.Very happy with delivery.Not to mention the quality of product is very good</p>"
+          }
+        },
+        "fc66a5c6-e625-43ff-8a4b-f8ea81b218c0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Nandita_dad.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Nandita Da",
+            "title": "",
+            "content": "<p>Beautiful fabric. The colours are so beautiful and vibrant.Excellent quality.</p>"
+          }
+        },
+        "7bdc3802-706a-403f-b535-64f605e3d9e9": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Ankita_Maddi.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "Ankita Maddi",
+            "title": "",
+            "content": "<p>My first order with them was during pandemic when I had no option to purchase from anywhere for my sister's wedding. I was clueless, I trusted my gut be their website seemed quite trust worthy. I went ahead, placed my first order and the heaps of praises I got for that dress was unbelievable. Now when the pandemic is over and we again have plenty options I placed an order with them again for my brother's wedding. Their quality is just ❤️ Just as shown in the pictures. I love it when brands are transparent and do justice to their claims. You have my heart DOERAA🤍</p>"
+          }
+        },
+        "2720cde1-a140-479b-bda5-d3be0fa08f1d": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Ashmita_lahiri.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Ashmita Lahiri",
+            "title": "",
+            "content": "<p>Absolutely wonderful material. I've been buying from Doeraa for quite some time. The products are exactly like the description, sometimes even better than the descriptions! Ever since I've started buying from them, I've not bought any fabric from any other websites!There's a whatsapp number. The executives return to queries, sort any issue sooner than expected!Doeraa is a must choice for whoever in love with quality and stylish fabrics. They have a huge range of products from casual to formal. Thank you Doeraa!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-0",
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-1",
+        "template--16605951197438__3fd59fef-1bf4-457d-81f6-883d6cf0d0df-16699722798a2f5003-2",
+        "4dfb635c-93dd-4730-a13c-cc4a25e549c2",
+        "fc66a5c6-e625-43ff-8a4b-f8ea81b218c0",
+        "7bdc3802-706a-403f-b535-64f605e3d9e9",
+        "2720cde1-a140-479b-bda5-d3be0fa08f1d"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "stack_testimonials": false,
+        "subheading": "",
+        "title": "Customer Testimonials",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "testimonial_card_background": "",
+        "testimonial_card_text_color": ""
+      }
+    },
+    "5cab71bb-c8ce-4b27-abb3-7796b9836445": {
+      "type": "timeline",
+      "blocks": {
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-0": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_1.jpg",
+            "navigation_label": "Phase 1",
+            "subheading": "",
+            "title": "Inception",
+            "content": "<p> Doeraa was founded by a group of fashion-conscious individuals who wanted to create a brand that would empower consumers to make a positive impact on the world through their fashion choices.</p>"
+          }
+        },
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_2.jpg",
+            "navigation_label": "Phase 2",
+            "subheading": "",
+            "title": "Early days",
+            "content": "<p>In the early days, Doeraa focused on sourcing sustainable materials and working with skilled artisans to create a range of stylish and functional fashion products that were made with the consumer in mind.</p>"
+          }
+        },
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_3.jpg",
+            "navigation_label": "Phase 3",
+            "subheading": "",
+            "title": "Growth and expansion",
+            "content": "<p>As Doeraa gained popularity among fashion-conscious consumers, the brand expanded its offerings to include a wider range of products and began collaborating with more artisans from around the world.</p>"
+          }
+        },
+        "c510c79b-d805-4e1f-a273-38544912f219": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_4.jpg",
+            "navigation_label": "Phase 4",
+            "subheading": "",
+            "title": "Commitment to sustainability",
+            "content": "<p>Doeraa became known for its commitment to sustainability, and the brand implemented various initiatives to reduce its environmental impact and support ethical and sustainable practices in the production of its fashion products.<br/></p>"
+          }
+        },
+        "dcf51c32-dc7d-4012-a55d-6e03dddbc16c": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Phase_5.jpg",
+            "navigation_label": "Phase 5",
+            "subheading": "",
+            "title": "Giving back",
+            "content": "<p>In addition to its focus on sustainability, Doeraa also made a commitment to giving back to the community, and began donating a portion of its profits to charitable causes around the world. Today, Doeraa is a well-respected fashion brand that is known for its commitment to sustainability, social responsibility, and creating products that are not only stylish, but also have a positive impact on the world.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-0",
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-1",
+        "template--16605951197438__5cab71bb-c8ce-4b27-abb3-7796b9836445-1669972180f9fe4685-2",
+        "c510c79b-d805-4e1f-a273-38544912f219",
+        "dcf51c32-dc7d-4012-a55d-6e03dddbc16c"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "show_impact_text_in_slide": true,
+        "impact_text_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "impact_text_color": "",
+        "impact_text_gradient": ""
+      }
+    },
+    "a93d5ebb-49d9-44f8-ac04-ef6b895341db": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Featured collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "9ee1ac04-fb15-4510-988d-753ef01ce11f": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Featured collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "9f8ad5b8-3c28-42ad-883b-4c47fe3b5cc9": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Featured collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "0c05fa8a-1f7a-4aa6-a123-06f65364ba7c": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Featured collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "cff8814b-ea24-4a8e-b9aa-7ece1e086310": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Featured collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "fae0415f-eb09-49a7-84ca-57f7d07ce1ed": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Featured collection",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-recommendations",
+    "28884d65-cdae-499a-8ea2-60776ccc7607",
+    "eddae018-0626-400a-aac6-6336f78634cf",
+    "f5273ba1-9734-49b1-a15a-4436745d2ede",
+    "87cadf24-2b02-4a6b-80f5-056b246204e3",
+    "54c95d77-ac49-43cd-b6bd-c0b1baae95dd",
+    "613cdb49-850b-496b-8154-0798cf775333",
+    "3fd59fef-1bf4-457d-81f6-883d6cf0d0df",
+    "5cab71bb-c8ce-4b27-abb3-7796b9836445",
+    "a93d5ebb-49d9-44f8-ac04-ef6b895341db",
+    "9ee1ac04-fb15-4510-988d-753ef01ce11f",
+    "9f8ad5b8-3c28-42ad-883b-4c47fe3b5cc9",
+    "0c05fa8a-1f7a-4aa6-a123-06f65364ba7c",
+    "cff8814b-ea24-4a8e-b9aa-7ece1e086310",
+    "fae0415f-eb09-49a7-84ca-57f7d07ce1ed"
+  ]
+}

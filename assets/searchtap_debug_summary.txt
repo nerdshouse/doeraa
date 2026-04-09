@@ -1,0 +1,9 @@
+.st-product__price{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px;margin-bottom:0;font-family:Spartan,sans-serif}
+.st-ProductItem-Info{text-align:center}
+a.st-loop-product__link{font-family:Inter,sans-serif;font-size:16px;color:#1a1a1a;line-height:24px;font-weight:500;width:100%;display:block;text-overflow:ellipsis;overflow:hidden;margin:0 auto;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;min-height:52px}
+.product__item{padding:10px 7px}
+.st-shop-summary-wrap{margin-top:0}
+a.st-loop-product__link{font-size:14px}
+a.st-loop-product__link{font-size:14px}
+a.st-loop-product__link{font-size:14px;line-height:21px;-webkit-line-clamp:3}
+a.st-loop-product__link{min-height:40px}

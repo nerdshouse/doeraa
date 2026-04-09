@@ -1,0 +1,382 @@
+{{- 'getbootstrap.css' | asset_url | stylesheet_tag: preload: true -}}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+{{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
+{{- 'collection_css.css' | asset_url | stylesheet_tag: preload: true -}}
+
+
+
+
+<div {% render 'section-properties' %}>
+  <div class="section-stack">
+    {%- render 'section-header',
+      subheading: section.settings.subheading,
+      heading: section.settings.title,
+      heading_color: section.settings.heading_color,
+      heading_gradient: section.settings.heading_gradient,
+      content: section.settings.content,
+      link_text: section.settings.link_text,
+      link_url: section.settings.link_url
+    -%}
+    <div class="cstmTabs bs-example">
+      <ul class="nav nav-tabs" id="myTab">
+        {% for block in section.blocks %}
+          {% if block.settings.button_text != blank %}
+<!--             <button
+              class="tablinks"
+              onclick="openCity(event, '{{ block.settings.button_text | handleize }}')"
+              {% if forloop.first %}
+                id="defaultOpen"
+              {% endif %}
+            >
+              {{ block.settings.button_text }}
+            </button> -->
+        <li class=" nav-item">
+            <a href="#{{ block.settings.button_text | handleize }}" class="nav-link tablinks  {% if forloop.first %}active{% endif %}" data-toggle="tab">{{ block.settings.button_text }}</a>
+        </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <div class="content-div tab-content">
+        {% for block in section.blocks %}
+          <div id="{{ block.settings.button_text | handleize }}" class="tabcontent tab-pane fade  {% if forloop.first %}show active{% endif %}">
+            <div class="inner-tabcontent">
+            {% for i in (1..12) %}
+              {% capture img %}image{{ i }}{% endcapture %}
+              {% capture link %}link{{ i }}{% endcapture %}
+              {% capture title %}title{{ i }}{% endcapture %}
+              {% if block.settings[img] != blank %}
+                <div class="item color">
+                  <div class="inner-color-div">
+                    <a href="{{ block.settings[link] }}">
+                      <img
+                        src="{{ block.settings[img] | img_url : '125x125' }}"
+                        width="125"
+                        height="125"
+                        class="content-over-media__media zoom-image"
+                        loading="lazy"
+                      >
+                      <p class="colorname">{{ block.settings[title] }}</p>
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+$(document).ready(function(){
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#myTab a[href="' + activeTab + '"]').tab('show');
+	}
+});
+</script>
+
+<!-- <script>
+ 
+  function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+  tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+  tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+  }
+  document.getElementById("defaultOpen").click();
+</script> -->
+{% schema %}
+{
+"name": "Collection filter",
+"class":"cstmhome-tabs",
+"settings": [
+  {
+    "type": "checkbox",
+    "id": "full_width",
+    "label": "Full width",
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "subheading",
+    "label": "Subheading"
+  },
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Heading"
+  },
+  {
+    "type": "richtext",
+    "id": "content",
+    "label": "Content"
+  },
+  {
+    "type": "url",
+    "id": "link_url",
+    "label": "Link URL"
+  },
+  {
+    "type": "text",
+    "id": "link_text",
+    "label": "Link text"
+  },
+  {
+    "type": "header",
+    "content": "Colors",
+    "info": "Gradient replaces solid colors when set."
+  },
+  {
+    "type": "color",
+    "id": "background",
+    "label": "Background"
+  },
+  {
+    "type": "color_background",
+    "id": "background_gradient",
+    "label": "Background gradient"
+  },
+  {
+    "type": "color",
+    "id": "text_color",
+    "label": "Text"
+  },
+  {
+    "type": "color",
+    "id": "heading_color",
+    "label": "Heading color"
+  },
+  {
+    "type": "color_background",
+    "id": "heading_gradient",
+    "label": "Heading gradient"
+  }
+],
+"blocks":[
+  {
+    "type":"title",
+    "name":"Collection",
+    "settings":[
+      {
+        "type":"text",
+        "id":"button_text",
+        "label":"Tab Button Text"
+      },
+      {
+        "type":"image_picker",
+        "id":"image1",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title1",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link1",
+        "label":"Link"
+      },
+      {
+        "type":"image_picker",
+        "id":"image2",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title2",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link2",
+        "label":"Link"
+      },
+      {
+        "type":"image_picker",
+        "id":"image3",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title3",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link3",
+        "label":"Link"
+      },
+      {
+        "type":"image_picker",
+        "id":"image4",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title4",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link4",
+        "label":"Link"
+      },
+      {
+        "type":"image_picker",
+        "id":"image5",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title5",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link5",
+        "label":"Link"
+      },
+      {
+        "type":"image_picker",
+        "id":"image6",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title6",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link6",
+        "label":"Link"
+      },
+        {
+        "type":"image_picker",
+        "id":"image7",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title7",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link7",
+        "label":"Link"
+      },
+        {
+        "type":"image_picker",
+        "id":"image8",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title8",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link8",
+        "label":"Link"
+      },
+        {
+        "type":"image_picker",
+        "id":"image9",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title9",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link9",
+        "label":"Link"
+      },
+        {
+        "type":"image_picker",
+        "id":"image10",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title10",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link10",
+        "label":"Link"
+      },
+      {
+        "type":"image_picker",
+        "id":"image11",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title11",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link11",
+        "label":"Link"
+      },
+      {
+        "type":"image_picker",
+        "id":"image12",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"title12",
+        "label":"Title"
+      },
+      {
+        "type":"url",
+        "id":"link12",
+        "label":"Link"
+      }
+    ]
+  }
+],
+"presets":[
+  {
+    "name":"Collection filter",
+    "category":"custom"
+  }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}

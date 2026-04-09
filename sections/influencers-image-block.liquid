@@ -1,0 +1,137 @@
+<div {% render 'section-properties' %}>
+  {% if section.settings.head_img != blank %}
+  <div class="headerimage">
+    <img src="{{ section.settings.head_img | img_url : 'master' }}">
+  </div>
+  {% endif %}
+<div class="section-stack">
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+<div class="imginflu">
+{% for block in section.blocks %}
+<div class="inner-flu">
+<img src="{{ block.settings.image | img_url : 'master' }}">
+  <p>{{ block.settings.title }}</p>
+</div>
+  {% endfor %}
+</div>
+  {% if section.settings.btnlink != blank %}
+<div class="cstmbtn">
+<a class="button button--xl" href="{{ section.settings.btnlink }}">{{ section.settings.btnlabel }}</a>
+</div>
+{% endif %}
+</div>
+</div>
+{% schema %}
+  {
+    "name": "Influencers Image Block",
+    "class":"image-blockinflu",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"head_img",
+        "label":"Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      },
+      {
+        "type":"url",
+        "id":"btnlink",
+        "label":"Button link"
+      },
+      {
+        "type":"text",
+        "id":"btnlabel",
+        "label":"Button label"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"title",
+        "name":"item",
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Influencers Image Block",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

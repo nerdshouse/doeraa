@@ -1,0 +1,64 @@
+{% if settings.goEnable %}
+<div class="gokwik-checkout"{% if settings.hideFlow %} style="display:none !important;" {% endif %}>
+  {% comment %} <button type='button' class="button button--xl" onclick="onCheckoutClick(this)"> {% endcomment %}
+<button type="button" class="button button--xl" onclick="safeGoKwikCheckout(this)">
+            <span class="btn-text" >
+                <span>{{ settings.main-titile }}</span>
+                <span>{{ settings.sub-titile }}</span>
+            </span>
+          <span class="pay-opt-icon">
+             <img src="https://cdn.gokwik.co/v4/images/upi-icons.svg">
+             <img src="https://cdn.gokwik.co/v4/images/right-arrow.svg">
+         
+ </span>
+    <div style="display:none"><div class="cir-loader">Loading..</div></div>
+  </button>
+</div>
+{% endif %}
+
+<script>
+async function safeGoKwikCheckout(btn) {
+  try {
+    btn.disabled = true;
+
+    const updates = {};
+
+    document.querySelectorAll('.cart-item').forEach(el => {
+      const key = el.dataset.lineKey;
+      const maxQty = parseInt(el.dataset.maxQty, 10);
+
+      if (!key || !maxQty) return;
+
+      const qtyInput = el.querySelector('.quantity-input');
+      const currentQty = qtyInput ? parseInt(qtyInput.value, 10) : 0;
+
+      if (currentQty > maxQty) {
+        updates[key] = maxQty;
+      }
+    });
+
+    if (Object.keys(updates).length) {
+      await fetch('/cart/update.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ updates })
+      });
+
+      // ⏳ IMPORTANT: wait for Shopify to sync
+      await new Promise(r => setTimeout(r, 600));
+    }
+
+    onCheckoutClick(btn);
+
+  } catch (e) {
+    console.error('GoKwik sync failed', e);
+    btn.disabled = false;
+    location.reload();
+  }
+}
+</script>
+
+
+
+
+

@@ -1,0 +1,178 @@
+<div {% render 'section-properties' %}>
+<div class="section-stack">
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+
+  <div class="video-carousel owl-carousel video_part">
+    {% for block in section.blocks %}
+      <div class="item video_product">
+        <div class="video_iframe">
+          <div class="bg-img" style="background-image:url('{{block.settings.bg| img_url: 'master' }}');">
+            {% if block.settings.video_iframe != blank %}
+              <a
+                data-fancybox=""
+                data-src="#ex-{{ forloop.index }}1"
+                href="javascript:;"
+                class="viewpopTest key_titles"
+              >
+                {% render 'playbtn' %}
+              </a>
+              <div class="youtube_video" id="ex-{{ forloop.index }}1" style="display:none;">
+                <div class="popup_video">
+                  <video controls loop autoplay muted playsinline>
+                    <source src="{{ block.settings.video_iframe }}" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        {%- assign product = all_products[block.settings.featured_product] -%}
+        <div class="link_contnt">
+          <a href="{{ product.url }}" class="logo-bar__link">
+            <div class="video_txt">
+      {% if product.featured_image != blank %}
+              <img src="{{ product.featured_image | img_url: '50x50' }}" alt="{{product.featured_image.alt}}">
+              {% endif %}
+              <h2>{{ product.title | truncate : 25 }}</h2>
+              <h4>{{ product.price | money_without_trailing_zeros }}</h4>
+            </div>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+<script>
+  $(document).ready(function(){
+$('.owl-carousel.video_part').owlCarousel({
+    loop:true,
+    margin:5,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1.3,
+            nav:true
+        },
+        600:{
+            items:3,
+            nav:false
+        },
+        1000:{
+            items:5,
+            nav:true,
+            loop:false
+        }
+    }
+})
+    });
+</script>
+
+{% schema %}
+{
+  "name": {
+    "en": "home product video"
+  },
+  "class": "index-section index-section--flush",
+  "max_blocks": 8,
+  "settings": [
+     {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": {
+        "en": "Image"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "bg",
+          "label": {
+            "en": "Image"
+          }
+        },
+        {
+        "id": "video_iframe",
+        "type": "text",
+        "label": "Video URL"
+        },
+        {
+          "type":"product",
+          "id":"featured_product",
+          "label":"Select product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "home product video"
+      },
+      "category":"Image"
+    }
+  ]
+}
+{% endschema %}

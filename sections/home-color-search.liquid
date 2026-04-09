@@ -1,0 +1,173 @@
+<div {% render 'section-properties' %}>
+<div class="section-stack">
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+
+  <div class="color-div">
+  {% for block in section.blocks %}
+    {% if block.settings.color_image != blank %}
+    <div class="item color">
+      <div class="inner-color-div">
+      {% if block.settings.coll_url != blank %}
+        <a href="{{ block.settings.coll_url }}">
+        {% endif %}
+          <img src="{{ block.settings.color_image | img_url : '195x' }}" class="content-over-media__media zoom-image" alt="{{ block.settings.color_name }}" loading="lazy">
+    <p class="colorname">{{ block.settings.color_name }}</p>
+          {% if block.settings.coll_url != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+    <div class="owl-carousel cstmcolor">
+  {% for block in section.blocks %}
+    {% if block.settings.color_image != blank %}
+    <div class="item color">
+      <div class="inner-color-div">
+      {% if block.settings.coll_url != blank %}
+        <a href="{{ block.settings.coll_url }}">
+        {% endif %}
+    <img src="{{ block.settings.color_image | img_url : '195x' }}" class="content-over-media__media zoom-image" alt="{{ block.settings.color_name }}" loading="lazy">
+    <p class="colorname">{{ block.settings.color_name }}</p>
+          {% if block.settings.coll_url != blank %}
+        </a>
+            {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+</div>
+</div>
+
+<script>
+  $(document).ready(function(){
+$('.owl-carousel.cstmcolor').owlCarousel({
+    loop:true,
+    margin:10,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:4,
+            nav:true
+        },
+        600:{
+            items:5,
+            nav:false
+        },
+        1000:{
+            items:4,
+            nav:true,
+            loop:false
+        }
+    }
+})
+    });
+</script>
+{% schema %}
+  {
+    "name": "Home color section",
+    "class":"cstm-color-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      }
+    ],
+    "blocks":[
+      {
+        "name":"color",
+        "type":"collection",
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"color_image",
+            "label":"Collection Image"
+          },
+          {
+            "type":"text",
+            "id":"color_name",
+            "label":"Collection name"
+          },
+          {
+            "type":"url",
+            "id":"coll_url",
+            "label":"Collection link"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Home color section",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

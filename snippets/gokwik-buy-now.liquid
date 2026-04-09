@@ -1,0 +1,14 @@
+{% if settings.goBuynowEnable %}             
+<button type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded" onclick="onBuyNowClick(this)" id="gokwik-buy-now"{% if settings.hideFlow %} style="button-background: 96 82 82 / var(--button-background-opacity, 1);--button-outline-color: 96 82 82;--button-text-color: 255 255 255;" {% endif %}>{{ settings.buynow-titile }}
+<div style="display:none"><div class="cir-loader">Loading..</div></div>
+</button>  
+{% endif %}
+
+
+
+
+
+
+
+
+

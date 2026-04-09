@@ -1,0 +1,249 @@
+<div {% render 'section-properties' %}>
+<div class="section-stack">
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+
+<div class="cstmTabs">
+<div class="tab">
+  {% for block in section.blocks %}
+  {% if block.settings.button_text != blank %}  
+  <button class="tablinks2" onclick="opentrending(event, '{{ block.settings.button_text | handleize }}')" {% if forloop.first %} id="defaultOpen2"{% endif %}>{{ block.settings.button_text }}</button>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<div class="content-div">
+  {% for block in section.blocks %}
+    {% if block.settings.button_text != blank %}  
+<div id="{{ block.settings.button_text | handleize }}" class="tabcontent2">
+  <div class="owl-carousel trending-{{ forloop.index }}">
+{%- assign products = block.settings.products | default: block.settings.collection.products -%}
+   {%- for product in products limit:  block.settings.products_count -%}
+     <div class="item">
+       {%- render 'product-card-for-owl',product: product -%}
+     {% comment %}
+         {%- render 'product-card', product: product -%}
+     {% endcomment %}
+     </div>
+  {% endfor %}
+  </div>
+    {% if block.settings.show_button %}
+  <div class="btncoll">
+    <a class="btn home-cart-btn button button--xl" href="{{ block.settings.buttonlink }}">{{ block.settings.buttontext }}</a>
+  </div>
+  {% endif %}
+</div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+  
+  
+</div>
+
+  
+</div>
+</div>
+<script>
+  function opentrending(evt2, cityName2) {
+  var j, tabcontent2, tablinks2;
+
+  tabcontent2 = document.getElementsByClassName("tabcontent2");
+  for (j = 0; j < tabcontent2.length; j++) {
+    tabcontent2[j].style.display = "none";
+  }
+
+  tablinks2 = document.getElementsByClassName("tablinks2");
+  for (j = 0; j < tablinks2.length; j++) {
+    tablinks2[j].className = tablinks2[j].className.replace(" active", "");
+  }
+
+  document.getElementById(cityName2).style.display = "block";
+  evt2.currentTarget.className += " active";
+}
+  document.getElementById("defaultOpen2").click();
+</script>
+
+
+{% for block in section.blocks %}
+<script>
+  $(document).ready(function(){
+$('.owl-carousel.trending-{{ forloop.index }}').owlCarousel({
+    loop:true,
+    margin:20,
+    dots:false,
+    lazyLoad:true,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:2,
+          smartSpeed: 2000,
+            nav:true
+        },
+        600:{
+            items:2.3,
+            nav:false
+        },
+        1000:{
+            items:4,
+            nav:true,
+            loop:false
+        }
+    }
+})
+    });
+</script>
+  {% endfor %}
+{% schema %}
+  {
+    "name": "Tab slider trending",
+    "class":"cstmhome-tabs",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "products_per_row_mobile",
+        "label": "Products per row (mobile)",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          }
+        ],
+        "default": "2"
+      },
+    {
+      "type": "range",
+      "id": "products_per_row_desktop",
+      "min": 2,
+      "max": 5,
+      "label": "Products per row (desktop)",
+      "default": 3
+    },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"collection",
+        "name":"Collection",
+        "settings":[
+          {
+            "type":"text",
+            "id":"button_text",
+            "label":"Tab Button Text"
+          },
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+          {
+            "type":"checkbox",
+            "id":"show_button",
+            "label":"show button",
+            "default":false
+          },
+          {
+            "type":"text",
+            "id":"buttontext",
+            "label":"Button Text",
+            "default":"Show more"
+          },
+          {
+            "type":"url",
+            "id":"buttonlink",
+            "label":"Button link"
+          },
+          {
+            "type": "product_list",
+            "id": "products",
+            "label": "Products",
+            "info": "Replaces collection when selected."
+          },
+             {
+            "type": "range",
+            "id": "products_count",
+            "min": 2,
+            "max": 50,
+            "label": "Products to show",
+            "default": 6
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Tab slider trending",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,170 @@
+<div {% render 'section-properties' %}>
+<div class="section-stack">
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+
+  <div class="wrkstep">
+
+    <div class="cstmstep cstm-desktop">
+  {% for block in section.blocks %}
+    {% if block.settings.step != blank %}
+    <div class="item">
+      <div class="testimonial rounded-sm bg-custom">
+        <h4 class="cstmcount">{{ block.settings.step }}</h4>
+        <p class="cstmtitle">{{ block.settings.title }}</p>
+        <p class="stepcontent">{{block.settings.content }}</p>
+      </div>
+    </div>
+    {% endif %}
+   {% endfor %} 
+    </div>
+    
+    <div class="owl-carousel cstmstep cstm-mobile">
+  {% for block in section.blocks %}
+    {% if block.settings.step != blank %}
+    <div class="item">
+      <div class="testimonial rounded-sm bg-custom">
+        <h4 class="cstmcount">{{ block.settings.step }}</h4>
+        <p class="cstmtitle">{{ block.settings.title }}</p>
+        <p class="stepcontent">{{block.settings.content }}</p>
+      </div>
+    </div>
+    {% endif %}
+   {% endfor %} 
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+$(document).ready(function(){
+$('.owl-carousel.cstmstep').owlCarousel({
+    loop:false,
+    margin:25,
+    nav:false,
+    dots:true,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+})
+ });
+</script>
+
+{% schema %}
+  {
+    "name": "Influencers Work",
+    "class":"cstm-influ-work",
+    "settings": [
+       {
+        "type":"image_picker",
+        "id":"head_img",
+        "label":"Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"title",
+        "name":"step",
+        "settings":[
+          {
+            "type":"text",
+            "id":"step",
+            "label":"Step"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"title"
+          },
+          {
+            "type":"text",
+            "id":"content",
+            "label":"Content"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Influencers Work",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

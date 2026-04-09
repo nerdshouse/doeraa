@@ -1,0 +1,188 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+BUY BUTTONS
+----------------------------------------------------------------------------------------------------------------------
+
+This component is used to show the buy buttons
+
+********************************************
+Supported variables
+********************************************
+
+* product: the product from which to show the buttons
+* show_payment_button: if we show or not the dynamic checkout button
+* button_size: the size of the button (default to xl if none is passed)
+* atc_button_background: the background of the ATC button
+* atc_button_text_color: the text color of the ATC button
+* payment_button_background: the custom dynamic checkout button background
+* payment_button_text_color: the custom dynamic checkout button text color
+* form_id: if specified, define the form ID linked to this input
+* show_atc_sticky_only: to show only stick atc
+{%- endcomment -%}
+
+{%- assign variant_picker_block = section.blocks | where: 'type', 'variant_picker' | first -%}
+{% assign hasunstitch = false %}
+{% assign hasavailable = false %}
+{% for variant in product.variants %}
+  {% if variant.title contains 'Unstitched' %}
+    {% assign hasunstitch = true %}
+    {% if variant.available %}
+      {% assign hasavailable = true %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% unless hasunstitch %}
+  {% assign hasavailable = true %}
+{% endunless %}
+
+{%- form 'product', product, is: 'product-form', id: form_id -%}
+  <input
+    type="hidden"
+    {% if variant_picker_block != blank %}
+    disabled
+    {% endif %}
+    name="id"
+    value="{{ product.selected_or_first_available_variant.id }}">
+
+  {%- assign button_disabled = false -%}
+  {%- assign button_size = button_size | default: 'xl' -%}
+
+  {%- if product.selected_or_first_available_variant.available and hasavailable -%}
+    {%- if product.template_suffix contains 'pre-order' -%}
+      {%- capture button_content -%}
+        {{ 'product.general.pre_order_button' | t }}{%- endcapture -%}
+    {%- else -%}
+      {%- capture button_content -%}
+        {{ 'product.general.add_to_cart_button' | t }}{%- endcapture -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- capture button_content -%}
+      {{ 'product.general.sold_out_button' | t }}{%- endcapture -%}
+    {%- assign button_disabled = true -%}
+  {%- endif -%}
+
+  <buy-buttons
+    class="buy-buttons  {% if show_payment_button %}buy-buttons--multiple{% endif %}"
+    template="{{ product.template_suffix | escape }}"
+    form="{{ form_id }}">
+    {% unless show_atc_sticky_only %}
+      {%- render 'button'
+        , content: button_content,
+        type: 'submit',
+        size: button_size,
+        disabled: button_disabled,
+        secondary: show_payment_button,
+        subdued: button_disabled,
+        background: atc_button_background,
+        text_color: atc_button_text_color -%}
+    
+
+    <!-- <div class="shopify-payment-button">
+    <button
+    type="button"
+    id="flo-buy-now-button"
+    onclick="handleFloBuyNowBtn(event)"
+    class="shopify-payment-button__button shopify-payment-button__button--unbranded"
+    name="flo-buy-now-button"
+    >
+    {{ 'Buy it now' }}
+    </button>
+    </div> -->
+    <div class="shopify-payment-button">
+      {% render 'gokwik-buy-now' %}
+    </div>
+      {% endunless %}
+    {%- if show_payment_button -%}
+      <!-- {{- form | payment_button -}} -->
+      {% comment %}
+      <!--         <button  onclick="ZecpeCheckVariant(this, this.parentElement.parentElement, this.previousElementSibling)" type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded zecpe-btn">
+      <div class="lds-ring" style="height : 30px;"><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div></div>
+      <span class="occ-btn-text" style="display : flex;align-items : center;justify-content : center;">
+      Buy it now
+      </span>
+      </button> -->
+      <button
+      onclick="window.zecpeCheckFunctionAndCall ? window.zecpeCheckFunctionAndCall('ZecpeCheckVariant', this, this.parentElement.parentElement, this.previousElementSibling) : window.location.href = '/cart/checkout'; event.stopPropagation(); event.stopImmediatePropagation();"
+      type="button"
+      class="shopify-payment-button__button shopify-payment-button__button--unbranded zecpe-btn"
+      >
+      <div id="lds-ring" style="height : 20px;">
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      </div>
+      <span
+      class="occ-btn-text"
+      style="display : flex;align-items : center;justify-content : center;"
+      >
+      Buy it now
+      </span>
+      </button>
+      {% endcomment %}
+      {% comment %}
+      <!--        <button type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded " onclick="customBuyNow();"> -->
+
+
+      Buy it now
+
+      </button>
+      {% endcomment %}
+        <style>
+#shopify-section-{{ section.id }}.shopify-payment-button {
+  {% if hasunstitch %}
+    {%- unless hasavailable -%}
+      display: none;
+    {%- endunless -%}
+  {% else %}
+    {%- unless product.selected_or_first_available_variant.available -%}
+      display: none;
+    {%- endunless -%}
+  {% endif %}
+
+  {%- if payment_button_background != blank and payment_button_background != 'rgba(0,0,0,0)' -%}
+    --button-background: {{ payment_button_background.rgb }}
+    ;
+  {%- endif -%}
+
+  {%- if payment_button_text_color != blank and payment_button_text_color != 'rgba(0,0,0,0)' -%}
+    --button-text-color: {{ payment_button_text_color.rgb }}
+    ;
+  {%- endif -%}
+}
+#shopify-section-{{ section.id }}.shopify-payment-button__button {
+  {% if hasunstitch %}
+    {%- unless hasavailable -%}
+      display: none;
+    {%- endunless -%}
+  {% else %}
+    {%- unless product.selected_or_first_available_variant.available -%}
+      display: none;
+    {%- endunless -%}
+  {% endif %}
+
+  {%- if payment_button_background != blank and payment_button_background != 'rgba(0,0,0,0)' -%}
+    --button-background: {{ payment_button_background.rgb }}
+    ;
+  {%- endif -%}
+
+  {%- if payment_button_text_color != blank and payment_button_text_color != 'rgba(0,0,0,0)' -%}
+    --button-text-color: {{ payment_button_text_color.rgb }}
+    ;
+  {%- endif -%}
+}
+</style>
+  {%- endif -%}
+</buy-buttons>
+{%- endform -%}
+
+  <script>
+function customBuyNow() {
+  let variantId = '{{ product.selected_or_first_available_variant.id }}';
+  let shopURL = '{{ shop.url }}';
+  let qty = $('.quantity-selector .quantity-selector__input').val();
+
+  window.location.href = shopURL + '/cart/' + variantId + ':' + qty + '?channel=buy_button';
+}
+</script>

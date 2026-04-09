@@ -1,0 +1,127 @@
+<div {% render 'section-properties' %}>
+<div class="section-stack">
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+
+<div class="main-profile">
+{% for block in section.blocks %}
+ {% if block.settings.image != blank %} 
+  <div class="itempro">
+    <div class="inner-pro">
+      <div class="image-profile">
+        <img src="{{ block.settings.image | img_url : 'master' }}"> <span class="count">{{ block.settings.count }}</span>
+      </div>
+   <div class="nameprofile">
+<h4>{{ block.settings.title }}</h4>
+   </div>
+    </div>
+  </div>
+{% endif %}  
+{% endfor %}  
+</div>
+  
+</div>
+</div>
+{% schema %}
+  {
+    "name": "About profile",
+    "class":"cstmprofile",
+    "settings": [
+       {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "header",
+        "content": "Colors",
+        "info": "Gradient replaces solid colors when set."
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color"
+      },
+      {
+        "type": "color_background",
+        "id": "heading_gradient",
+        "label": "Heading gradient"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"profile",
+        "name":"item",
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"count",
+            "label":"Number"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"About profile",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

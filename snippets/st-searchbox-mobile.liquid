@@ -1,0 +1,96 @@
+<div class="st-search-bar st-search-bar--mobile hidden-desktop" role="search">
+    <span class="st-search-icon" aria-hidden="true">
+      {%- render 'icon' with 'search' -%}
+    </span>
+    <input type="text" name="q" placeholder="Search products" value="" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Search">
+    <span class="input-close-btn" style="display: none;"></span>
+
+    <div class="st-search-suggestions" hidden>
+      <ul class="st-search-suggestions__list" role="listbox" aria-label="Search suggestions"></ul>
+    </div>
+</div>
+
+<style>
+  .st-search-bar.st-search-bar--mobile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    border: 1px solid rgba(34, 34, 34, 0.15);
+    border-radius: 999px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .st-search-bar.st-search-bar--mobile:focus-within {
+    border-color: rgba(34, 34, 34, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .st-search-bar.st-search-bar--mobile .st-search-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-start: 12px;
+    color: #707070;
+  }
+
+  .st-search-bar.st-search-bar--mobile .st-search-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .st-search-bar.st-search-bar--mobile input[name="q"] {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 11px 42px 11px 10px;
+    font-size: 14px;
+    color: #1f1f1f;
+    line-height: 1.2;
+  }
+
+  .st-search-bar.st-search-bar--mobile input[name="q"]::placeholder {
+    color: #8a8a8a;
+  }
+
+  .st-search-bar.st-search-bar--mobile input[name="q"]:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .st-search-bar.st-search-bar--mobile .input-close-btn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+
+  .st-search-bar.st-search-bar--mobile .st-search-suggestions {
+    left: 0;
+    right: 0;
+  }
+
+  .st-search-bar.st-search-bar--mobile .st-search-suggestions__item-title {
+    max-width: 100%;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .st-search-bar.hidden-desktop {
+      margin: 0 !important;
+      padding: 0;
+      background-color: #fff;
+    }
+  }
+
+  @media only screen and (min-width: 1025px) {
+    .st-search-bar.hidden-desktop {
+      display: none !important;
+    }
+  }
+
+</style>
+
+              

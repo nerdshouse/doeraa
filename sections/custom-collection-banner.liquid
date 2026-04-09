@@ -1,0 +1,92 @@
+  <style>
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.full_width -%}
+        --section-outer-spacing-block: 0;
+      {%- else -%}
+        --section-spacing-block-end: 0;
+      {%- endif -%}
+
+      --content-over-media-overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+
+      {%- if section.settings.allow_transparent_header -%}
+        margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
+      {%- endif -%}
+    }
+  </style>
+ <div {% render 'section-properties' %} {%- if section.settings.allow_transparent_header -%}allow-transparent-header{% endif %}>
+   <div class="inner-ban-g">
+     
+     <div class="cstbanner {% if section.settings.mobile_banner != blank %} c_desktop_banner{% endif %}">
+       {% if section.settings.desktop_banner != blank %}
+         {% if section.settings.coll_link != blank %}
+         <a href="{{ section.settings.coll_link }}">
+           {% endif %}
+     <img src="{{ section.settings.desktop_banner | img_url : 'master' }}" alt"{{ section.settings.desktop_banner.alt }}">
+         {% if section.settings.coll_link != blank %}
+         </a>
+       {% endif %}
+       {% endif %}
+     </div>
+    {% if section.settings.mobile_banner != blank %}
+     <div class="cstbanner c_mobile_banner">
+        {% if section.settings.coll_link != blank %}
+       <a href="{{ section.settings.coll_link }}">
+         {% endif %}
+     <img src="{{ section.settings.mobile_banner | img_url : 'master' }}" alt"{{ section.settings.mobile_banner.alt }}">
+          {% if section.settings.coll_link != blank %}
+       </a>
+       {% endif %}
+     </div>
+    {% endif %}
+     
+   </div>
+ </div>
+
+{% schema %}
+  {
+    "name": "Custom collection banner",
+    "class":"cstmcoll-banner",
+    "settings": [
+      {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+      {
+        "type":"image_picker",
+        "id":"desktop_banner",
+        "label":"Desktop Banner"
+      },
+      {
+        "type":"image_picker",
+        "id":"mobile_banner",
+        "label":"Mobile Banner"
+      },
+      {
+        "type":"url",
+        "id":"coll_link",
+        "label":"Collection Link"
+      }
+    ],
+    "presets":[
+      {
+        "name":"Custom collection banner",
+        "category":"custom"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

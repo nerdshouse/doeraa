@@ -1,0 +1,72 @@
+<div class="collection-links-section container">
+  <ul>
+    {% for block in section.blocks %}
+      <li>
+        {% if block.settings.collection %}
+          <a href="{{ block.settings.collection.url }}">{{ block.settings.collection_title }}</a>
+          {% unless forloop.last %}
+            <span class="add-line">|</span>
+          {% endunless %}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<style>
+  .collection-links-section ul {
+    list-style-type: none;
+    padding: 5px;
+    line-height: 34px !important;
+    font-size: 18px;
+  }
+
+  .collection-links-section ul li {
+    display: inline-block;
+  }
+
+  .collection-links-section ul li a {
+    text-decoration: none;
+    color: #515151;
+  }
+
+  .collection-links-section ul li a:hover {
+    text-decoration: underline;
+  }
+
+  /* Style for the vertical bar */
+  .add-line{
+    margin: 18px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "custom collection",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection Block",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "text",
+          "id": "collection_title",
+          "label": "Custom Title",
+          "default": "Collection Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "custom collection"
+    }
+  ]
+}
+{% endschema %}

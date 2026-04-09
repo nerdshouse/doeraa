@@ -1,0 +1,546 @@
+<div class="st-search-bar st-search-bar--desktop hidden-mobile" role="search">
+  <span class="st-search-icon" aria-hidden="true">
+    {%- render 'icon' with 'search' -%}
+  </span>
+
+  <input
+    type="text"
+    name="q"
+    placeholder="Search products, fabrics, collections"
+    value=""
+    autocapitalize="off"
+    autocomplete="off"
+    autocorrect="off"
+    aria-label="Search"
+  >
+
+  <span class="input-close-btn" style="display: none;"></span>
+
+  <div class="st-search-suggestions" hidden>
+    <ul class="st-search-suggestions__list" role="listbox" aria-label="Search suggestions"></ul>
+  </div>
+</div>
+
+<style>
+  .st-search-bar.st-search-bar--desktop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: clamp(220px, 30vw, 430px);
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid rgba(34, 34, 34, 0.15);
+    border-radius: 999px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .st-search-bar.st-search-bar--desktop:focus-within {
+    border-color: rgba(34, 34, 34, 0.15);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  .st-search-bar.st-search-bar--desktop .st-search-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-start: 12px;
+    color: #707070;
+  }
+
+  .st-search-bar.st-search-bar--desktop .st-search-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .st-search-bar.st-search-bar--desktop input[name="q"] {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 10px 42px 10px 10px;
+    font-size: 14px;
+    color: #1f1f1f;
+    line-height: 1.2;
+  }
+
+  .st-search-bar.st-search-bar--desktop input[name="q"]::placeholder {
+    color: #8a8a8a;
+  }
+
+  .st-search-bar.st-search-bar--desktop input[name="q"]:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .st-search-bar.st-search-bar--desktop .input-close-btn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+
+  .st-search-suggestions {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 45;
+    background: #fff;
+    border: 1px solid rgba(34, 34, 34, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+  }
+
+  .st-search-suggestions[hidden] {
+    display: none !important;
+  }
+
+  .st-search-suggestions__list {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    max-height: min(360px, 55vh);
+    overflow-y: auto;
+  }
+
+  .st-search-suggestions__group {
+    padding: 10px 0 4px;
+    border-top: 1px solid rgba(34, 34, 34, 0.08);
+  }
+
+  .st-search-suggestions__group:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .st-search-suggestions__group-title {
+    margin: 0 14px 10px;
+    color: #6f6f6f;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .st-search-suggestions__group-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .st-search-suggestions__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    text-decoration: none;
+    color: #202020;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .st-search-suggestions__group--products .st-search-suggestions__group-list,
+  .st-search-suggestions__group--collections .st-search-suggestions__group-list,
+  .st-search-suggestions__group--articles .st-search-suggestions__group-list {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .st-search-suggestions__group--pages .st-search-suggestions__item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .st-search-suggestions__item-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .st-search-suggestions__item-title {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .st-search-suggestions__thumb {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex: 0 0 auto;
+    border: 1px solid rgba(34, 34, 34, 0.08);
+    background: #f3f4f6;
+  }
+
+  .st-search-suggestions__item:hover,
+  .st-search-suggestions__item.is-active {
+    background: #f6f8fb;
+  }
+
+  .st-search-suggestions__item-type {
+    color: #7f7f7f;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .st-search-suggestions__empty {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #7f7f7f;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .st-search-suggestions {
+      top: calc(100% + 6px);
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .st-search-suggestions__list {
+      max-height: min(52vh, 320px);
+      padding: 4px 0;
+    }
+
+    .st-search-suggestions__item {
+      gap: 10px;
+      padding: 9px 10px;
+      font-size: 12px;
+    }
+
+    .st-search-suggestions__thumb {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+    }
+
+    .st-search-suggestions__item-type {
+      font-size: 10px;
+      letter-spacing: 0.04em;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .st-search-suggestions__group-title {
+      margin-inline: 10px;
+      font-size: 10px;
+    }
+
+    .st-search-suggestions__item {
+      padding-inline: 8px;
+    }
+  }
+
+  @media only screen and (max-width: 1023px) {
+    .st-search-bar.hidden-mobile {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var ENDPOINT = '/search/suggest.json';
+    var DEBOUNCE_MS = 180;
+    var MIN_QUERY_LENGTH = 2;
+    var typeLabels = {
+      products: 'Product',
+      collections: 'Collection',
+      pages: 'Page',
+      articles: 'Article'
+    };
+
+    function debounce(fn, wait) {
+      var timeout;
+      return function () {
+        var context = this;
+        var args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          fn.apply(context, args);
+        }, wait);
+      };
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function fetchSuggestions(query) {
+      var url = ENDPOINT
+        + '?q=' + encodeURIComponent(query)
+        + '&resources[type]=product,collection,page,article'
+        + '&resources[limit]=6'
+        + '&resources[options][unavailable_products]=last';
+
+      return fetch(url, { headers: { Accept: 'application/json' } }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('Failed to load suggestions');
+        }
+
+        return response.json();
+      });
+    }
+
+    function flattenResults(results) {
+      var output = [];
+
+      function resolveImage(item) {
+        if (!item) {
+          return '';
+        }
+
+        if (item.featured_image && item.featured_image.url) {
+          return item.featured_image.url;
+        }
+
+        if (item.image && item.image.url) {
+          return item.image.url;
+        }
+
+        if (typeof item.image === 'string') {
+          return item.image;
+        }
+
+        if (item.featured_media && item.featured_media.preview_image && item.featured_media.preview_image.url) {
+          return item.featured_media.preview_image.url;
+        }
+
+        return '';
+      }
+
+      Object.keys(typeLabels).forEach(function (key) {
+        var entries = results[key] || [];
+
+        entries.forEach(function (item) {
+          if (!item || !item.url || !item.title) {
+            return;
+          }
+
+          output.push({
+            type: key,
+            label: typeLabels[key],
+            title: item.title,
+            url: item.url,
+            image: resolveImage(item)
+          });
+        });
+      });
+
+      return output;
+    }
+
+    function groupResults(items) {
+      var grouped = {
+        products: [],
+        collections: [],
+        articles: [],
+        pages: []
+      };
+
+      items.forEach(function (item) {
+        if (grouped[item.type]) {
+          grouped[item.type].push(item);
+        }
+      });
+
+      return grouped;
+    }
+
+    function setupSearchBar(bar) {
+      if (!bar || bar.dataset.stSearchInitialized === 'true') {
+        return;
+      }
+
+      var input = bar.querySelector('input[name="q"]');
+      var panel = bar.querySelector('.st-search-suggestions');
+      var list = bar.querySelector('.st-search-suggestions__list');
+      var activeIndex = -1;
+      var currentItems = [];
+
+      if (!input || !panel || !list) {
+        return;
+      }
+
+      bar.dataset.stSearchInitialized = 'true';
+
+      function closePanel() {
+        panel.hidden = true;
+        activeIndex = -1;
+      }
+
+      function openPanel() {
+        panel.hidden = false;
+      }
+
+      function goToSearchResults(query) {
+        var normalizedQuery = (query || '').trim();
+        if (!normalizedQuery) {
+          return;
+        }
+
+        window.location.href = '/search?q=' + encodeURIComponent(normalizedQuery);
+      }
+
+      function renderItems(items) {
+        var grouped = groupResults(items);
+        currentItems = items;
+        activeIndex = -1;
+
+        if (!items.length) {
+          list.innerHTML = '<li class="st-search-suggestions__empty">No matching suggestions</li>';
+          openPanel();
+          return;
+        }
+
+        var index = 0;
+        list.innerHTML = Object.keys(typeLabels).map(function (type) {
+          var groupItems = grouped[type];
+
+          if (!groupItems || !groupItems.length) {
+            return '';
+          }
+
+          var groupClass = 'st-search-suggestions__group st-search-suggestions__group--' + type;
+          var groupMarkup = groupItems.map(function (item) {
+            var thumb = item.image
+              ? '<img class="st-search-suggestions__thumb" src="' + escapeHtml(item.image) + '" alt="" loading="lazy" width="34" height="34">'
+              : '';
+
+            var markup = '<li>'
+              + '<a class="st-search-suggestions__item" role="option" data-index="' + index + '" href="' + escapeHtml(item.url) + '">'
+              + '<span class="st-search-suggestions__item-main">'
+              + thumb
+              + '<span class="st-search-suggestions__item-title">' + escapeHtml(item.title) + '</span>'
+              + '</span>'
+              + '<span class="st-search-suggestions__item-type">' + escapeHtml(item.label) + '</span>'
+              + '</a>'
+              + '</li>';
+
+            index += 1;
+            return markup;
+          }).join('');
+
+          return '<li class="' + groupClass + '">'
+            + '<div class="st-search-suggestions__group-title">' + escapeHtml(typeLabels[type]) + '</div>'
+            + '<ul class="st-search-suggestions__group-list">' + groupMarkup + '</ul>'
+            + '</li>';
+        }).join('');
+
+        openPanel();
+      }
+
+      function setActive(nextIndex) {
+        var links = list.querySelectorAll('.st-search-suggestions__item');
+        if (!links.length) {
+          activeIndex = -1;
+          return;
+        }
+
+        links.forEach(function (link) {
+          link.classList.remove('is-active');
+        });
+
+        if (nextIndex < 0) {
+          activeIndex = -1;
+          return;
+        }
+
+        activeIndex = Math.max(0, Math.min(nextIndex, links.length - 1));
+        links[activeIndex].classList.add('is-active');
+      }
+
+      var runSuggest = debounce(function () {
+        var query = input.value.trim();
+
+        if (query.length < MIN_QUERY_LENGTH) {
+          closePanel();
+          return;
+        }
+
+        fetchSuggestions(query)
+          .then(function (payload) {
+            var results = (payload.resources && payload.resources.results) || {};
+            renderItems(flattenResults(results));
+          })
+          .catch(function () {
+            closePanel();
+          });
+      }, DEBOUNCE_MS);
+
+      input.addEventListener('input', runSuggest);
+
+      input.addEventListener('focus', function () {
+        if (input.value.trim().length >= MIN_QUERY_LENGTH) {
+          runSuggest();
+        }
+      });
+
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          if (activeIndex > -1 && currentItems[activeIndex]) {
+            event.preventDefault();
+            window.location.href = currentItems[activeIndex].url;
+            return;
+          }
+
+          event.preventDefault();
+          goToSearchResults(input.value);
+          return;
+        }
+
+        if (panel.hidden) {
+          return;
+        }
+
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          setActive(activeIndex + 1);
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          setActive(activeIndex - 1);
+        } else if (event.key === 'Escape') {
+          closePanel();
+        }
+      });
+
+      input.addEventListener('blur', function () {
+        setTimeout(closePanel, 140);
+      });
+
+      list.addEventListener('mousedown', function (event) {
+        var target = event.target.closest('.st-search-suggestions__item');
+        if (target) {
+          window.location.href = target.getAttribute('href');
+        }
+      });
+    }
+
+    function initSearchBars(root) {
+      (root || document).querySelectorAll('.st-search-bar').forEach(setupSearchBar);
+    }
+
+    window.__stHeaderSearchInit = initSearchBars;
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        initSearchBars(document);
+      });
+    } else {
+      initSearchBars(document);
+    }
+  })();
+</script>
