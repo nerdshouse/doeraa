@@ -2269,8 +2269,8 @@ cart-drawer#cart-drawer [slot="footer"] {
 
 @media screen and (max-width: 699px) {
   cart-drawer#cart-drawer {
-    width: min(400px, calc(100vw - 24px)) !important;
-    max-width: min(400px, calc(100vw - 24px)) !important;
+    width: min(420px, calc(100vw - 16px)) !important;
+    max-width: min(420px, calc(100vw - 16px)) !important;
     right: 0 !important;
     left: auto !important;
   }
@@ -3776,8 +3776,8 @@ cart-drawer [name="checkout"] {
 
 @media screen and (min-width: 700px) {
   #cart-drawer.drawer--lg {
-    width: 430px !important;
-    max-width: 430px !important;
+    width: min(520px, 34vw) !important;
+    max-width: min(520px, 34vw) !important;
   }
 }
 
@@ -3789,64 +3789,49 @@ cart-drawer [name="checkout"] {
   min-width: 108px;
 }
 
-/* Sticky ATC visual cleanup */
-.product-quick-add .product-quick-add__variant {
+/* Briyo-like compact and cleaner sticky ATC row */
+.product-quick-add.is-visible .product-quick-add__variant {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
-  column-gap: 12px;
+  gap: 12px;
 }
 
-.product-quick-add .product-quick-add__variant buy-buttons {
-  width: auto !important;
-  max-width: none !important;
+.product-quick-add.is-visible .product-quick-add__quantity .quantity-selector {
+  min-width: 116px;
 }
 
-.product-quick-add .product-quick-add__variant .button {
-  border-radius: 12px !important;
-  min-height: 46px;
-  padding: 10px 18px !important;
-  white-space: nowrap;
-  line-height: 1.2;
-}
-
-.product-quick-add [onclick="handleButtonClick()"] {
-  width: auto !important;
-  min-width: 150px;
-}
-
-/* Center shipping/freebie message text in cart */
-cart-drawer#cart-drawer .shipping-notes-wrapper-text {
+.product-quick-add.is-visible .product-quick-add__quantity .quantity-selector__input {
   text-align: center;
-  width: 100%;
 }
 
-cart-drawer#cart-drawer .Cart__ShippingNotice .Drawer__Container {
+.product-quick-add.is-visible buy-buttons .button,
+.product-quick-add.is-visible buy-buttons button {
+  border-radius: 12px !important;
+  min-height: 44px;
+  padding-inline: 16px;
+}
+
+/* Center align cart drawer recommendation area */
+cart-drawer#cart-drawer .cart-drawer__recommendations {
+  text-align: center;
+}
+
+cart-drawer#cart-drawer .cart-drawer__recommendations .h-stack.justify-between {
+  justify-content: center;
+}
+
+cart-drawer#cart-drawer .cart-drawer__recommendations .horizontal-product {
+  justify-items: center;
+}
+
+cart-drawer#cart-drawer .cart-drawer__recommendations .horizontal-product__info {
   align-items: center;
+  text-align: center;
 }
 
-/* ===== COLLECTION GRID FIX - Globo Filter ===== */
-@media screen and (min-width: 1000px) {
-  #gf-products product-card {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-  }
-
-  #gf-products .product-card__figure,
-  #gf-products .product-card__figure a {
-    display: block !important;
-    width: 100% !important;
-  }
-
-  #gf-products .product-card__image,
-  #gf-products .product-card__image--primary {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-  }
-
-  #gf-products .product-card__info {
-    width: 100% !important;
-  }
+cart-drawer#cart-drawer .shipping-notes-wrapper-text,
+cart-drawer#cart-drawer .Cart__ShippingNotice .Drawer__Container {
+  text-align: center;
+  justify-items: center;
 }
