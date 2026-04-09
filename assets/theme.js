@@ -141,10 +141,11 @@ _createOverlay() {
   // Create overlay element
   this._overlay = document.createElement('div');
   this._overlay.className = 'drawer-overlay';
+  const drawerWidth = Math.max(Math.round(this.getBoundingClientRect().width || this.offsetWidth || 350), 0);
   this._overlay.style.cssText = `
     position: fixed;
     top: 0;
-    left: 350px;
+    left: ${drawerWidth}px;
     right: 0;
     height: 100vh;
     background: #0000008c;

@@ -106,6 +106,37 @@
         {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant, form_id: product_form_id -%}
       </div>
 
+      <div class="product-quick-add__quantity">
+        <quantity-selector class="quantity-selector">
+          <button
+            type="button"
+            class="quantity-selector__button"
+            aria-label="{{ 'product.quantity.decrease_quantity' | t }}"
+          >
+            {% render 'icon' with 'minus', width: 10, height: 2 %}
+          </button>
+          <input
+            id="{{ product_form_id }}-sticky-quantity"
+            type="number"
+            is="quantity-input"
+            inputmode="numeric"
+            class="quantity-selector__input"
+            name="quantity"
+            form="{{ product_form_id }}"
+            min="1"
+            value="1"
+            autocomplete="off"
+          >
+          <button
+            type="button"
+            class="quantity-selector__button"
+            aria-label="{{ 'product.quantity.increase_quantity' | t }}"
+          >
+            {% render 'icon' with 'plus', width: 10, height: 10 %}
+          </button>
+        </quantity-selector>
+      </div>
+
       <buy-buttons template="{{ product.template_suffix }}" form="{{ product_form_id }}" force-secondary-button>
         {%- render 'button', type: 'submit', content: button_label, form: product_form_id, background: buy_buttons_block.settings.atc_button_background, text_color: buy_buttons_block.settings.atc_button_text_color, secondary: true -%}
       </buy-buttons>
