@@ -9,36 +9,34 @@
 
   if (typeof window.safeGoKwikBuyNow !== 'function') {
     window.safeGoKwikBuyNow = async function (btn) {
+      const getFormBoundInput = function (form, name) {
+        if (!form || !name) return null;
+        const local = Array.from(form.querySelectorAll('[name="' + name + '"]'));
+        const bound = form.id
+          ? Array.from(document.querySelectorAll('[name="' + name + '"][form="' + form.id + '"]'))
+          : [];
+        const all = local.concat(bound);
+        return all.length ? all[0] : null;
+      };
+
       try {
         if (btn) btn.disabled = true;
 
         const form = btn ? btn.closest('form') : null;
-
-        // Keep compatibility if the button is rendered without a product form context.
-        if (!form) {
-          if (typeof window.onBuyNowClick === 'function') {
-            window.onBuyNowClick(btn);
-            return;
-          }
-          if (typeof window.onCheckoutClick === 'function') {
-            window.onCheckoutClick(btn);
-            return;
-          }
-          window.location.href = '/checkout';
-          return;
-        }
+        if (!form) throw new Error('Missing product form for GoKwik buy-now');
 
         const cartBeforeResponse = await fetch('/cart.js', { credentials: 'same-origin' });
         const cartBefore = cartBeforeResponse.ok ? await cartBeforeResponse.json() : { item_count: 0, items: [] };
 
-        // Prevent Doeraa bag/bundle helper items from hijacking GoKwik Buy Now payload.
+        // Reset any helper bundle lines and clear current cart for true "Buy Now this product" behavior.
         const bagCleanupUpdates = {};
         (cartBefore.items || []).forEach(function (item) {
           if (GOKWIK_BUNDLE_PRODUCT_IDS.includes(item.product_id)) {
             bagCleanupUpdates[item.key] = 0;
           }
         });
-        if (Object.keys(bagCleanupUpdates).length) {
+
+        if (Object.keys(bagCleanupUpdates).length || (cartBefore.item_count || 0) > 0) {
           await fetch('/cart/update.js', {
             method: 'POST',
             headers: {
@@ -48,12 +46,19 @@
             credentials: 'same-origin',
             body: JSON.stringify({ updates: bagCleanupUpdates }),
           });
+
+          await fetch('/cart/clear.js', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+            },
+            credentials: 'same-origin',
+          });
         }
 
         // Variant input can be disabled in this theme when variant picker JS manages state.
-        // Resolve a concrete variant id ourselves so /cart/add.js is always valid.
-        const enabledVariantInput = form.querySelector('input[name="id"]:not([disabled])');
-        const anyVariantInput = form.querySelector('input[name="id"]');
+        const enabledVariantInput = form.querySelector('input[name="id"]:not([disabled])') || getFormBoundInput(form, 'id');
+        const anyVariantInput = form.querySelector('input[name="id"]') || getFormBoundInput(form, 'id');
         const variantId = (enabledVariantInput && enabledVariantInput.value) || (anyVariantInput && anyVariantInput.value);
 
         if (!variantId) {
@@ -61,6 +66,7 @@
         }
 
         const qtyInput =
+          getFormBoundInput(form, 'quantity') ||
           form.querySelector('[name="quantity"]') ||
           form.querySelector('quantity-selector .quantity-selector__input') ||
           document.querySelector('.shopify-section--main-product .quantity-selector .quantity-selector__input');
@@ -99,7 +105,7 @@
           const cartResponse = await fetch('/cart.js', { credentials: 'same-origin' });
           if (cartResponse.ok) {
             const cart = await cartResponse.json();
-            if ((cart.item_count || 0) > (cartBefore.item_count || 0)) {
+            if ((cart.item_count || 0) >= 1) {
               break;
             }
           }
@@ -108,24 +114,20 @@
           });
         }
 
-        if (typeof window.onBuyNowClick === 'function') {
-          window.onBuyNowClick(btn);
+        if (typeof window.onCheckoutClick === 'function') {
+          window.onCheckoutClick(btn);
           return;
         }
 
-        if (typeof window.onCheckoutClick === 'function') {
-          window.onCheckoutClick(btn);
+        if (typeof window.onBuyNowClick === 'function') {
+          window.onBuyNowClick(btn);
           return;
         }
 
         window.location.href = '/checkout';
       } catch (error) {
         console.error('GoKwik buy-now sync failed', error);
-        if (typeof window.onBuyNowClick === 'function') {
-          window.onBuyNowClick(btn);
-        } else {
-          window.location.href = '/checkout';
-        }
+        alert('Buy Now could not start for the selected product. Please re-select variant/quantity and try again.');
       } finally {
         if (btn) btn.disabled = false;
       }
