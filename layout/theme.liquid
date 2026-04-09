@@ -87,70 +87,7 @@
         })('', 'TriplePixel', localStorage);
       /* << TriplePixel :: end*/
     </script>
-    <link rel="preconnect dns-prefetch" href="https://triplewhale-pixel.web.app/" crossorigin>
     {% include 'visually_io_sdk' %}
-
-    <script>
-      /* >> TriplePixel :: start*/
-      (window.TriplePixelData = { TripleName: 'doeraa.myshopify.com', ver: '1.9.0' }),
-        (function (W, H, A, L, E, _, B, N) {
-          function O(U, T, P, H, R) {
-            void 0 === R && (R = !1),
-              (H = new XMLHttpRequest()),
-              P
-                ? (H.open('POST', U, !0), H.setRequestHeader('Content-Type', 'application/json'))
-                : H.open('GET', U, !0),
-              H.send(JSON.stringify(P || {})),
-              (H.onreadystatechange = function () {
-                4 === H.readyState && 200 === H.status
-                  ? ((R = H.responseText), U.includes('.txt') ? eval(R) : P || (N[B] = R))
-                  : (299 < H.status || H.status < 200) && T && !R && ((R = !0), O(U, T - 1));
-              });
-          }
-          if (((N = window), !N[H + 'sn'])) {
-            N[H + 'sn'] = 1;
-            try {
-              A.setItem(H, 1 + (0 | A.getItem(H) || 0)),
-                (E = JSON.parse(A.getItem(H + 'U') || '[]')).push(location.href),
-                A.setItem(H + 'U', JSON.stringify(E));
-            } catch (e) {}
-            var i, m, p;
-            A.getItem('"!nC`') ||
-              ((_ = A),
-              (A = N),
-              A[H] ||
-                ((L = function () {
-                  return Date.now().toString(36) + '_' + Math.random().toString(36);
-                }),
-                (E = A[H] =
-                  function (t, e) {
-                    return 'State' == t ? E.s : ((W = L()), (E._q = E._q || []).push([W, t, e]), W);
-                  }),
-                (E.s = 'Installed'),
-                (E._q = []),
-                (E.ch = W),
-                (B = 'configSecurityConfModel'),
-                (N[B] = 1),
-                O('//conf.config-security.com/model', 5),
-                (i = L()),
-                (m = A[atob('c2NyZWVu')]),
-                _.setItem('di_pmt_wt', i),
-                (p = {
-                  id: i,
-                  action: 'profile',
-                  avatar: _.getItem('auth-security_rand_salt_'),
-                  time: m[atob('d2lkdGg=')] + ':' + m[atob('aGVpZ2h0')],
-                  host: A.TriplePixelData.TripleName,
-                  url: window.location.href,
-                  ref: document.referrer,
-                  ver: window.TriplePixelData.ver,
-                }),
-                O('//api.config-security.com/', 5, p),
-                O('//triplewhale-pixel.web.app/dot1.9.txt', 5)));
-          }
-        })('', 'TriplePixel', localStorage);
-      /* << TriplePixel :: end*/
-    </script>
     {% render 'gokwik' %}
 
     {% render 'pagefly-head' %}
@@ -177,15 +114,7 @@
       gtag('config', 'AW-528826631', { send_page_view: false });
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z0MTGKW89"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
       gtag('config', 'G-6Z0MTGKW89');
     </script>
 
@@ -243,7 +172,7 @@
     {%- render 'css-variables' -%}
     {%- render 'js-variables' -%}
 
-    <script asyc src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script type="module" src="{{ 'vendor.min.js' | asset_url }}"></script>
     <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
@@ -308,39 +237,13 @@
       height="1400"
       style="pointer-events: none; position: absolute; top: 0; left: 0; width: 99vw; height: 99vh; max-width: 99vw; max-height: 99vh;"
       src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+"
-      loading="eager"
+      loading="lazy"
+      decoding="async"
+      fetchpriority="low"
     >
     <!-- Google search console -->
     <meta name="google-site-verification" content="2uDBpLruz28wS14GplVeDKUVdt_b-tFPOZEY9bC-xeQ">
     <!-- Google search console -->
-    <script type="text/javascript">
-      (function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
-            (c[a].q = c[a].q || []).push(arguments);
-          };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = 'https://www.clarity.ms/tag/' + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, 'clarity', 'script', 'rjxlcfvpxq');
-    </script>
-    <script type="text/javascript">
-      (function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
-            (c[a].q = c[a].q || []).push(arguments);
-          };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = 'https://www.clarity.ms/tag/' + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, 'clarity', 'script', 'sj8eke9wzu');
-    </script>
   </head>
 
   <body class="{% if settings.show_page_transition %}page-transition{% endif %} {% if settings.zoom_image_on_hover %}zoom-image--enabled{% endif %} cstn-{{ template.suffix }} {% if template == 'collections' %}collectointem{% endif %} template-{{ template | handle }}">

@@ -187,7 +187,7 @@ Supported variables
           <div class="add-to-cart-re">
               {%- if request.page_type == 'index' -%}
             
-            <button name="cb" data-product={{ product.variants.first.id }}   onClick="handleATCButtonClick('{{ product.variants.first.id }}','{{ product.price }}','{{ product.tags }}')" id="customButtons" style="visibility: visible;" type="button" class="btn home-cart-btn button button--xl" is="custom-button" aria-label="{{ quick_add_label | escape }}" 
+            <button style="visibility: visible;" type="submit" class="btn home-cart-btn button button--xl" is="custom-button" aria-label="{{ quick_add_label | escape }}" 
             {% if hasunstitch %}              
               {% if hasavailable %}worked{% else %} disabled {% endif %}
             {% else %}
@@ -200,7 +200,7 @@ Supported variables
           
          {%- if request.page_type != 'index' -%}
             {%- if request.page_type != 'product' -%}
-            <button  name="cb" data-product={{ product.variants.first.id }}  onClick="handleATCButtonClick('{{ product.variants.first.id }}','{{ product.price }}','{{ product.tags }}')" id="customButtons" style="visibility: visible;" type="button"class="btn home-cart-btn button button--xl" is="custom-button" aria-label="{{ quick_add_label | escape }}" 
+            <button  style="visibility: visible;" type="submit"class="btn home-cart-btn button button--xl" is="custom-button" aria-label="{{ quick_add_label | escape }}" 
               {% if hasunstitch %}              
               {% if hasavailable %}worked{% else %} disabled {% endif %}
             {% else %}
@@ -286,71 +286,6 @@ Supported variables
     {%- endif -%}
   </div>
 </product-card>
-<script>
-       if (window.innerWidth > 700)  {
-          const customButton = document.getElementsByName("cb");
-        customButton.forEach(button => {
-                button.type = "submit"; 
-            });
-       }
- 
-   function handleATCButtonClick(pid,price,tags) {
-       
-    
-            if (window.innerWidth < 700)  {
-document.documentElement.style.overflowY = 'hidden';
-                const overlaydiv = document.getElementById("overlaydiv");
-                overlaydiv.style.display = "block";
-              const popUp=document.getElementById("popup");
-              popup.style.display="block";
-              const buyPopU= document.getElementById("buyPopUp");
-              const productQuickAdd = buyPopU.querySelector("buy-buttons");
-               const productQuickAddForm = buyPopU.querySelector("form");
-            
-                const customButton = document.getElementById("customButtons");
-                const productdata = customButton.getAttribute('data-product');
-               const inp= document.getElementsByClassName("forminp");
-             
-              inp[0].setAttribute("value", pid);
-              
-
-               const formattedPriceElement = document.getElementById('formattedPriced');
-              const formattedUpdatedPrice = Math.floor(price / 100);
-
-  formattedPriceElement.innerHTML = `${formattedUpdatedPrice}`;
-
-               const originalPriceElement = document.getElementById('originalPricee');
-              const originalUpdatedPrice = Math.floor(price / 100);
-
-  originalPriceElement.innerHTML = `${originalUpdatedPrice}`;
-            
-           const formattedTypeElement = document.getElementById('formattedTypee');
-       if (tags.includes('per-piece')) {
-    formattedTypeElement.innerHTML = 'per piece';
-} else if (tags.includes('per-pack')) {
-    formattedTypeElement.innerHTML = 'per pack';
-} else if (tags.includes('long-description')) {
-    formattedTypeElement.innerHTML = 'per set';
-} else {
-    formattedTypeElement.innerHTML = 'per meter';
-}
- const QuantityTypeElement = document.getElementById('QuantityType');
-       if (tags.includes('per-piece')) {
-    QuantityTypeElement.innerHTML = 'Quantity per piece';
-} else if (tags.includes('per-pack')) {
-    QuantityTypeElement.innerHTML = 'Quantity per pack';
-} else if (tags.includes('long-description')) {
-    QuantityTypeElement.innerHTML = 'Quantity per set';
-} else {
-    QuantityTypeElement.innerHTML = 'Quantity in meters';
-}
-    
-       
-       
-    }
-        }
-</script>
-
        <style>
          @media (max-width: 809px) {
     .custom-price-cart {

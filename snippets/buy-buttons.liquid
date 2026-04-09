@@ -176,13 +176,3 @@ Supported variables
   {%- endif -%}
 </buy-buttons>
 {%- endform -%}
-
-  <script>
-function customBuyNow() {
-  let variantId = '{{ product.selected_or_first_available_variant.id }}';
-  let shopURL = '{{ shop.url }}';
-  let qty = $('.quantity-selector .quantity-selector__input').val();
-
-  window.location.href = shopURL + '/cart/' + variantId + ':' + qty + '?channel=buy_button';
-}
-</script>

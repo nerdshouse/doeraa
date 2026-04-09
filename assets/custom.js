@@ -57,27 +57,6 @@ $(document).ready(function () {
   var price = $(".price-list.price-list--lg sale-price.text-lg").attr(
     "data-price",
   );
-  $(".product-info__buy-buttons .button--xl.button--secondary").click(
-    function () {
-      var url = window.location.href;
-      $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "html",
-        success: function (res) {
-          console.log("res=", res);
-          var refresh = $(res)
-            .find(".product-info__quantity-selector .quantity-selector")
-            .html();
-          // $('.product-info__quantity-selector .quantity-selector').html(refresh);
-        },
-        error: function (status) {
-          alert(status);
-        },
-      });
-    },
-  );
-
   var path = window.location.href;
   $(".cstmTabs .inner-color-div a").each(function () {
     if (this.href === path) {
@@ -375,11 +354,18 @@ $(document).ready(function () {
     }
   }
 
-  async function syncCartAfterChange() {
+  async function syncCartAfterChange(keepDrawerOpen) {
+    const drawer = document.querySelector(CART_DRAWER_SELECTOR);
+    const shouldKeepOpen = Boolean(keepDrawerOpen) || Boolean(drawer && drawer.hasAttribute("open"));
+
     await Promise.all([refreshCartDrawerFromSection(), syncCartMeta()]);
     
     const newDrawer = document.querySelector(CART_DRAWER_SELECTOR);
     updateMinusButtonState(newDrawer);
+
+    if (shouldKeepOpen) {
+      openCartDrawer();
+    }
   }
 
   async function syncCartMeta() {
@@ -421,7 +407,7 @@ $(document).ready(function () {
         throw new Error("Cart update failed");
       }
 
-      await syncCartAfterChange();
+      await syncCartAfterChange(true);
     } catch (error) {
       window.location.reload();
     } finally {
@@ -468,8 +454,8 @@ $(document).ready(function () {
       throw new Error("Add to cart failed");
     }
 
-    await syncCartAfterChange();
     openCartDrawer();
+    await syncCartAfterChange(true);
   }
 
   document.addEventListener("click", function (event) {
@@ -614,8 +600,8 @@ $(document).ready(function () {
         throw new Error("Add to cart failed");
       }
 
-      await syncCartAfterChange();
       openCartDrawer();
+      await syncCartAfterChange(true);
     } catch (error) {
       window.location.href = "/cart";
     }
