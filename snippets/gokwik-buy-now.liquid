@@ -5,8 +5,6 @@
 {% endif %}
 
 <script>
-  const GOKWIK_BUNDLE_PRODUCT_IDS = [8001599865086, 8001573290238, 8001597571326];
-
   if (typeof window.safeGoKwikBuyNow !== 'function') {
     window.safeGoKwikBuyNow = async function (btn) {
       const getFormBoundInput = function (form, name) {
@@ -25,36 +23,14 @@
         const form = btn ? btn.closest('form') : null;
         if (!form) throw new Error('Missing product form for GoKwik buy-now');
 
-        const cartBeforeResponse = await fetch('/cart.js', { credentials: 'same-origin' });
-        const cartBefore = cartBeforeResponse.ok ? await cartBeforeResponse.json() : { item_count: 0, items: [] };
-
-        // Reset any helper bundle lines and clear current cart for true "Buy Now this product" behavior.
-        const bagCleanupUpdates = {};
-        (cartBefore.items || []).forEach(function (item) {
-          if (GOKWIK_BUNDLE_PRODUCT_IDS.includes(item.product_id)) {
-            bagCleanupUpdates[item.key] = 0;
-          }
+        // Buy-now should open checkout for only the currently selected product.
+        await fetch('/cart/clear.js', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+          },
+          credentials: 'same-origin',
         });
-
-        if (Object.keys(bagCleanupUpdates).length || (cartBefore.item_count || 0) > 0) {
-          await fetch('/cart/update.js', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-            credentials: 'same-origin',
-            body: JSON.stringify({ updates: bagCleanupUpdates }),
-          });
-
-          await fetch('/cart/clear.js', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-            },
-            credentials: 'same-origin',
-          });
-        }
 
         // Variant input can be disabled in this theme when variant picker JS manages state.
         const enabledVariantInput = form.querySelector('input[name="id"]:not([disabled])') || getFormBoundInput(form, 'id');
@@ -100,20 +76,15 @@
           throw new Error('Buy now add-to-cart failed');
         }
 
-        // Ensure cart state is updated before handing over to GoKwik popup.
-        for (let i = 0; i < 4; i += 1) {
-          const cartResponse = await fetch('/cart.js', { credentials: 'same-origin' });
-          if (cartResponse.ok) {
-            const cart = await cartResponse.json();
-            if ((cart.item_count || 0) >= 1) {
-              break;
-            }
+        const latestCartResponse = await fetch('/cart.js', { credentials: 'same-origin' });
+        if (latestCartResponse.ok) {
+          const latestCart = await latestCartResponse.json();
+          window.cart = latestCart;
+          window.__gokwikCart = latestCart;
+          if (typeof cart !== 'undefined') {
+            cart = latestCart;
           }
-          await new Promise(function (resolve) {
-            setTimeout(resolve, 180);
-          });
         }
-
         if (typeof window.onCheckoutClick === 'function') {
           window.onCheckoutClick(btn);
           return;

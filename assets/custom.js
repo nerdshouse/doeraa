@@ -197,6 +197,36 @@ $(document).ready(function () {
 (function () {
   const CART_DRAWER_SELECTOR = "#cart-drawer";
   const CART_SECTION_SELECTOR = "#shopify-section-cart-drawer";
+  let lastAtcSubmitQty = null;
+  let lastAtcSubmitAt = 0;
+
+  function getVisibleRuntimeQty() {
+    const isVisible = function (el) {
+      if (!el) return false;
+      if (el.hidden) return false;
+      const style = window.getComputedStyle(el);
+      if (style.display === "none" || style.visibility === "hidden") return false;
+      return Boolean(el.offsetParent || el.getClientRects().length);
+    };
+
+    const selectors = [
+      "#homeatcc",
+      '#additionalContent input[name="overlay_quantity"]',
+      '.shopify-section--main-product input[name="quantity"]',
+      'input[id$="-sticky-quantity"]',
+    ];
+
+    for (const selector of selectors) {
+      const nodes = document.querySelectorAll(selector);
+      for (const input of nodes) {
+        if (!isVisible(input)) continue;
+        const qty = parseInt(input.value || input.getAttribute("value"), 10);
+        if (Number.isFinite(qty) && qty > 0) return qty;
+      }
+    }
+
+    return null;
+  }
 
   function isCartPage() {
     return /^\/cart(?:\/|$)/.test(window.location.pathname);
@@ -325,22 +355,102 @@ $(document).ready(function () {
       });
   }
 
+  function getPreferredFormQuantity(form, submitter) {
+    if (!form) return 1;
+
+    const parseQty = function (value) {
+      const n = parseInt(value, 10);
+      return Number.isFinite(n) && n > 0 ? n : null;
+    };
+
+    const readInputQty = function (input) {
+      if (!input) return null;
+      // Some legacy scripts mutate only the value attribute via setAttribute().
+      return parseQty(input.value) || parseQty(input.getAttribute("value"));
+    };
+
+    const isVisible = function (el) {
+      if (!el) return false;
+      if (el.hidden) return false;
+      const style = window.getComputedStyle(el);
+      if (style.display === "none" || style.visibility === "hidden") return false;
+      return Boolean(el.offsetParent || el.getClientRects().length);
+    };
+
+    // Legacy popup ATC uses #homeatcc as visible quantity and #homeatc hidden in form.
+    if (form.id === "atcForm" || form.querySelector("#homeatc")) {
+      const popupQty = readInputQty(document.getElementById("homeatcc"));
+      if (popupQty) return popupQty;
+    }
+
+    // Prefer quantity input in the same visible UI context as the clicked submitter.
+    if (submitter) {
+      const submitContext =
+        submitter.closest("product-quick-add") ||
+        submitter.closest("#additionalContent") ||
+        submitter.closest("#popup") ||
+        submitter.closest(".shopify-section--main-product") ||
+        form;
+
+      if (submitContext && form.id) {
+        const localBound = submitContext.querySelectorAll(
+          '[name="quantity"][form="' + form.id + '"]',
+        );
+        for (const input of localBound) {
+          if (!isVisible(input)) continue;
+          const qty = readInputQty(input);
+          if (qty) return qty;
+        }
+      }
+    }
+
+    // If sticky quick-add submitted, use sticky quantity only when visible.
+    if (submitter && submitter.closest("product-quick-add")) {
+      const stickyInput = document.getElementById(form.id + "-sticky-quantity");
+      const stickyQty = isVisible(stickyInput) ? readInputQty(stickyInput) : null;
+      if (stickyQty) return stickyQty;
+    }
+
+    // Otherwise use visible enabled quantity fields bound to the form.
+    const boundSelector = '[name="quantity"]:not([disabled])[form="' + form.id + '"]';
+    const formSelector = '[name="quantity"]:not([disabled])';
+    const localCandidates = Array.from(form.querySelectorAll(formSelector));
+    const boundCandidates = Array.from(document.querySelectorAll(boundSelector));
+    const candidates = localCandidates.concat(boundCandidates);
+
+    for (const input of candidates) {
+      if (!isVisible(input)) continue;
+      const qty = readInputQty(input);
+      if (qty) return qty;
+    }
+
+    for (const input of candidates) {
+      const qty = readInputQty(input);
+      if (qty) return qty;
+    }
+
+    return 1;
+  }
+
   async function refreshCartDrawerFromSection() {
     const cartSection = document.querySelector(CART_SECTION_SELECTOR);
     if (!cartSection) return;
 
-    const separator = window.location.pathname.includes("?") ? "&" : "?";
-    const sectionUrl =
-      window.location.pathname + separator + "section_id=cart-drawer";
-    const response = await fetch(sectionUrl, { credentials: "same-origin" });
+    const sectionUrls = [
+      "/?section_id=cart-drawer",
+      "/cart?section_id=cart-drawer",
+    ];
+    let updatedSection = null;
 
-    if (!response.ok) {
-      throw new Error("Unable to refresh cart drawer section");
+    for (const sectionUrl of sectionUrls) {
+      const response = await fetch(sectionUrl, { credentials: "same-origin" });
+      if (!response.ok) continue;
+
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      updatedSection = doc.querySelector(CART_SECTION_SELECTOR);
+      if (updatedSection) break;
     }
-
-    const html = await response.text();
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const updatedSection = doc.querySelector(CART_SECTION_SELECTOR);
 
     if (updatedSection) {
       const currentDrawer = cartSection.querySelector("cart-drawer");
@@ -561,6 +671,87 @@ $(document).ready(function () {
     true,
   );
 
+  // Run in capture phase so quantity is corrected before any theme/app submit handler reads the form.
+  document.addEventListener(
+    "submit",
+    function (event) {
+      const form = event.target;
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const formAction = (form.getAttribute("action") || "").toLowerCase();
+      const isAddToCartForm =
+        formAction.includes("/cart/add") || formAction.endsWith("cart/add");
+      if (!isAddToCartForm) return;
+
+      if (
+        event.submitter &&
+        (event.submitter.name === "checkout" ||
+          (event.submitter.formAction &&
+            event.submitter.formAction.includes("/checkout")))
+      ) {
+        return;
+      }
+
+      const preferredQty = getPreferredFormQuantity(form, event.submitter || null);
+      const qtyString = String(preferredQty);
+      lastAtcSubmitQty = qtyString;
+      lastAtcSubmitAt = Date.now();
+
+      const inlineQtyField = form.querySelector('[name="quantity"]');
+      if (inlineQtyField) {
+        inlineQtyField.value = qtyString;
+        inlineQtyField.setAttribute("value", qtyString);
+      }
+
+      if (form.id) {
+        const boundQtyFields = document.querySelectorAll(
+          '[name="quantity"][form="' + form.id + '"]',
+        );
+        boundQtyFields.forEach(function (input) {
+          input.value = qtyString;
+          input.setAttribute("value", qtyString);
+        });
+      }
+
+      const legacyAtcQty = form.querySelector("#homeatc") || document.getElementById("homeatc");
+      if (legacyAtcQty) {
+        legacyAtcQty.value = qtyString;
+        legacyAtcQty.setAttribute("value", qtyString);
+      }
+    },
+    true,
+  );
+
+  if (!window.__cartAddQtyPayloadPatchApplied) {
+    window.__cartAddQtyPayloadPatchApplied = true;
+    const nativeFetch = window.fetch.bind(window);
+
+    window.fetch = function (input, init) {
+      try {
+        const reqUrl = typeof input === "string" ? input : (input && input.url) || "";
+        const isCartAdd = /\/cart\/add(?:\.js)?(?:\?|$)/.test(reqUrl);
+        const qtyIsFresh = lastAtcSubmitQty !== null && Date.now() - lastAtcSubmitAt < 2500;
+        const runtimeQty = getVisibleRuntimeQty();
+        const forcedQty =
+          runtimeQty !== null ? String(runtimeQty) : qtyIsFresh ? String(lastAtcSubmitQty) : null;
+
+        if (isCartAdd && forcedQty && init && init.body instanceof FormData) {
+          const formType = init.body.get("form_type");
+          if (formType === "product") {
+            init.body.set("quantity", forcedQty);
+          }
+        } else if (isCartAdd && forcedQty && init && init.body instanceof URLSearchParams) {
+          const formType = init.body.get("form_type");
+          if (formType === "product") {
+            init.body.set("quantity", forcedQty);
+          }
+        }
+      } catch (e) {}
+
+      return nativeFetch(input, init);
+    };
+  }
+
   document.addEventListener("submit", async function (event) {
     if (isCartPage()) return;
 
@@ -585,7 +776,23 @@ $(document).ready(function () {
     event.preventDefault();
 
     try {
+      const preferredQty = getPreferredFormQuantity(form, event.submitter || null);
+
+      // Force real DOM fields too so any parallel theme/app handlers see the same quantity.
+      const inlineQtyField = form.querySelector('[name="quantity"]');
+      if (inlineQtyField) inlineQtyField.value = String(preferredQty);
+      if (form.id) {
+        const boundQtyFields = document.querySelectorAll(
+          '[name="quantity"][form="' + form.id + '"]',
+        );
+        boundQtyFields.forEach(function (input) {
+          input.value = String(preferredQty);
+          input.setAttribute("value", String(preferredQty));
+        });
+      }
+
       const formData = new FormData(form);
+      formData.set("quantity", String(preferredQty));
 
       const addResponse = await fetch("/cart/add.js", {
         method: "POST",

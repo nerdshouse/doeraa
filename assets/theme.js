@@ -422,6 +422,7 @@ export class QuantitySelector extends HTMLElement {
     this._input = null;
     this._decreaseButton = null;
     this._increaseButton = null;
+    this._isDispatchingChange = false;
   }
 
   connectedCallback() {
@@ -553,7 +554,7 @@ export class QuantitySelector extends HTMLElement {
   }
 
   _onInputChange(event) {
-    if (this.disabled) return;
+    if (this.disabled || this._isDispatchingChange) return;
     this._validateAndUpdateValue();
   }
 
@@ -631,18 +632,25 @@ export class QuantitySelector extends HTMLElement {
   }
 
   _dispatchChangeEvent() {
-    this.dispatchEvent(new CustomEvent('quantity:change', {
-      detail: {
-        value: this.value,
-        element: this,
-        input: this._input
-      },
-      bubbles: true
-    }));
+    if (this._isDispatchingChange) return;
 
-    // Trigger a change event on the input for form compatibility
-    if (this._input) {
-      this._input.dispatchEvent(new Event('change', { bubbles: true }));
+    this._isDispatchingChange = true;
+    try {
+      this.dispatchEvent(new CustomEvent('quantity:change', {
+        detail: {
+          value: this.value,
+          element: this,
+          input: this._input
+        },
+        bubbles: true
+      }));
+
+      // Trigger a change event on the input for form compatibility
+      if (this._input) {
+        this._input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    } finally {
+      this._isDispatchingChange = false;
     }
   }
 

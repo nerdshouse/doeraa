@@ -17,6 +17,19 @@
 {% endif %}
 
 <script>
+async function refreshGoKwikCartCache() {
+  const response = await fetch('/cart.js', { credentials: 'same-origin' });
+  if (!response.ok) return null;
+
+  const latestCart = await response.json();
+  window.cart = latestCart;
+  window.__gokwikCart = latestCart;
+  if (typeof cart !== 'undefined') {
+    cart = latestCart;
+  }
+  return latestCart;
+}
+
 async function safeGoKwikCheckout(btn) {
   try {
     btn.disabled = true;
@@ -43,11 +56,9 @@ async function safeGoKwikCheckout(btn) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ updates })
       });
-
-      // ⏳ IMPORTANT: wait for Shopify to sync
-      await new Promise(r => setTimeout(r, 600));
     }
 
+    await refreshGoKwikCartCache();
     onCheckoutClick(btn);
 
   } catch (e) {

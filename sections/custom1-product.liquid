@@ -1,8 +1,22 @@
 {%- render 'section-spacing-collapsing' -%}
  <script>
+  function syncCustomSectionQtyToForm(formId, qty) {
+    const parsedQty = Math.max(parseInt(qty, 10) || 1, 1);
+    if (!formId) return;
+
+    document
+      .querySelectorAll('input[name="quantity"][form="' + formId + '"], #' + formId + ' input[name="quantity"]')
+      .forEach(function (input) {
+        input.value = parsedQty;
+        input.setAttribute('value', parsedQty);
+      });
+  }
+
   function updateInputValue(inp) {
-     const inputField = document.getElementsByName('quantity');
-    let qty = inputField[0].value;
+    const qtyInput = document.querySelector('#additionalContent input.quantity-selector__input[name="overlay_quantity"]');
+    if (!qtyInput) return;
+
+    let qty = parseInt(qtyInput.value, 10) || 1;
     if(inp==1)
     {
       qty++;
@@ -19,6 +33,9 @@
      const formattedUpdatedPrice = Math.floor(updatedPrice / 100);;
 
 formattedPriceElement.innerHTML = `₹${formattedUpdatedPrice}`;
+    qtyInput.value = qty;
+    qtyInput.setAttribute('value', qty);
+    syncCustomSectionQtyToForm(qtyInput.dataset.formId, qty);
     
   }
 </script>
@@ -198,13 +215,13 @@ formattedPriceElement.innerHTML = `₹${formattedUpdatedPrice}`;
               </svg>
             </button>
             <input
-              id="{{ product_form_id }}-quantity"
+              id="{{ product_form_id }}-overlay-quantity"
               type="text"
               is="quantity-input"
               inputmode="numeric"
               class="mul quantity-selector__input"
-              name="quantity"
-              form="{{ product_form_id }}"
+              name="overlay_quantity"
+              data-form-id="{{ product_form_id }}"
               size="2"
               value="1"
               autocomplete="off" 
@@ -334,6 +351,10 @@ formattedPriceElement.innerHTML = `₹${formattedUpdatedPrice}`;
 
                 const additionalContent = document.getElementById("additionalContent");
                 additionalContent.style.display = "none";
+                const overlayQtyInput = document.getElementById("{{ product_form_id }}-overlay-quantity");
+                if (overlayQtyInput) {
+                  syncCustomSectionQtyToForm(overlayQtyInput.dataset.formId, overlayQtyInput.value);
+                }
 
                 const customButton = document.getElementsByName("customButton");
                 customButton[0].type = "submit"; // Change the button type to "submit"
@@ -359,7 +380,10 @@ formattedPriceElement.innerHTML = `₹${formattedUpdatedPrice}`;
         }
 
      else{
-        
+       const overlayQtyInput = document.getElementById("{{ product_form_id }}-overlay-quantity");
+       if (overlayQtyInput) {
+         syncCustomSectionQtyToForm(overlayQtyInput.dataset.formId, overlayQtyInput.value);
+       }
        const customButton = document.getElementsByName("customButton");
                 customButton[0].type = "submit";
                 customButton[0].click();
@@ -378,8 +402,12 @@ formattedPriceElement.innerHTML = `₹${formattedUpdatedPrice}`;
             customButton[0].type = "button";
             clickCount = 0;
       const formattedPriceElement = document.getElementById('formattedPrice');
-       const inputField = document.getElementsByName('quantity');
-   inputField[0].value=1;
+      const overlayQtyInput = document.getElementById("{{ product_form_id }}-overlay-quantity");
+      if (overlayQtyInput) {
+        overlayQtyInput.value = 1;
+        overlayQtyInput.setAttribute('value', 1);
+        syncCustomSectionQtyToForm(overlayQtyInput.dataset.formId, 1);
+      }
 
      const formattedUpdatedPrice = Math.floor({{ product.price }} / 100);;
 

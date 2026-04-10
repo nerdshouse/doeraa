@@ -564,10 +564,12 @@
           const additionalContent = document.getElementById('popup');
           additionalContent.style.display = 'none';
           const inputField = document.getElementById('homeatc');
+          inputField.value = 1;
           inputField.setAttribute('value', 1);
 
           const inputFields = document.getElementById('homeatcc');
 
+          inputFields.value = 1;
           inputFields.setAttribute('value', 1);
           document.documentElement.style.overflow = 'unset';
         }, 2000);
@@ -579,15 +581,50 @@
         const additionalContent = document.getElementById('popup');
         additionalContent.style.display = 'none';
         const inputField = document.getElementById('homeatc');
+        inputField.value = 1;
         inputField.setAttribute('value', 1);
 
         const inputFields = document.getElementById('homeatcc');
 
+        inputFields.value = 1;
         inputFields.setAttribute('value', 1);
       }
     </script>
     <script>
       var productType;
+      function getVisiblePdpQuantity() {
+        const isVisible = function (el) {
+          if (!el) return false;
+          if (el.hidden) return false;
+          const style = window.getComputedStyle(el);
+          if (style.display === 'none' || style.visibility === 'hidden') return false;
+          return Boolean(el.offsetParent || el.getClientRects().length);
+        };
+
+        const candidates = Array.from(
+          document.querySelectorAll(
+            '.shopify-section--main-product input[name="quantity"], #homeatcc, input[name="overlay_quantity"]',
+          ),
+        );
+
+        for (const input of candidates) {
+          if (!isVisible(input)) continue;
+          const qty = parseInt(input.value || input.getAttribute('value'), 10);
+          if (Number.isFinite(qty) && qty > 0) return qty;
+        }
+
+        return 1;
+      }
+
+      function syncAtcFormQuantity() {
+        const atcQtyInput = document.getElementById('homeatc');
+        if (!atcQtyInput) return 1;
+        const qty = getVisiblePdpQuantity();
+        atcQtyInput.value = qty;
+        atcQtyInput.setAttribute('value', qty);
+        return qty;
+      }
+
       function updateInputValues(inp) {
         const inputField = document.getElementById('homeatc');
         let qty = inputField.value;
@@ -606,7 +643,9 @@
             const formattedTypeElement = document.getElementById('formattedTypee');
             formattedTypeElement.innerHTML = '';
           }
+          inputField.value = qty;
           inputField.setAttribute('value', qty);
+          inputFields.value = qty;
           inputFields.setAttribute('value', qty);
           var updatedPrice = ori * qty;
           var formattedUpdatedPrice = updatedPrice;
@@ -627,7 +666,9 @@
             const formattedTypeElement = document.getElementById('formattedTypee');
             formattedTypeElement.innerHTML = productType;
           }
+          inputField.value = qty;
           inputField.setAttribute('value', qty);
+          inputFields.value = qty;
           inputFields.setAttribute('value', qty);
 
           var updatedPrice = ori * qty;
@@ -635,6 +676,17 @@
           formattedPriceElement.innerHTML = `${formattedUpdatedPrice}`;
         }
       }
+
+      document.addEventListener(
+        'submit',
+        function (event) {
+          const form = event.target;
+          if (!(form instanceof HTMLFormElement)) return;
+          if (form.id !== 'atcForm') return;
+          syncAtcFormQuantity();
+        },
+        true,
+      );
     </script>
     {{ 'tiny-img-link-preloader.js' | asset_url | script_tag }}
     {% render 'kwikpass' %}
