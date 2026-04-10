@@ -97,10 +97,6 @@ button.btn.home-cart-btn.button {
   text-transform: capitalize;
   padding: 15px 54px;
 }
-.bcpo-label label span,
-.rte.details b {
-  text-transform: capitalize;
-}
 .cstm-featured-coll section-header.section-header {
   display: flex;
   align-items: center;
@@ -1263,14 +1259,6 @@ p.cri-head {
   justify-content: space-between;
   padding: 0 50px;
 }
-.product-info label.block-label.text-subdued,
-.product-info legend.text-subdued,
-.selector-wrapper.bcpo-simple.bcpo-instructions,
-.selector-wrapper.bcpo-simple.bcpo-radios label,
-a.cstmsizechat {
-  font-weight: 700;
-  color: #1d3b4a;
-}
 .product-info button.button.button--xl.button--secondary {
   border: 1px solid #b7b7b7;
   background: 0 0;
@@ -1780,10 +1768,6 @@ thead.order-summary__header th {
   line-height: 22px;
   text-align: center;
 }
-.bcpo-radios .bcpo-label label,
-.video_txt h4 {
-  font-size: 16px;
-}
 .video_txt {
   padding: 40px 15px 30px;
   position: relative;
@@ -1824,34 +1808,6 @@ thead.order-summary__header th {
 }
 .video-carousel .owl-nav button.owl-next {
   right: -10px;
-}
-.bcpo-text {
-  width: 32% !important;
-  float: left !important;
-  display: inline-block !important;
-}
-.bcpo .bcpo-text input {
-  max-width: 90% !important;
-  min-width: unset !important;
-  max-height: 28px;
-}
-.bcpo-label label {
-  font-size: 13px;
-}
-.selector-wrapper.bcpo-simple.bcpo-instructions > div {
-  margin-bottom: 5px !important;
-}
-.selector-wrapper.bcpo-simple.bcpo-text > :last-child {
-  margin-bottom: 10px !important;
-}
-#bcpo .bcpo-price-addons {
-  position: relative;
-  top: 10px;
-  box-shadow: none;
-  padding: 0;
-}
-#bcpo .selector-wrapper > :last-child {
-  margin-bottom: 15px;
 }
 .shopify-section--collection-banner
   .section.section-blends.section-full.text-custom
@@ -3435,10 +3391,6 @@ details.product-info__accordion.accordion.group.offtertext {
   .footer__aside {
     margin-top: 20px;
   }
-  .bcpo-radios .bcpo-label label,
-  p.footer__copyright.text-sm.text-subdued {
-    font-size: 14px;
-  }
   .footer__aside-bottom {
     justify-content: center;
   }
@@ -3531,10 +3483,6 @@ details.product-info__accordion.accordion.group.offtertext {
     padding-top: 8px;
   }
 }
-@media screen and (max-width: 600px) {
-  .bcpo-text {
-    width: 49% !important;
-  }
   .blog-banner-content h1 {
     left: 30px;
   }
